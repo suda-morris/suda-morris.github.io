@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Q-learning | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Algorithm">
+    <meta name="description" content="Q学习——强化学习的具体方法在Q学习的框架中，作为学习对象的是称为Q值（Q-value）的数值，Q值是指在某种情况下，为了选择下一个要采取的行动的指标数值的集合。根据Q学习而获得Q值，在某个状态下选择下一个行动时，可以根据Q值来进行选择。 Q学习中，获得合适的Q值是学习的目标，在学习的初期，不清楚什么是合适的Q值，所以无法做决定。因此在学习的初期，Q值是由随机数来随机确定的。在此基础上，根据Q值进">
+<meta name="keywords" content="Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Q-learning">
+<meta property="og:url" content="https://suda-morris.github.io/2018/11/06/q-learning/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="Q学习——强化学习的具体方法在Q学习的框架中，作为学习对象的是称为Q值（Q-value）的数值，Q值是指在某种情况下，为了选择下一个要采取的行动的指标数值的集合。根据Q学习而获得Q值，在某个状态下选择下一个行动时，可以根据Q值来进行选择。 Q学习中，获得合适的Q值是学习的目标，在学习的初期，不清楚什么是合适的Q值，所以无法做决定。因此在学习的初期，Q值是由随机数来随机确定的。在此基础上，根据Q值进">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://s1.ax1x.com/2018/11/06/iohpUs.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/11/06/io4rf1.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/11/06/ioXhWD.png">
+<meta property="og:updated_time" content="2018-11-06T07:38:31.559Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Q-learning">
+<meta name="twitter:description" content="Q学习——强化学习的具体方法在Q学习的框架中，作为学习对象的是称为Q值（Q-value）的数值，Q值是指在某种情况下，为了选择下一个要采取的行动的指标数值的集合。根据Q学习而获得Q值，在某个状态下选择下一个行动时，可以根据Q值来进行选择。 Q学习中，获得合适的Q值是学习的目标，在学习的初期，不清楚什么是合适的Q值，所以无法做决定。因此在学习的初期，Q值是由随机数来随机确定的。在此基础上，根据Q值进">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/11/06/iohpUs.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank">
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Q-learning</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Q-learning</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-11-06T02:15:27.000Z" itemprop="datePublished" class="page-time">
+  2018-11-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ML-DL/">ML&DL</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Q学习——强化学习的具体方法"><span class="post-toc-number">1.</span> <span class="post-toc-text">Q学习——强化学习的具体方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Q值更新的计算公式"><span class="post-toc-number">2.</span> <span class="post-toc-text">Q值更新的计算公式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Q-learning算法步骤"><span class="post-toc-number">3.</span> <span class="post-toc-text">Q-learning算法步骤</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-q-learning" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Q-learning</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-11-06 10:15:27" datetime="2018-11-06T02:15:27.000Z" itemprop="datePublished">2018-11-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ML-DL/">ML&DL</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Q学习——强化学习的具体方法"><a href="#Q学习——强化学习的具体方法" class="headerlink" title="Q学习——强化学习的具体方法"></a>Q学习——强化学习的具体方法</h2><p>在Q学习的框架中，作为学习对象的是称为Q值（Q-value）的数值，Q值是指在某种情况下，为了选择下一个要采取的行动的<code>指标数值</code>的集合。根据Q学习而获得Q值，在某个状态下选择下一个行动时，可以根据Q值来进行选择。</p>
+<p>Q学习中，获得合适的Q值是学习的目标，在学习的初期，不清楚什么是合适的Q值，所以无法做决定。因此在学习的初期，Q值是由随机数来随机确定的。在此基础上，根据Q值进行行动的选择，更新状态。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/11/06/iohpUs.jpg" alt="Q值更新原则1&2" title="">
+                </div>
+                <div class="image-caption">Q值更新原则1&2</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/11/06/io4rf1.png" alt="Q值更新原则3" title="">
+                </div>
+                <div class="image-caption">Q值更新原则3</div>
+            </figure>
+<h2 id="Q值更新的计算公式"><a href="#Q值更新的计算公式" class="headerlink" title="Q值更新的计算公式"></a>Q值更新的计算公式</h2><p>$$<br>Q(s_t,a_t)=Q(s_t,a_t)+\alpha(r+\gamma \space maxQ(s_{t+1},a_{t+1})-Q(s_t,a_t))<br>$$</p>
+<ul>
+<li>$s_t$表示t时刻的状态，$a_t$表示在$s_t$时所选的行动</li>
+<li>$\max Q(s_{t+1},a_{t+1})$表示在下一个时刻（t+1）能够选择的行动中所对应的Q值中的最大值</li>
+<li>$r$表示奖赏（仅限于能够获得时，不能获得的话，是0）</li>
+<li>$\alpha$表示学习系数（0.1左右）</li>
+<li>$\gamma$表示折扣率（0.9左右）</li>
+</ul>
+<h2 id="Q-learning算法步骤"><a href="#Q-learning算法步骤" class="headerlink" title="Q-learning算法步骤"></a>Q-learning算法步骤</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/11/06/ioXhWD.png" alt="Q-learning算法步骤" title="">
+                </div>
+                <div class="image-caption">Q-learning算法步骤</div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-11-06T07:38:31.559Z" itemprop="dateUpdated">2018-11-06 15:38:31</time>
+</span><br>
+
+
+        
+        <a href="/2018/11/06/q-learning/" target="_blank" rel="external">https://suda-morris.github.io/2018/11/06/q-learning/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2018/11/06/q-learning/&title=《Q-learning》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2018/11/06/q-learning/&title=《Q-learning》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2018/11/06/q-learning/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Q-learning》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2018/11/06/q-learning/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2018/11/06/q-learning/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/11/07/qr-code/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">QR-Code</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/11/02/compilation-process/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Compilation Process</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Tue Nov 06 2018 10:15:27 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2018/11/06/q-learning/&title=《Q-learning》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2018/11/06/q-learning/&title=《Q-learning》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2018/11/06/q-learning/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Q-learning》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2018/11/06/q-learning/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2018/11/06/q-learning/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNUlEQVR42u3aQW7DMAxEUd//0u62RWB5hiMFFfW1KhLX1vOCISlel7zuX+vpk8/PP799uvP4ntMWDBgwtmXcwzXenP7I8Rb15z7eBwYMGAcwlFDobiiJlvreYMCAAWPMGF9jB83hfWDAgAHDZSRXKokgDBgwYNSKWD0gJgF0eS0OAwaMDRl6kfn9v5ecb8CAAWMrxm0uNwjqIfIOFgwYMHoz3PQuKXfdowV7PzBgwGjKyFv8s4483U/s808YMGBszqg1zvSgrLT+ay2/PwEXBgwYTRm19E4f4XKL2OS/YMCA0ZWhDz3kbbJxaHYTUKOIhQEDxuaMWmmqD28p6aA+oPbycmHAgHEMoxZw3RCsF6VK6gkDBowzGUkC54bjGuMlNYQBA0YjhtJiU5I2N0+rdQSlgTAYMGC0Y7jTC3k5mryUy10wYMBowagVq26Q1UOwEnAfU0MYMGA0Zbh9db2JloxWJEUvDBgw+jH0IDj3ytohgTQzAgMGjHaMWkBMDh31tpqdFMKAAaM1Y1azLEkEkxENGDBgnMZwg12S5CXXGOexMGDAaMRYsSH3BSXHqzBgwOjKqCVnteNJnaG81pcOHAwYMBox3EJUH7mohWCFZ/cOYcCA0YLhNrlmtdXGKaNykGn8esCAAaMFY0X8HieFSRH70jWEAQPG8Qy3xW+HzhoVBgwYMOTWmJsUJqNjS343YMCA8Y8Z+iNrbHvMa127DQYMGBsyaiMOesss34R7tAADBoxGjB+SnmqYwAuaRwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>esp32-spi | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="ESP32">
+    <meta name="description" content="ESP32 SPI外设介绍 ESP32共有4组SPI：SPI0，SPI1，HSPI和VSPI。其中SPI0固定用于从片外Nor Flash读取用户程序代码，SPI1与SPI0使用相同的引脚，负责向片外Flash中写入数据。HSPI和VSPI是可以供用户随意使用。  SPI Transactions定义 一次完整的SPI通信过程包括5个阶段  发送命令（0~16比特）(可选) 发送地址（0~64比特">
+<meta name="keywords" content="ESP32">
+<meta property="og:type" content="article">
+<meta property="og:title" content="esp32-spi">
+<meta property="og:url" content="https://suda-morris.github.io/2018/07/05/esp32-spi/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="ESP32 SPI外设介绍 ESP32共有4组SPI：SPI0，SPI1，HSPI和VSPI。其中SPI0固定用于从片外Nor Flash读取用户程序代码，SPI1与SPI0使用相同的引脚，负责向片外Flash中写入数据。HSPI和VSPI是可以供用户随意使用。  SPI Transactions定义 一次完整的SPI通信过程包括5个阶段  发送命令（0~16比特）(可选) 发送地址（0~64比特">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-05T01:51:34.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="esp32-spi">
+<meta name="twitter:description" content="ESP32 SPI外设介绍 ESP32共有4组SPI：SPI0，SPI1，HSPI和VSPI。其中SPI0固定用于从片外Nor Flash读取用户程序代码，SPI1与SPI0使用相同的引脚，负责向片外Flash中写入数据。HSPI和VSPI是可以供用户随意使用。  SPI Transactions定义 一次完整的SPI通信过程包括5个阶段  发送命令（0~16比特）(可选) 发送地址（0~64比特">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">esp32-spi</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">esp32-spi</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-05T01:48:00.000Z" itemprop="datePublished" class="page-time">
+  2018-07-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ESP32-SPI外设介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">ESP32 SPI外设介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SPI-Transactions定义"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">SPI Transactions定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#GPIO-Matrix与IOMUX的差别"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">GPIO Matrix与IOMUX的差别</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#spi-master驱动"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">spi_master驱动</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-esp32-spi"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">esp32-spi</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-05 09:48:00" datetime="2018-07-05T01:48:00.000Z"  itemprop="datePublished">2018-07-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="ESP32-SPI外设介绍"><a href="#ESP32-SPI外设介绍" class="headerlink" title="ESP32 SPI外设介绍"></a>ESP32 SPI外设介绍</h2><blockquote>
+<p>ESP32共有4组SPI：SPI0，SPI1，HSPI和VSPI。其中SPI0固定用于从片外Nor Flash读取用户程序代码，SPI1与SPI0使用相同的引脚，负责向片外Flash中写入数据。HSPI和VSPI是可以供用户随意使用。</p>
+</blockquote>
+<h3 id="SPI-Transactions定义"><a href="#SPI-Transactions定义" class="headerlink" title="SPI Transactions定义"></a>SPI Transactions定义</h3><blockquote>
+<p>一次完整的SPI通信过程包括5个阶段</p>
+<ol>
+<li>发送命令（0~16比特）(可选)</li>
+<li>发送地址（0~64比特）（可选）</li>
+<li>写数据</li>
+<li>空等待（可选，通常用来匹配某个固定的时序）</li>
+<li>读数据</li>
+</ol>
+</blockquote>
+<h3 id="GPIO-Matrix与IOMUX的差别"><a href="#GPIO-Matrix与IOMUX的差别" class="headerlink" title="GPIO Matrix与IOMUX的差别"></a>GPIO Matrix与IOMUX的差别</h3><blockquote>
+<p>ESP32几乎所有外设的信号都有自己专用的IO引脚，称为IOMUX；同时ESP32也支持将这些外设信号通过GPIO互联矩阵引到非IOMUX的引脚上。</p>
+<ul>
+<li>使用GPIO互联矩阵的时候，信号频率不能超过40MHz</li>
+<li>使用IOMUX的时候，信号频率可以达到80MHz</li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>引脚名字</th>
+<th>HSPI</th>
+<th>VSPI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CS0</td>
+<td>15</td>
+<td>5</td>
+</tr>
+<tr>
+<td>SCLK</td>
+<td>14</td>
+<td>18</td>
+</tr>
+<tr>
+<td>MISO</td>
+<td>12</td>
+<td>19</td>
+</tr>
+<tr>
+<td>MOSI</td>
+<td>13</td>
+<td>23</td>
+</tr>
+<tr>
+<td>QUADWP</td>
+<td>2</td>
+<td>22</td>
+</tr>
+<tr>
+<td>QUADHD</td>
+<td>4</td>
+<td>21</td>
+</tr>
+</tbody>
+</table>
+<h3 id="spi-master驱动"><a href="#spi-master驱动" class="headerlink" title="spi_master驱动"></a>spi_master驱动</h3><blockquote>
+<p>spi_master驱动的特点：</p>
+<ol>
+<li>多线程</li>
+<li>DMA方式传输数据</li>
+<li>多路复用（支持一个master同时外挂多个slave）</li>
+</ol>
+</blockquote>
+<ul>
+<li>使用流程</li>
+</ul>
+<blockquote>
+<ol>
+<li>初始化SPI总线：<code>spi_bus_initialize</code>，在bus_config结构体中指定SPI外设信号需要连接的引脚，如果有些信号不需要，就填-1</li>
+<li>向总线注册SPI从设备：<code>spi_bus_add_device</code>，在dev_config结构体中指定好时序参数（这一步结束后将得到该设备的操作句柄）</li>
+<li>与从设备之间的IO操作有两种方式<ol>
+<li>把transaction丢进队列中<code>spi_device_queue_trans</code>，然后通过<code>spi_device_get_trans_result</code>来获取传输的结果</li>
+<li>使用<code>spi_device_transmit</code>完成transaction并等待结束，返回结果</li>
+</ol>
+</li>
+<li>卸载从设备<code>spi_bus_remove_device</code></li>
+<li>释放总线<code>spi_bus_free</code></li>
+</ol>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-05T01:51:34.514Z" itemprop="dateUpdated">2018-07-05 09:51:34</time>
+</span><br>
+
+
+        
+        <a href="/2018/07/05/esp32-spi/" target="_blank" rel="external">https://suda-morris.github.io/2018/07/05/esp32-spi/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ESP32/">ESP32</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2018/07/05/esp32-spi/&title=《esp32-spi》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2018/07/05/esp32-spi/&title=《esp32-spi》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2018/07/05/esp32-spi/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《esp32-spi》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2018/07/05/esp32-spi/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2018/07/05/esp32-spi/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/07/11/esp-idf-programming/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">esp-idf-programming</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/30/freertos-notes/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">FreeRTOS Introduction---Based on ESP32</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Thu Jul 05 2018 09:48:00 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2018/07/05/esp32-spi/&title=《esp32-spi》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2018/07/05/esp32-spi/&title=《esp32-spi》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2018/07/05/esp32-spi/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《esp32-spi》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2018/07/05/esp32-spi/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2018/07/05/esp32-spi/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3ay07DUAxF0fz/T4cpUkm6j90ixd4ZISjJXUEyfh0Hvs6X6/f3rz7z+vmrO7/e4fjGJUOGjMcyyOPvAfeH6LCDVyNDhowFDBIK+8ftBPQ3Z5YhQ4aM2yDYD6A8rMuQIUMGYfTL4P5zZciQsZNBQmH6GJJE9gtdGTJkbGDwcPn/X39lviFDhoxHMc7w4qlerd1WPJUMGTJGM3iA4wlZupZRC7gyZMjYw+BjxTSMksKVf/INTIYMGQsYPO2LH9CoNIOXKEOGjNEMnrR9dmzAXxkvfWXIkDGbwX9cW+dKXw1v88mQIWMDgxexBMB5JHAHfwEZMmQsYHSCHW+W1Zp398hgEitDhoyHM9LVh08ND/rraDJkyNjAqJWvaSstXbZIA7cMGTJmM9LGPW/WkyN2FjKSH8uQIePZjDSYEkwaWGvLYZdhV4YMGeMY/FidxK4WgoOwLkOGjNGMdFRZW8ggzTuegL4pZWXIkDGUURsGBOUl/i3+RDQSkCFDxiAGB6TJIh9wpgsff7wOGTJkrGHw0SM5Ii9o+SJaMOWQIUPGAkbc8CoNMmspJlq5kCFDxgjGGV4pIG30F+8gQ4aM0Qx+1QpLnhT27yZDhozZjM4Is9Ys40nnfVgP/nvIkCFjBCMdOtbKztoSWLEWlyFDxmIGb98X89AaVYYMGTLCJYk0ieyHbBkyZGxg8GFA2npL75y+ShkyZGxg8EQtLWgJqfN0GTJkLGD8ACH+GQbjlB2HAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

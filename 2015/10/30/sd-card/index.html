@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>SD Card Driver | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="SD">
+    <meta name="description" content="Micro SD卡简介                                                                                             SD卡               Micro SD卡的控制指令功能强大，支持SPI、SDIO模式，兼容MMC。在SPI模式下，CS/MOSI/MISO/CLK都需要加10~100K左右的上拉">
+<meta name="keywords" content="SD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SD Card Driver">
+<meta property="og:url" content="https://suda-morris.github.io/2015/10/30/sd-card/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="Micro SD卡简介                                                                                             SD卡               Micro SD卡的控制指令功能强大，支持SPI、SDIO模式，兼容MMC。在SPI模式下，CS/MOSI/MISO/CLK都需要加10~100K左右的上拉">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://i.imgur.com/baGsEky.jpg">
+<meta property="og:image" content="http://i.imgur.com/sDb6XU5.jpg">
+<meta property="og:image" content="http://i.imgur.com/2QG9Ein.jpg">
+<meta property="og:image" content="http://i.imgur.com/Xh1BWEV.png">
+<meta property="og:image" content="http://i.imgur.com/9oboqjq.jpg">
+<meta property="og:image" content="http://i.imgur.com/ZYbXuth.png">
+<meta property="og:image" content="http://i.imgur.com/ccW4YbS.jpg">
+<meta property="og:updated_time" content="2018-07-05T01:38:09.646Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SD Card Driver">
+<meta name="twitter:description" content="Micro SD卡简介                                                                                             SD卡               Micro SD卡的控制指令功能强大，支持SPI、SDIO模式，兼容MMC。在SPI模式下，CS/MOSI/MISO/CLK都需要加10~100K左右的上拉">
+<meta name="twitter:image" content="http://i.imgur.com/baGsEky.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank">
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">SD Card Driver</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">SD Card Driver</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-30T08:58:07.000Z" itemprop="datePublished" class="page-time">
+  2015-10-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Driver/">Driver</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Micro-SD卡简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">Micro SD卡简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SD-命令"><span class="post-toc-number">2.</span> <span class="post-toc-text">SD 命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SD-应答"><span class="post-toc-number">3.</span> <span class="post-toc-text">SD 应答</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SD卡初始化"><span class="post-toc-number">4.</span> <span class="post-toc-text">SD卡初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SD卡读取数据流程"><span class="post-toc-number">5.</span> <span class="post-toc-text">SD卡读取数据流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SD卡写数据流程"><span class="post-toc-number">6.</span> <span class="post-toc-text">SD卡写数据流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SD卡读数据块操作"><span class="post-toc-number">7.</span> <span class="post-toc-text">SD卡读数据块操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#FATFS简介"><span class="post-toc-number">8.</span> <span class="post-toc-text">FATFS简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#汉字字库"><span class="post-toc-number">9.</span> <span class="post-toc-text">汉字字库</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-sd-card" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">SD Card Driver</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-10-30 16:58:07" datetime="2015-10-30T08:58:07.000Z" itemprop="datePublished">2015-10-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Driver/">Driver</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Micro-SD卡简介"><a href="#Micro-SD卡简介" class="headerlink" title="Micro SD卡简介"></a>Micro SD卡简介</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/baGsEky.jpg" alt="SD卡" title="">
+                </div>
+                <div class="image-caption">SD卡</div>
+            </figure>
+<ol>
+<li>Micro SD卡的控制指令功能强大，支持SPI、SDIO模式，兼容MMC。在SPI模式下，CS/MOSI/MISO/CLK都需要加10~100K左右的上拉电阻</li>
+<li>SD卡有5个寄存器<ol>
+<li>CID：128比特，卡标识寄存器,只读</li>
+<li>RCA：16比特，相对卡地址寄存器，即本地系统中卡的地址，动态变化，在主机初始化的时候确定。SPI模式中没有此寄存器</li>
+<li>CSD：128比特，卡描述数据，主要存储了卡的容量、数据格式、DSR寄存器是否可用、数据传输相关参数、数据传输速度、最大的数据访问时间、最大的读写数据块长度等，是可配置寄存器</li>
+<li>SCR：64比特，SD配置寄存器，即SD卡特定信息数据如：SCR版本号、SD卡版本号、是否支持安全性、擦除后卡状态默认值、SD总线宽度等，由生产商在卡生产阶段写入</li>
+<li>OCR：32比特，操作条件寄存器,提供SD Host查询SD卡支持的电压范围，是否是大容量卡OCR[30],卡省电过程是否结束OCR[31]</li>
+</ol>
+</li>
+<li>每发送一个命令，SD卡都会给出一个应答，以告知主机该命令的执行情况，或者返回主机需要获取的数据。SPI模式下，SD卡针对不同的命令，应答可以是R1~R7。命令与响应都是MSB优先。除了SEND_STATUS和READ_OCR指令外，其他指令的响应格式都是R1，格式R1的长度是1Byte，并且最高位总是0，其余每位均是错误提示，在指令接收过程中发生了什么样的错误，对应的错误位就会是‘1’。R1b和R1具有相同的格式，它将伴随一个附加的busy信号，busy信号的长度可以是任意个字节，全0表示卡处在“忙”的状态。格式R2的长度为2字节，它是指令SEND_STATUS的响应，它的高字节和R1相同，低字节同样作为状态提示。格式R3的长度是5字节，它是指令READ_OCR的响应，最高字节和R1相同，其余4字节包含SD卡的OCR寄存器信息</li>
+<li>在SD卡收到复位命令（CMD0）时，CS为低电平则SD卡的SPI模式被启用。不过在发送CMD0之前，要发送&gt;74个时钟这是因为SD卡内部有一个供电电压上升时间，大概为64个CLK，剩下的10个CLK用于SD卡同步，之后才能开始CMD0的操作。在卡初始化的时候，CLK时钟最大不能超过400KHz</li>
+<li>对SD卡的常用基本操作主要由：单块读、连续读、单块写、连续写。SPI模式下，通过向SD卡发送响应的命令并读取相应的响应来实现对SD卡的控制。</li>
+</ol>
+<h2 id="SD-命令"><a href="#SD-命令" class="headerlink" title="SD 命令"></a>SD 命令</h2><ol>
+<li>命令:每个命令都有一个起始位和结束位，总长度为48 bits，并且每个命令都有 7 bits 的CRC 校验码，高字节优先传输<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/sDb6XU5.jpg" alt="SD Command" title="">
+                </div>
+                <div class="image-caption">SD Command</div>
+            </figure></li>
+<li>Command 共分为12类（class0 - class11），在寄存器CSD中有12 bits CCC（Card Command Class）对本卡支持的分类进行描述<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/2QG9Ein.jpg" alt="SD命令" title="">
+                </div>
+                <div class="image-caption">SD命令</div>
+            </figure></li>
+<li>几个重要的命令<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/Xh1BWEV.png" alt="常用命令" title="">
+                </div>
+                <div class="image-caption">常用命令</div>
+            </figure></li>
+<li>CMD8命令格式<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/9oboqjq.jpg" alt="CMD8" title="">
+                </div>
+                <div class="image-caption">CMD8</div>
+            </figure>
+</li>
+</ol>
+<h2 id="SD-应答"><a href="#SD-应答" class="headerlink" title="SD 应答"></a>SD 应答</h2><ol>
+<li>R1响应格式<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/ZYbXuth.png" alt="R1响应格式" title="">
+                </div>
+                <div class="image-caption">R1响应格式</div>
+            </figure>
+</li>
+</ol>
+<h2 id="SD卡初始化"><a href="#SD卡初始化" class="headerlink" title="SD卡初始化"></a>SD卡初始化</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/ccW4YbS.jpg" alt="SD卡初始化流程" title="">
+                </div>
+                <div class="image-caption">SD卡初始化流程</div>
+            </figure>
+<ol>
+<li>配置时钟，慢速一般为400Hz，设置工作模式</li>
+<li>发送CMD0，对卡进行软复位，进入空闲态，该指令没有反馈</li>
+<li>发送CMD8命令用于读取卡的接口信息，如果是SD2.0，则支持CMD8命令；如果是SD1.x，MMC，则不支持CMD8</li>
+<li>发送CMD55+ACMD41，判断当前电压是否在卡的工作范围内，看卡能否识别命令，如果是MMC卡，则CMD55不能被识别，短反馈</li>
+<li>发送CMD2，验证SD卡是否接入，长反馈</li>
+<li>发送CMD3，读取SD卡的RCA地址，短反馈</li>
+<li>以RCA作为参数，发送CMD9读取CSD，长反馈</li>
+<li>发送CMD7，选中要操作的SD卡，短反馈</li>
+<li>配置告诉时钟，准备数据传输，一般为20~25MHz</li>
+<li>设置工作模式：DMA、中断或者查询模式</li>
+</ol>
+<h2 id="SD卡读取数据流程"><a href="#SD卡读取数据流程" class="headerlink" title="SD卡读取数据流程"></a>SD卡读取数据流程</h2><ol>
+<li>发送CMD17</li>
+<li>接收卡响应R1</li>
+<li>接收数据起始令牌0xFE</li>
+<li>接收数据</li>
+<li>接收2字节的CRC，如果不使用CRC，这两个字节在读取后可以丢掉</li>
+<li>禁止片选之后，发多8个CLK</li>
+</ol>
+<h2 id="SD卡写数据流程"><a href="#SD卡写数据流程" class="headerlink" title="SD卡写数据流程"></a>SD卡写数据流程</h2><ol>
+<li>发送CMD24</li>
+<li>接收卡响应R1</li>
+<li>发送写数据起始令牌0xFE</li>
+<li>发送数据</li>
+<li>发送2字节的伪CRC</li>
+<li>禁止片选之后，发多8个CLK</li>
+</ol>
+<h2 id="SD卡读数据块操作"><a href="#SD卡读数据块操作" class="headerlink" title="SD卡读数据块操作"></a>SD卡读数据块操作</h2><ol>
+<li>在读数据块模式下，数据传输的基本单元是数据块，它的大小在CSD中（READ_BL_LEN）定义</li>
+<li>为了保证数据传输的正确，每个数据块后都有一个CRC校验码。</li>
+<li>CMD17（Read_Single_Block）启动一次读数据块操作，在传输结束后返回返回到发送状态。</li>
+<li>CMD18（Read_Multiple_Block）启动一次连续多个数据块的读操作</li>
+<li>主机可以在多数据块读操作的任何时候终止操作，而不管操作的类型。发送停止传输命令即可终止操作</li>
+<li>如果在多数据块读操作中，卡检测到错误（如越界，地址错位或内部错误），它将停止数据传输并仍处于数据状态；此时主机必须发送停止传输命令，终止操作</li>
+</ol>
+<h2 id="FATFS简介"><a href="#FATFS简介" class="headerlink" title="FATFS简介"></a>FATFS简介</h2><ol>
+<li>FATFS是一个完全免费开源的FAT文件系统模块，专门为小型的嵌入式系统而设计。支持FAT12、FAT16和FAT32，支持多个存储媒介；有独立的缓冲区，可以对多个文件进行读/写。</li>
+<li>拥有多种配置选项：<ol>
+<li>支持多卷（物理驱动器或分区，最多10个卷）</li>
+<li>多个ANSI/OEM代码页包括DBCS</li>
+<li>支持长文件名、ANSI/OEM或Unicode</li>
+<li>支持RTOS</li>
+<li>支持多种扇区大小</li>
+<li>只读、最小化的API和I/O缓冲区等</li>
+</ol>
+</li>
+<li>需要我们编写移植代码的是FATFS模块提供的底层接口，包括存储媒介读/写接口(disk I/O)和供给文件创建修改时间的实时时钟<ol>
+<li>ffconf.h:FATFS模块配置文件</li>
+<li>ff.h:FATFS和应用模块共用的包含文件</li>
+<li>ff.c:FATFS模块</li>
+<li>diskio.h:FATFS和disk I/O模块共用的包含文件</li>
+<li>interger.h:数据类型定义</li>
+<li>option：可选的外部功能(比如支持中文等)</li>
+<li>diskio.c:FATFS和disk I/O模块接口层文件</li>
+</ol>
+</li>
+<li>ffconf.h<ol>
+<li>_CODE_PAGE,根据具体使用的而语言在ffconf.h中定义具体的宏定义。如果使用简体中文，则选择936；如果使用英文，则选择437；如果使用日文，则选择932。打开option文件夹，打开cc936.c文件，里面有一个很大的数组static const WCHAR uni2oem[]。这个数组用于unicode码和OEM码之间的相互转换。接下来又有两个函数，ff_convert()和ff_wtoupper()具体执行码型转换和将字符串转换为大写。unicode是一种双字节字符编码，无论中文还是英文，或者其他语言统一到2字节。与现有的任何编码都不兼容。WindowsNT的内核即使用该编码，所有数据进入内核前转换成UNICODE，退出内核后再转换成版本相关的编码(通常称为OEM，在简体中文下即为GB)</li>
+<li>_FS_TINY，使用浓缩版的FATFS就设置为1</li>
+<li>_FS_READONLY,这个用来配置是不是只读</li>
+<li>_USE_STRFUNC,这个用来设置是否支持字符串类操作，比如f_putc,f_puts等</li>
+<li>_USE_MKFS,这个用来设置是否使能格式化</li>
+<li>_USE_FASTSEEK，这个用来使能快速定位</li>
+<li>_USE_LABEL,这个用来设置是否支持磁盘盘符（磁盘名字）读取与设置</li>
+<li>_USE_LFN,该选项用于设置是否支持长文件名，还需要_CODE_PAGE支持，取值范围为0~3。0表示不支持长文件名，1~3是支持长文件名，但是存储地方不一样</li>
+<li>_VOLUMES,用于设置FATFS支持的逻辑设备数目</li>
+<li>_MAX_SS,扇区缓冲的最大值，一般设置为512</li>
+</ol>
+</li>
+<li>ff.h中的函数定义<ol>
+<li>FRESULT f_mount (FATFS<em> fs, const TCHAR</em> path, BYTE opt);加载文件系统<ul>
+<li>fs表示文件系统对象，path表示本地设备驱动号，opt=1表示立即挂载，0表示延迟挂载</li>
+</ul>
+</li>
+<li>FRESULT f_lseek (FIL* fp, DWORD ofs);移动文件的读写指针<ul>
+<li>ofs表示文件偏移量的数目</li>
+</ul>
+</li>
+<li>FRESULT f_close (FIL* fp);关闭打开的文件对象    </li>
+<li>FRESULT f_opendir (DIR<em> dp, const TCHAR</em> path);打开目录，返回目录对象    </li>
+<li>FRESULT f_readdir (DIR<em> dp, FILINFO</em> fno);读取目录获得文件信息</li>
+<li>FRESULT f_stat (const TCHAR<em> path, FILINFO</em> fno);读取文件的状态</li>
+<li>FRESULT f_getfree (const TCHAR<em> path, DWORD</em> nclst, FATFS** fatfs);获取驱动器上的空闲簇数</li>
+<li>FRESULT f_truncate (FIL* fp);截断文件</li>
+<li>FRESULT f_sync (FIL* fp);刷新写文件的缓冲数据</li>
+<li>FRESULT f_unlink (const TCHAR* path);删除目录中的一个文件</li>
+<li>FRESULT f_mkdir (const TCHAR* path);创建一个新目录</li>
+<li>FRESULT f_chmod (const TCHAR* path, BYTE attr, BYTE mask);更改文件/目录的属性</li>
+<li>FRESULT f_utime (const TCHAR<em> path, const FILINFO</em> fno);更改文件/目录的时间戳</li>
+<li>FRESULT f_rename (const TCHAR<em> path_old, const TCHAR</em> path_new);重命名/移动文件或目录</li>
+<li>FRESULT f_forward (FIL<em> fp, UINT(</em>func)(const BYTE<em>,UINT), UINT btf, UINT</em> bf);转发数据流</li>
+<li>FRESULT f_mkfs (const TCHAR* path, BYTE sfd, UINT au);在驱动器上创建一个文件系统</li>
+<li>FRESULT f_chdir (const TCHAR* path);改变当前目录</li>
+<li>FRESULT f_chdrive (const TCHAR* path);更改当前驱动器</li>
+<li>int f_putc (TCHAR c, FIL* fp);</li>
+<li>int f_puts (const TCHAR<em> str, FIL</em> cp);    </li>
+<li>int f_printf (FIL<em> fp, const TCHAR</em> str, …);</li>
+<li>TCHAR<em> f_gets (TCHAR</em> buff, int len, FIL* fp);</li>
+</ol>
+</li>
+<li>diskio.c(需要用户提供如下几个函数接口)<ol>
+<li>DSTATUS disk_initialize (BYTE pdrv);初始化磁盘驱动器</li>
+<li>DSTATUS disk_status (BYTE pdrv);获取磁盘状态</li>
+<li>DRESULT disk_read (BYTE pdrv, BYTE* buff, DWORD sector, UINT count);读扇区</li>
+<li>DRESULT disk_write (BYTE pdrv, const BYTE* buff, DWORD sector, UINT count);写扇区</li>
+<li>DRESULT disk_ioctl (BYTE pdrv, BYTE cmd, void* buff);设备相关的控制特性</li>
+<li>get_fattime获取当前时间</li>
+</ol>
+</li>
+<li>簇：文件数据分配的基本单位</li>
+<li>FAT文件系统依次应该为:引导扇区、文件分配表两个、根目录区和数据区</li>
+</ol>
+<h2 id="汉字字库"><a href="#汉字字库" class="headerlink" title="汉字字库"></a>汉字字库</h2><ol>
+<li>常用的汉字内码系统有GB2312，GB13000，GBK，BIG5（繁体）等几种，其中GB2312支持的汉字仅有几千个，很多时候不够用，而GBK内码不仅完全兼容GB2312，还支持繁体字，总汉字数量达到2万多个。</li>
+<li>每个GBK码由2字节组成，第一个字节为0X81~0xFE，第二个字节分为两部分，一是0x40~0x7E，二是0x80~0xFE。第一个字节代表的意义称为区，GBK里面总共有126个区，每个区内有190个汉字。</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-05T01:38:09.646Z" itemprop="dateUpdated">2018-07-05 09:38:09</time>
+</span><br>
+
+
+        
+        <a href="/2015/10/30/sd-card/" target="_blank" rel="external">https://suda-morris.github.io/2015/10/30/sd-card/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SD/">SD</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2015/10/30/sd-card/&title=《SD Card Driver》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2015/10/30/sd-card/&title=《SD Card Driver》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2015/10/30/sd-card/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SD Card Driver》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2015/10/30/sd-card/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2015/10/30/sd-card/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/10/star-uml/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">StarUML Install</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/16/gps/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">GPS Introduction</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Fri Oct 30 2015 16:58:07 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2015/10/30/sd-card/&title=《SD Card Driver》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2015/10/30/sd-card/&title=《SD Card Driver》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2015/10/30/sd-card/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SD Card Driver》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2015/10/30/sd-card/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2015/10/30/sd-card/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3aMZLjMAwEQP//0750E8kDwL4qgc1oyytRagVTIMHXKx7vP+P+v1fjfubkKV8YGBgYj2Ukj7/6JaFe3VV97odPg4GBcQAjicLJ9UnsJh/r8ncMDAyM2xCcBGj+XAwMDIx54FaXwb0CFAMD42RGEpTzUi9ZAP98LY6BgfFARh6X///vn/Q3MDAwHsV4F8eEWg3owlthYGCsZuQBV8VMisvm+2BgYCxlJAcmei+U/JJf+QGGgYGxmlFtGSbIXhB/YcsPAwNjNSMJ3GrZV90465WJGBgYpzHyG3qY+4IvPzoW9WMxMDAWMZKp8239BNA7MNFci2NgYKxgVEu0SWszD+ivVbgYGBiLGNWIrAZxXib2ykcMDIxzGPfxN78m3/RP5r9chWNgYKxjTFqJ1QMZkzZAYS2OgYFxACM5ypDE5bwhmm8FYmBgnMCoFnDz18qDPloeY2BgHMCodgarjc/eQY28RYGBgbGbkd/2Go9ywVe8BgMD4wRGXt71Yjc/upFv3hXaAxgYGCsY+TGIyUv0Aj35cBgYGGcyeqTq4YxqARotYjEwMBYx3sVRDdxe7JZnwMDAWM3obZb1FplJY/IXs2FgYOxg9Da8qkcuqiVjuV2BgYFxAKMXfMkDem2G5locAwMDI9iyT6J5PnOhw4CBgXE8oxq482Xth0UsBgbGakbeDOjFce9j/WS7DQMD44GMeYz2tvh7IT5qamJgYDyP8Q+Lv7JQqMaihwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>W7500 Introduction | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="W7500">
+    <meta name="description" content="WIZwiki-W7500平台介绍 W7500单芯片解决方案：ARM Cortex-M0，48MHz，128KB Flash，16KB RAM，硬件TCP/IP内核，32KB TCP/IP专属RAM，MII接口，8个socket 程序下载方法： CMSIS-DAP USB下载 利用串口的ISP固件下载方式(按住boot键不放，按一下sw键进入boot模式)   SWD(Serial Wire De">
+<meta name="keywords" content="W7500">
+<meta property="og:type" content="article">
+<meta property="og:title" content="W7500 Introduction">
+<meta property="og:url" content="https://suda-morris.github.io/2015/10/04/w7500/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="WIZwiki-W7500平台介绍 W7500单芯片解决方案：ARM Cortex-M0，48MHz，128KB Flash，16KB RAM，硬件TCP/IP内核，32KB TCP/IP专属RAM，MII接口，8个socket 程序下载方法： CMSIS-DAP USB下载 利用串口的ISP固件下载方式(按住boot键不放，按一下sw键进入boot模式)   SWD(Serial Wire De">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://i.imgur.com/YbsZrdE.png">
+<meta property="og:image" content="http://i.imgur.com/pLcN78g.png">
+<meta property="og:image" content="http://i.imgur.com/WkMJaE8.jpg">
+<meta property="og:image" content="http://i.imgur.com/BTLzrtr.jpg">
+<meta property="og:image" content="http://i.imgur.com/e0vGKku.gif">
+<meta property="og:image" content="http://i.imgur.com/wB70rjr.gif">
+<meta property="og:image" content="http://i.imgur.com/S4p240T.gif">
+<meta property="og:image" content="http://i.imgur.com/Mvcx1hV.png">
+<meta property="og:image" content="http://i.imgur.com/xZTW330.png">
+<meta property="og:image" content="http://wizwiki.net/wiki/lib/exe/fetch.php?media=products:w7500:overview:w7500_memory_map.png">
+<meta property="og:image" content="http://i.imgur.com/Nn7Krru.gif">
+<meta property="og:updated_time" content="2018-07-05T01:38:09.646Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="W7500 Introduction">
+<meta name="twitter:description" content="WIZwiki-W7500平台介绍 W7500单芯片解决方案：ARM Cortex-M0，48MHz，128KB Flash，16KB RAM，硬件TCP/IP内核，32KB TCP/IP专属RAM，MII接口，8个socket 程序下载方法： CMSIS-DAP USB下载 利用串口的ISP固件下载方式(按住boot键不放，按一下sw键进入boot模式)   SWD(Serial Wire De">
+<meta name="twitter:image" content="http://i.imgur.com/YbsZrdE.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank">
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">W7500 Introduction</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">W7500 Introduction</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-10-04T14:51:33.000Z" itemprop="datePublished" class="page-time">
+  2015-10-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#WIZwiki-W7500平台介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">WIZwiki-W7500平台介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MII"><span class="post-toc-number">2.</span> <span class="post-toc-text">MII</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中断和事件"><span class="post-toc-number">3.</span> <span class="post-toc-text">中断和事件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#供电"><span class="post-toc-number">4.</span> <span class="post-toc-text">供电</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TOE"><span class="post-toc-number">5.</span> <span class="post-toc-text">TOE</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动顺序"><span class="post-toc-number">6.</span> <span class="post-toc-text">启动顺序</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#存储器"><span class="post-toc-number">7.</span> <span class="post-toc-text">存储器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#时钟复位发生器CRG"><span class="post-toc-number">8.</span> <span class="post-toc-text">时钟复位发生器CRG</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#随机数发生器RNG"><span class="post-toc-number">9.</span> <span class="post-toc-text">随机数发生器RNG</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#外部中断"><span class="post-toc-number">10.</span> <span class="post-toc-text">外部中断</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Pad控制器"><span class="post-toc-number">11.</span> <span class="post-toc-text">Pad控制器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#GPIO"><span class="post-toc-number">12.</span> <span class="post-toc-text">GPIO</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UART"><span class="post-toc-number">13.</span> <span class="post-toc-text">UART</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#uDMAC"><span class="post-toc-number">14.</span> <span class="post-toc-text">uDMAC</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SSP"><span class="post-toc-number">15.</span> <span class="post-toc-text">SSP</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#I2C"><span class="post-toc-number">16.</span> <span class="post-toc-text">I2C</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#W7500P芯片介绍"><span class="post-toc-number">17.</span> <span class="post-toc-text">W7500P芯片介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SYSCFG-System-Configuration-Controller-的主要功能"><span class="post-toc-number">18.</span> <span class="post-toc-text">SYSCFG(System Configuration Controller)的主要功能</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-w7500" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">W7500 Introduction</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-10-04 22:51:33" datetime="2015-10-04T14:51:33.000Z" itemprop="datePublished">2015-10-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="WIZwiki-W7500平台介绍"><a href="#WIZwiki-W7500平台介绍" class="headerlink" title="WIZwiki-W7500平台介绍"></a>WIZwiki-W7500平台介绍</h2><ol>
+<li>W7500单芯片解决方案：ARM Cortex-M0，48MHz，128KB Flash，16KB RAM，硬件TCP/IP内核，32KB TCP/IP专属RAM，MII接口，8个socket</li>
+<li>程序下载方法：<ol>
+<li>CMSIS-DAP USB下载</li>
+<li>利用串口的ISP固件下载方式(按住boot键不放，按一下sw键进入boot模式)</li>
+</ol>
+</li>
+<li>SWD(Serial Wire Debug)调试</li>
+<li>2路SPI接口，2路I2C接口，3路UART接口，8路ADC(12bit，1Msps)，6路DMA控制器，1个32位的RNG（随机数生成器）</li>
+<li>外部PHY芯片：IP101GA<ol>
+<li>支持自动MDI / MDIX功能以简化网络的安装以及降低系统维护成本，即自动识别交叉线与直连线 </li>
+<li>提供媒体独立接口（MII）或简化媒体独立接口（RMII）与不同类型的10/100Mbps的媒体访问控制器（MAC）连接</li>
+<li>支持MDC和MDIO与MAC沟通 </li>
+</ol>
+</li>
+<li>CMSIS-DAP实现芯片：LPC11U35FHI33/501<ol>
+<li>CMSIS-DAP功能：<ol>
+<li>通过USB烧写固件到W7500</li>
+<li>利用W7500的UART1，通过USB接口与外界进行串口通讯（PC端需要安装驱动，驱动安装成功后会虚拟出串口名如：mbed Seral Port(COMn)）</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>开发板框图：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/YbsZrdE.png" alt="板子框图" title="">
+                </div>
+                <div class="image-caption">板子框图</div>
+            </figure></li>
+<li>W7500芯片框图：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/pLcN78g.png" alt="W7500芯片框图" title="">
+                </div>
+                <div class="image-caption">W7500芯片框图</div>
+            </figure></li>
+</ol>
+<h2 id="MII"><a href="#MII" class="headerlink" title="MII"></a>MII</h2><ol>
+<li>MII即媒体独立接口，也叫介质无关接口，它是IEEE-802.3定义的以太网行业标准，它包括一个数据接口，以及一个MAC和PHY之间的管理接口,MAC与PHY间的管理接口一般是MDIO</li>
+<li>数据接口包括分别用于发送器和接收器的两条独立信道，每条信道都有自己的数据、时钟和控制信号。</li>
+<li>管理接口是个双信号接口：一个是时钟信号，另一个是数据信号。通过管理接口，上层能监视和控制PHY</li>
+<li>MII数据接口总共需要16个信号：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/WkMJaE8.jpg" alt="MII接口" title="">
+                </div>
+                <div class="image-caption">MII接口</div>
+            </figure>
+<ol>
+<li>Tx_CLK/Rx_CLK：分别是Tx和Rx的时钟信号。均由PHY驱动</li>
+<li>TxD[0···3]/RxD[0···3]：分别是Tx和Rx的数据传输线。TxD是控制器驱动，RxD是PHY驱动</li>
+<li>Tx_EN/Rx_DV：分别是Tx和Rx的开关。这两根线都是PHY驱动。只有在Tx_EN有效时，TxD才会被PHY接收；只有在Rx_DV有效时，RxD才会被控制器接收</li>
+<li>Tx_ER/Rx_ER：分别是Tx和Rx的报错线。这两根线都是PHY驱动。即使是在Tx_EN或Rx_DV期间，只要此两根线有效，则出错的那个周期所传数据无效。10Mb以太网传输时，ER信号不影响正常传输，若不使用ER线，需将其接地</li>
+<li>CRS/COL：监听介质是否空闲/监听是否有冲突发生。这两根线都是由PHY驱动，并且只在半双工模式下有效</li>
+</ol>
+</li>
+<li>MII控制接口：MDC和MDIO。通过它，控制芯片可以访问PHY的寄存器(100M物理层芯片中介绍的寄存器组，但不仅限于100M物理层芯片，10M物理层芯片也可以拥有这些寄存器)，并通过这些寄存器来对物理层芯片进行控制和管理<ol>
+<li>MDC：管理接口时钟。它是由控制器驱动，与TX_CLK和RX_CLK无任何关系</li>
+<li>MDIO：用来传送MAC层的控制信息和物理层的状态信息。它是一根双向的数据线。因MDIO在某个时钟周期内会空闲，呈高阻状态，故使用时须将其<strong>上拉</strong></li>
+</ol>
+</li>
+<li>事实上，一个控制器，可以通过Management Interface来管理32个PHY。即，MDC和MDIO是可以复用的。</li>
+<li>MAC主要是通过MDIO（以MDC为时钟）来读写PHY的寄存器，MDIO上数据帧的格式如下：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/BTLzrtr.jpg" alt="MDIO上数据帧的格式" title="">
+                </div>
+                <div class="image-caption">MDIO上数据帧的格式</div>
+            </figure></li>
+<li>数据开始前，会发32个1，然后数据开始时先发送一个0，然后恢复到1；接下来两位，10表示读，01表示写；紧接着的5为是PHY地址；下面5位是寄存器地址；接下来两位表示状态转换域，若为读操作，则第一比特时MDIO为高阻态，第二比特时由物理层芯片使MDIO置“0”。若为写操作，则MDIO仍由MAC层芯片控制，其连续输出“10”两个比特。;接下来是16位的数据；空闲时线上为高阻</li>
+<li>以前的10M的MAC层芯片和物理层芯片之间传送数据是通过一根数据线来进行的，其时钟是10M，在100M中，如果也用一根数据线来传送的话，时钟需要100M，这会带来一些问题，所以定义了MII接口，它是用4根数据线来传送数据的，这样在传送100M数据时，时钟就会由100M降低为25M，而在传送10M数据时，时钟会降低到2.5M，这样就实现了10M和100M的兼容。</li>
+<li>MII接口的MAC模式定义：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/e0vGKku.gif" alt="MII接口MAC模式" title="">
+                </div>
+                <div class="image-caption">MII接口MAC模式</div>
+            </figure></li>
+<li>MII接口PHY模式定义：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/wB70rjr.gif" alt="MII接口PHY模式" title="">
+                </div>
+                <div class="image-caption">MII接口PHY模式</div>
+            </figure></li>
+<li>在MII接口的连线中，如果TX_ER信号线没有用到，必须将它下拉接地。</li>
+<li>RXD_DV同步于RX_CLK，被PHY驱动，它的作用如同于发送通道中的TX_EN，不同的是在时序上稍有一点差别：为了让数据能够成功被RS接收，要求RXD_DV有效的时间必须覆盖整个FRAME的过程</li>
+<li>MDC：管理接口的时钟，它是一个非周期信号，信号的最小周期（实际是正电平时间和负电平时间之和）为400ns，最小正电平时间和负电平时间为160ns，最大的正负电平时间无限制。它与TX_CLK和RX_CLK无任何关系。</li>
+<li>MDIO是一根双向的数据线。用来传送MAC层的控制信息和物理层的状态信息。MDIO数据与MDC时钟同步，在MDC上升沿有效。</li>
+<li>MDIO数据帧的时序关系：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/S4p240T.gif" alt="MDIO数据帧的时序关系" title="">
+                </div>
+                <div class="image-caption">MDIO数据帧的时序关系</div>
+            </figure></li>
+<li>MII接口也有一些不足之处，主要是其接口信号线很多，发送和接收和指示接口有14根数据线(不包括MDIO接口的信号线，因为其被所有MII接口所共享)，当交换芯片的端口数据较多时，会造成芯片的管脚数目很多的问题，这给芯片的设计和单板的设计都带来了一定的问题。为了解决这些问题，人们设计了两种新的MII接口，它们是RMII接口(Reduced MII接口)和SMII接口(StreamMII接口)。这两种接口都减少了MII接口的数据线，不过它们一般只用在以太网交换机的交换MAC芯片和多口物理层芯片中，而很少用于单口的MAC层芯片和物理层芯片中。RMII接口和SMII接口都可以用于10M以太网和100M以太网，但不可能用于1000M以太网，因为此时时钟频率太高，不可能实现。</li>
+</ol>
+<h2 id="中断和事件"><a href="#中断和事件" class="headerlink" title="中断和事件"></a>中断和事件</h2><ol>
+<li>W7500包含26路中断请求IRQ，一个非屏蔽中断NMI，一个事件信号</li>
+<li>W7500可以处理内部事件以唤醒内核（WFE），唤醒事件可以通过如下方式产生：<ol>
+<li>DMA进程完成之后</li>
+</ol>
+</li>
+</ol>
+<h2 id="供电"><a href="#供电" class="headerlink" title="供电"></a>供电</h2><ol>
+<li>W7500内部嵌入一个稳压器来提供内部1.5V的电压，稳压器没有掉电模式或者休眠模式</li>
+<li>ADC参考电压和VDD相同</li>
+<li>W7500在系统或电源复位后会处于工作模式，当CPU停止工作时可以采用两种低功耗模式(W7500没有掉电模式)：休眠模式(Sleep)和深度休眠(Deep Sleep)</li>
+<li>休眠模式仅仅关闭了CPU时钟，总线时钟依旧开启，深度休眠模式中总线时钟和存储器时钟都被关闭</li>
+</ol>
+<h2 id="TOE"><a href="#TOE" class="headerlink" title="TOE"></a>TOE</h2><ol>
+<li>TCP/IP卸载引擎(TOE)是一个嵌入式全硬件TCP/IP以太网控制器，它可以提供更简洁的嵌入式网络接入方案。TOE提供WOL(网络唤醒)功能可以大大降低系统功耗</li>
+<li>TOE框图：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/Mvcx1hV.png" alt="TOE区域框图" title="">
+                </div>
+                <div class="image-caption">TOE区域框图</div>
+            </figure></li>
+<li>NCONFLR（网络配置锁存寄存器）用来锁定和解锁对网络配置寄存器(SIR,SUBR,GAR和SHAR)的访问。当LOCK处于ON，受保护的寄存器无法进行配置，在这种情况下，写入NCONFLR寄存器的值是0x01ACCE55，当LOCK处于OFF，受保护的寄存器可以进行配置，这是该寄存器的值为非0x01ACCE55的其他任意值。</li>
+<li>TCKCNTR(Ticker计数寄存器)，用于向TOE内部定时器提供100us的Ticker计数。Ticker计数器单元是HCLK</li>
+</ol>
+<h2 id="启动顺序"><a href="#启动顺序" class="headerlink" title="启动顺序"></a>启动顺序</h2><ol>
+<li>W7500有三种不同的启动模式，可以通过BOOT引脚和TEST引脚选定。TEST=0，BOOT=0，在主Flash存储器中执行用户代码；TEST=0，BOOT=1，W7500支持ISP功能以便于用串口控制flash</li>
+</ol>
+<h2 id="存储器"><a href="#存储器" class="headerlink" title="存储器"></a>存储器</h2><ol>
+<li>Flash存储器由长度为32为宽的存储单元构成，可以用于存储代码或者数据</li>
+<li>存储器的构成基于一个主Flash存储器块，包含256字节的512扇区，或者4KB的32个块。块和扇区停工读/写保护</li>
+</ol>
+<h2 id="时钟复位发生器CRG"><a href="#时钟复位发生器CRG" class="headerlink" title="时钟复位发生器CRG"></a>时钟复位发生器CRG</h2><ol>
+<li>CRG包括PLL和POR</li>
+<li>三种类型的复位：<ol>
+<li>外部复位，上电复位，系统复位</li>
+<li>系统复位是当下面的情况发生时产生复位：<ol>
+<li>看门狗事件</li>
+<li>重映射之后</li>
+<li>软件复位(在Cortex-M0的SYSRESETREQ为)</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>两种时钟源可以用来驱动系统时钟：<ol>
+<li>外部振荡器时钟(8MHz~24MHz)(OCLK)</li>
+<li>内部8MHz RC振荡器(RCLK)</li>
+</ol>
+</li>
+<li>RNGCLK只有一个源(pll输出)并且没有预分频器</li>
+<li>CRG框图：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/xZTW330.png" alt="CRG框图" title="">
+                </div>
+                <div class="image-caption">CRG框图</div>
+            </figure></li>
+<li>监视时钟源：    <ol>
+<li>监视引脚：PA_02</li>
+<li>配置寄存器：MONCLK_SSR</li>
+</ol>
+</li>
+</ol>
+<h2 id="随机数发生器RNG"><a href="#随机数发生器RNG" class="headerlink" title="随机数发生器RNG"></a>随机数发生器RNG</h2><ol>
+<li>RNG是一个32位随机数发生器，当上电复位时，RNG会产生一个上电随机数，RNG可以通过软件来运行/停止。RNG的初始值和多项式值可以通过软件来更新</li>
+</ol>
+<h2 id="外部中断"><a href="#外部中断" class="headerlink" title="外部中断"></a>外部中断</h2><ol>
+<li>不管任何功能引脚功能设置，功能引脚都可以被用作一个外部中断源</li>
+<li>外部中断控制器的中断极性分为上升沿和下降沿</li>
+</ol>
+<h2 id="Pad控制器"><a href="#Pad控制器" class="headerlink" title="Pad控制器"></a>Pad控制器</h2><ol>
+<li>W7500具有数字I/O功能引脚和数字/模拟多路复用I/O功能引脚，功能引脚的可控性特性包括上拉，下拉，驱动强度，输入开启和CMOS/Schmitt触发输入缓存</li>
+</ol>
+<h2 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h2><ol>
+<li>屏蔽寄存器可将端口位视为整体而其他位不变</li>
+<li>访问屏蔽功能允许一位或者多位在单向传输过程中读或写，这避免了基于软件的读-修改-写操作的非线程安全问题。有了访问屏蔽操作，16-bit I/O被分成两半，低字节和高字节，这个位被定义为两个数组，每一个包含256字节</li>
+</ol>
+<h2 id="UART"><a href="#UART" class="headerlink" title="UART"></a>UART</h2><ol>
+<li>发送的数据存储在一个32字节的FIFO中，将需要发送的数据写入发送FIFO中，如果UART被启用，它会按照UARTxLCR_H只是的参数开始发送数据帧。数据会持续发送，直到发送FIFO为空。当有数据被写入发送FIFO或当前处于发送的过程中时，UARTxFR的BUSY位会保持为“1”，表示FIFO中有数据。</li>
+<li>接收的数据存储在一个32字节的FIFO里面。当接收到一个起始位，它开始运行，并对UART模式中计数器的第8个周期进行采样。如果UARTRXD为“1”，证实接收到了有效的停止位。当一个完整的字符数据被接收到，数据会被存储在接收FIFO中。错误位会被存储在UARTxCR的【10：8】位置，溢出的被存储在UARTxCR的【11】位</li>
+<li>更改UART控制寄存器的步骤：<ol>
+<li>禁用UART</li>
+<li>等待接收到或者发送完最后的字符</li>
+<li>设置行控制寄存器中FEN位为0，从而刷新发送FIFO</li>
+<li>更改UARTCR寄存器</li>
+<li>使能UART</li>
+</ol>
+</li>
+<li>W7500有个Simple Uart，其实就是UART2，用来ISP烧写程序的，一般用户不直接拿来使用</li>
+</ol>
+<h2 id="uDMAC"><a href="#uDMAC" class="headerlink" title="uDMAC"></a>uDMAC</h2><ol>
+<li>共6个通道，每个通道用于管理来自某个或者多个外设的内存访问请求</li>
+<li>不要给一个第优先级的 通道分配大不要给一个低优先级的通道分配大的R_power值，因为直到重仲裁之前来自控制器高优先级的请求都会被阻止</li>
+<li>当N&gt;2^R，并且不是2^R的整数倍时，控制器总是会执行2^R的传输序列，直到N&lt;2^R时再传输，控制器会在DMA周期的末尾，再执行剩余N次传输</li>
+<li>DMA周期类型：<ol>
+<li>Invalid</li>
+<li>Basic</li>
+<li>Auto-request</li>
+<li>ping-pong</li>
+</ol>
+</li>
+<li>Ping-pong cycle<ol>
+<li>DMA控制器轮流切换主、副两个数据通道，直到接收到一个无效的数据结构或者是circle_type被设置成了basic模式，或者是控制器停止了该通道的工作</li>
+<li>当DMA使用其中一个通道进行数据传输时候，处理器可以重新配置另外一个通道的参数</li>
+</ol>
+</li>
+</ol>
+<h2 id="SSP"><a href="#SSP" class="headerlink" title="SSP"></a>SSP</h2><ol>
+<li>SSP接口可以同具有以下接口的主句或者从机进行通讯<ol>
+<li>摩托罗拉SPI接口</li>
+<li>TI的同步串行接口</li>
+<li>国家半导体的Microware接口</li>
+</ol>
+</li>
+<li>SSP接口可作为主机或者从机接口，支持2MHz甚至更高的位速率</li>
+<li>PrimeCell SSP复位之后默认是禁用状态，需要按照以下步骤进行配置：<ol>
+<li>更改SSP控制器SSPCR0和SSPCR1来配置SSP接口外设的主从工作模式以及工作的协议标准：Motorola SPI，Texas Instruments SSP，National Semiconductor</li>
+<li>通过更改时钟预分频寄存器SSPCRSR来将外部SSPCLK时钟进行分频，从而可以更改位速率</li>
+</ol>
+</li>
+<li>有两种方法可以启动PrimeCell SSP：<ol>
+<li>激活发送FIFO：Prime Cell SSP禁用时，可以通过写入8个16位值发送FIFO</li>
+<li>通过发送FIFO服务请求到CPU中断</li>
+</ol>
+</li>
+<li>在从机模式的操作中，为了确保正确的操作，SSPCLK必须必预期的SSPCLKIN最快频率快12倍；在主机模式的操作中，为了确保正确的操作，SSPCLK必须为预期的SSPCLKOUT最快频率的2倍。</li>
+<li>SSPCLK的最低频率可以通过下列公式计算，两个条件必须同时被满足：<ol>
+<li>FSSPCLK(min) &gt;= 2 x FSSPCLKOUT(max), for master mode</li>
+<li>FSSPCLK(min) &gt;= 12 x FSSPCLKIN(max), for slave mode.</li>
+</ol>
+</li>
+<li>SSPCLK的最高频率可以通过下列公式计算，两个条件必须被同时满足：<ol>
+<li>FSSPCLK(max) &lt;= 254 x 256 x FSSPCLKOUT(min), for master mode</li>
+<li>FSSPCLK(max) &lt;= 254 x 256 x FSSPCLKIN(min), for slave mode.</li>
+</ol>
+</li>
+<li>SSPCR0寄存器被用来：<ol>
+<li>编写穿行时钟速率</li>
+<li>在三个协议模式中进行选择</li>
+<li>选择合适的数据长度</li>
+</ol>
+</li>
+<li>SSPCR1寄存器被用来：<ol>
+<li>选择主/从模式</li>
+<li>启用loopback回环测试功能</li>
+<li>启用PrimeCell SSP外设</li>
+</ol>
+</li>
+<li>位速率的产生<ol>
+<li>串行位速率通过将输入时钟SSPCLK分频获得。首先，使用范围在2~254的偶数分频值CPSDVSR对输入时钟进行分频，CPSDVSR的值在SSPCPSR寄存器中设置。然后再使用1~256的其中一个值（即1+SCR）对时钟进一步分频T，此处SCR在SSI控制SSPCR0寄存器中设置。</li>
+</ol>
+</li>
+<li>帧格式：根据所设置的数据大小，每个数据帧的长度均在4~16位之间，并且从最高有效位MSB开始发送。<ol>
+<li>德州仪器（TI）同步串行的帧格式<ol>
+<li>在该模式中，任何时候当SSP空闲时，SSPCLKOUT和SSPFSSOUT被强制为低电平，发送数据线SSPTx为三态。一旦发送FIFO的底部入口包含数据，SSPFSSOUT就会变为高电平并持续一个SSPCLKOUT周期。要发送的值也从发送FIFO传输到发送逻辑的穿行移位寄存器中</li>
+</ol>
+</li>
+<li>Motorola SPI的帧格式<ol>
+<li>4线接口，其中SSPFSSOUT信号用作从机选择。Motorola SPI格式的主要特性为：SSPCLKOUT信号的不活动状态和相位均通过SSPSCR0控制寄存器中的SPO和SPH来设置。</li>
+<li>SPO，时钟极性位。当SPO时钟极性控制位为低时，它在SSPCLKOUT管脚上产生稳定的低电平值。如果SPO位为高，则在没有进行数据传输的情况下，在SSPCLKPUT管脚上产生一个稳定的高电平值。</li>
+<li>SPH，相位控制位。SPH相位控制位用来选择捕获数据的时钟边沿并允许边沿改变状态。SPH在第一个传输位上的影响最大，因为它可以在第一个数据捕获边沿之前允许或不允许一次时钟转换。当SPH相位控制位为低时，在第一个时钟边沿转换时捕获数据。如果SPH位为高，则在第二个时钟边沿转换时捕获数据</li>
+</ol>
+</li>
+<li>National Semiconductor帧格式<ol>
+<li>National Semiconductor格式与SPI格式非常相似，不同的是其采用的是使用主-从消息传递技术的半双工模式而非全双工模式。</li>
+<li>此穿行传输都由PrimeCell SSP向片外从器件发送8位控制字开始。在此传输过程中，PrimeCell SSP不会接收到输入的数据，在消息发送完毕后，片外从机对消息进行译码，并在PrimeCell SSP将8位控制消息的最后一位发送完成之后等待一个串行时钟周期，之后从机以请求的数据来响应。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="I2C"><a href="#I2C" class="headerlink" title="I2C"></a>I2C</h2><ol>
+<li>支持标准模式100Kbps和高速模式400Kbps</li>
+<li>SDA是双向的串行数据线，SCL是双向的串行时钟线。总线空闲时，这两根线都为高。每次操作都是9位，包括8个数据位和1个应答位，并且发送数据前必须先传输MSB</li>
+<li>数据有效性：在时钟的高电平周期期间，SDA线上的数据必须保持稳定，SDA线上的数据仅可在时钟SCL为低电平时改变。</li>
+<li>所有总线传输都带有所需的应答时钟周期，该时钟周期由主机产生。在相应周期内，发送器不能执行下一操作</li>
+<li>I2C开始条件和结束条件<ol>
+<li>当SCL为高电平时，SDA线上由高到低的跳变被定义为开始条件，由低到高的跳变被定义为结束条件</li>
+<li>开始条件和结束条件总是由主机产生</li>
+<li>I2C总线在结束条件之后一段时间重新被释放。如果使用重新开始条件替代结束条件的话，I2C将会保持占用状态</li>
+</ol>
+</li>
+<li>放到SDA线上的每个数据字节应该都是8位，每个字节之后跟随一个应答位。</li>
+<li>7位地址之后的第8位是数据方向位（R/W）,0代表写操作，1代表读操作</li>
+<li>每个字节之后都有一个应答位，应答位可以使接收者在成功接收到本字节之后，告诉发送者此数据已经被成功接收，可以发送下个字节。主机产生所有的时钟脉冲，包括应答位(第9位)的时钟脉冲</li>
+</ol>
+<h2 id="W7500P芯片介绍"><a href="#W7500P芯片介绍" class="headerlink" title="W7500P芯片介绍"></a>W7500P芯片介绍</h2><ol>
+<li>IOP4IoT（Internet Offload Processor for Internet of Things）芯片，集成ARM Cortex-M0，128KB Flash，硬件TCP/IP内核，10/100M 以太网MAC与PHY，PHY符合IEEE802.3u标准，硬件TCP/IP核支持TCP、UDP、IPv4、ICMP、ARP、IGMP和PPPoE</li>
+<li>CPU最大支持48MHz的工作频率</li>
+<li>硬件TCP/IP核支持8个套接字，总共可以使用32KB的专用内存，物理层与数据链路层的通信接口符合MII</li>
+<li>PHY实际上是内嵌了IC+（IP101G）芯片</li>
+<li>除了32KB的Socket专用内存外，还有16KB的通用内存</li>
+<li>有6KB的ROM存放boot代码</li>
+<li>内部8MHz的RC振荡器</li>
+<li>8路12位的ADC，采样速率1Msps</li>
+<li>6通道DMA控制器</li>
+<li>1路看门狗（32位的向下计数器），4路定时器（32位或者16位的下降计数器），8路PWM控制器（32位计数器，其中6位为可编程的预分频器）</li>
+<li>3路串口（其中两路带有FIFO与流控，另一个是简单串口），2路SPI，2路I2C（主从模式均可，最大支持400Kbps）</li>
+<li>1个伪随机数产生器</li>
+<li>程序内存，数据内存，寄存器和IO口统一被组织在4G的线型地址空间中，所有字节按照小端格式编写</li>
+<li>当上电时BOOT引脚和TEST引脚都为低电平时，系统进入正常工作模式；当BOOT引脚为高电平，TEST引脚为低电平，系统进入Boot模式（ISP下载）</li>
+<li>支持25路中断请求，1路非屏蔽中断，一路内部事件信号请求（当DMA传输结束后会触发）</li>
+<li>VDD电压范围：2.7V~5.5V，ADC的参考电压同VDD</li>
+<li>W7500P没有power-off模式，但是有Sleep和Deep Sleep模式,Sleep模式仅停止PCU工作，Deep Sleep模式还会切断所有外设的时钟<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://wizwiki.net/wiki/lib/exe/fetch.php?media=products:w7500:overview:w7500_memory_map.png" alt="W7500P内存映射图" title="">
+                </div>
+                <div class="image-caption">W7500P内存映射图</div>
+            </figure>
+</li>
+</ol>
+<h2 id="SYSCFG-System-Configuration-Controller-的主要功能"><a href="#SYSCFG-System-Configuration-Controller-的主要功能" class="headerlink" title="SYSCFG(System Configuration Controller)的主要功能"></a>SYSCFG(System Configuration Controller)的主要功能</h2><ol>
+<li>控制内存重映射</li>
+<li>可以使能系统锁死后自动复位</li>
+<li>保存着最近一次系统复位的原因信息</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/Nn7Krru.gif" alt="suda-morris" title="">
+                </div>
+                <div class="image-caption">suda-morris</div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-05T01:38:09.646Z" itemprop="dateUpdated">2018-07-05 09:38:09</time>
+</span><br>
+
+
+        
+        <a href="/2015/10/04/w7500/" target="_blank" rel="external">https://suda-morris.github.io/2015/10/04/w7500/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/W7500/">W7500</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2015/10/04/w7500/&title=《W7500 Introduction》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2015/10/04/w7500/&title=《W7500 Introduction》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2015/10/04/w7500/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《W7500 Introduction》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2015/10/04/w7500/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2015/10/04/w7500/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/10/06/cortex-m0-introduction/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Coetex-M0 Introduction</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/09/28/javascript/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Javascript Basic</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Sun Oct 04 2015 22:51:33 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2015/10/04/w7500/&title=《W7500 Introduction》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2015/10/04/w7500/&title=《W7500 Introduction》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2015/10/04/w7500/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《W7500 Introduction》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2015/10/04/w7500/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2015/10/04/w7500/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3awW7DIBCEYb//S1Opp0iWycwsVPXyc4raxPD5sFoYrkse43d8fv78y/z797/f/ztu49oxYMCA8VrGmA5lWQpbn/HplX2hwoAB4wCGuxS3gM6L6YLXBwMGDBhyWcxex9NzYMCAASMruPPJsuKrPw0GDBgnM9ySWjkay2ZZtheHAQPGCxlZMPA3n7fnGzBgwPj3jLF01FvDcF4YMGC0ZlSaPGUpWWzpHr3BgAGjN0PZlLpNm978uXHm41wwYMA4gFEvmvMje/37YYQJAwaM1ozKRa59S9FDiDDlgAEDxqsY2fT1eLJSrL/cFoEBA0Y7xtpLXXqLWV/6YzAAAwaMpgxpc2g2dvWoQGkKYcCAcQJDL4hubJDFA9k3YcCA0ZuRTekeqLm/yjbJMGDA6MpQ2ji7u9zQPkqxJQwYMFozsr1vPfJ04wHpcTBgwGjHcBu7yiKULWsIgAEDRmuG0gLqhXLVk+3DOxgwYLRmZEfwbpygX6HIgk8YMGCcw9AvPSiHYnWqXehhwIBxACNrB90WUMEv2IvDgAGjHUNZxL4IQV+o9FsYMGC0YwxzuEV2bXP5+BJhwIDRmlHpuNxNpn5sl70yGDBg9GZkRbYSGLgtoHJUBwMGjBMY7jGcO+pPs3fhMGDAOJjhXupSlrIgcoABAwaMKGLUm8sFcSYMGDAOYOjXwpRcVIkqK5fPYMCAcRojCwbcQHHVcrOLGjBgwHgt4wfToiLguIITggAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

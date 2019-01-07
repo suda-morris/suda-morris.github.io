@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Network Security | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="SSL/TLS">
+    <meta name="description" content="信息安全的基本属性 机密性（Confidentiality）——别人“看不到”或者“看不懂” 认证（Authentication）——证明“你就是你” 完整性（Integrity）——信息没有被“动过” 不可否认性（Non-repudiation）——不能抵赖  密码算法分类 加密算法：用于机密性解决方案 杂凑函数：用于完整性解决方案 数字签名：用于认证和不可否认性  保密通信系统模型">
+<meta name="keywords" content="SSL&#x2F;TLS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Network Security">
+<meta property="og:url" content="https://suda-morris.github.io/2015/12/06/network-security/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="信息安全的基本属性 机密性（Confidentiality）——别人“看不到”或者“看不懂” 认证（Authentication）——证明“你就是你” 完整性（Integrity）——信息没有被“动过” 不可否认性（Non-repudiation）——不能抵赖  密码算法分类 加密算法：用于机密性解决方案 杂凑函数：用于完整性解决方案 数字签名：用于认证和不可否认性  保密通信系统模型">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://s1.ax1x.com/2018/12/29/FWXQtx.png">
+<meta property="og:image" content="http://i.imgur.com/YJZiqwC.png">
+<meta property="og:image" content="http://i.imgur.com/rahzPAL.png">
+<meta property="og:updated_time" content="2018-12-29T03:34:07.600Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Network Security">
+<meta name="twitter:description" content="信息安全的基本属性 机密性（Confidentiality）——别人“看不到”或者“看不懂” 认证（Authentication）——证明“你就是你” 完整性（Integrity）——信息没有被“动过” 不可否认性（Non-repudiation）——不能抵赖  密码算法分类 加密算法：用于机密性解决方案 杂凑函数：用于完整性解决方案 数字签名：用于认证和不可否认性  保密通信系统模型">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/12/29/FWXQtx.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank">
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Network Security</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Network Security</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-12-06T10:06:10.000Z" itemprop="datePublished" class="page-time">
+  2015-12-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#信息安全的基本属性"><span class="post-toc-number">1.</span> <span class="post-toc-text">信息安全的基本属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#密码算法分类"><span class="post-toc-number">2.</span> <span class="post-toc-text">密码算法分类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#保密通信系统模型"><span class="post-toc-number">3.</span> <span class="post-toc-text">保密通信系统模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SSL-TLS加密"><span class="post-toc-number">4.</span> <span class="post-toc-text">SSL/TLS加密</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-network-security" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Network Security</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-12-06 18:06:10" datetime="2015-12-06T10:06:10.000Z" itemprop="datePublished">2015-12-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="信息安全的基本属性"><a href="#信息安全的基本属性" class="headerlink" title="信息安全的基本属性"></a>信息安全的基本属性</h2><ol>
+<li>机密性（Confidentiality）——别人“看不到”或者“看不懂”</li>
+<li>认证（Authentication）——证明“你就是你”</li>
+<li>完整性（Integrity）——信息没有被“动过”</li>
+<li>不可否认性（Non-repudiation）——不能抵赖</li>
+</ol>
+<h2 id="密码算法分类"><a href="#密码算法分类" class="headerlink" title="密码算法分类"></a>密码算法分类</h2><ul>
+<li>加密算法：用于机密性解决方案</li>
+<li>杂凑函数：用于完整性解决方案</li>
+<li>数字签名：用于认证和不可否认性</li>
+</ul>
+<h2 id="保密通信系统模型"><a href="#保密通信系统模型" class="headerlink" title="保密通信系统模型"></a>保密通信系统模型</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/12/29/FWXQtx.png" alt="FWXQtx.png" title="">
+                </div>
+                <div class="image-caption">FWXQtx.png</div>
+            </figure>
+<h2 id="SSL-TLS加密"><a href="#SSL-TLS加密" class="headerlink" title="SSL/TLS加密"></a>SSL/TLS加密</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/YJZiqwC.png" alt="SSL协议报文" title="">
+                </div>
+                <div class="image-caption">SSL协议报文</div>
+            </figure>
+<ol>
+<li>SSL运行在TCP/IP层之上、应用层之下，为应用程序提供加密数据通道，它采用了RC4、MD5以及RSA等加密算法，使用40位的密钥。</li>
+<li>HTTPS实际上就是HTTP over SSL，它使用默认端口443，而不是像HTTP那样使用端口80。</li>
+<li>HTTPS协议使用SSL在发送方把原始数据进行加密，然后在接收方进行解密，加密和解密需要发送方和接收方通过交换公知的密钥来实现，因此，所传送的数据不容易被网络何可截获和解密<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/rahzPAL.png" alt="SSL通信过程" title="">
+                </div>
+                <div class="image-caption">SSL通信过程</div>
+            </figure></li>
+<li>工作流程<ol>
+<li>建立安全能力。SSL捂手的第一阶段启动逻辑连接，建立这个连接的安全能力。首先客户机向服务器发出client hello消息并等待服务器响应，随后服务器向客户机返回server hello消息，对client hello消息中的信息进行确认。<ol>
+<li>Client hello消息包括：<ol>
+<li>客户端可以支持的SSL最高版本号</li>
+<li>一个客户端生成的随机数，稍后用于生成“对话密钥”</li>
+<li>一个确定会话的会话ID</li>
+<li>一个客户端可以支持的密码套件列表，每个套件都以SSL开头，紧跟着的是密钥交换算法，用with这个词把密钥交换算法、机密算法、散列算法分开。例如：SSL_DHE_RSA_WITH_DES_CBC_SHA, 表示把DHE_RSA(带有RSA数字签名的暂时Diffie-HellMan)定义为密钥交换算法；把DES_CBC定义为加密算法；把SHA定义为散列算法。</li>
+<li>一个客户端可以支持的压缩算法列表</li>
+</ol>
+</li>
+<li>Server Hello消息包括 <ol>
+<li>一个SSL版本号。去客户端支持的最高版本号和服务端支持的最高笨笨好中的较低者</li>
+<li>一个服务器生成的随机数，稍后用于生成“对话密钥”</li>
+<li>会话ID</li>
+<li>从客户端的密码条件列表中选择的一个密码套件</li>
+<li>从客户端的压缩方法的列表中选择的压缩方法</li>
+</ol>
+</li>
+<li>这个阶段之后，客户端服务端知道了下列内容：<ol>
+<li>SSL版本</li>
+<li>密钥交换、信息验证和加密算法</li>
+<li>压缩方法</li>
+<li>有关密钥生成的两个随机数</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>服务器鉴别与密钥交换。服务器启动SSL握手第二阶段，是本阶段所有消息的唯一发送方，客户机是所有消息的唯一接收方。该阶段分为4步<ol>
+<li>证书：服务器将数字证书和到根CA整个链发给客户端，使客户端能用服务器证书中的服务器公钥认证服务器</li>
+<li>服务器密钥交换：这里视密钥交换算法而定</li>
+<li>证书请求：服务端可能会要求客户自身进行验证</li>
+<li>服务器握手完成</li>
+</ol>
+</li>
+<li>客户机鉴别与密钥交换。客户机启动SSL握手第三阶段，是本阶段所有消息的唯一发送方，服务器是所有消息的唯一接收方。该阶段分为3歩：<ol>
+<li>证书：为了对服务器证明自身，客户要发送一个整数信息，这是可选的</li>
+<li>客户机密钥交换：这里客户端将预备主密钥发送给服务端，注意这里会使用服务端的公钥进行加密</li>
+<li>证书验证：对预备密钥和随机数进行签名</li>
+</ol>
+</li>
+<li>完成，客户机启动SSL握手的第四阶段，是服务器结束。该阶段分成4歩</li>
+</ol>
+</li>
+<li>SSL协议可分为两层：<ol>
+<li>SSL记录协议：它建立在可靠的传输协议之上，为高层协议提供数据封装、压缩、加密等基本功能的支持</li>
+<li>SSL握手协议：它建立在SSL记录协议之上，用于在实际数据传输开始前，通讯双方进行身份认证、协商加密算法、交换密钥等</li>
+</ol>
+</li>
+<li>ESP8266作为SSL server时，提供加密证书的制作脚本，生成SSL加密所需的头文件cert.h和private_key.h。CA认证功能默认关闭，用户可调用接口espconn_secure_ca_enable使能CA认证<ol>
+<li>证书制作：tool文件夹下，修改makefile.sh文件里面的IP地址为实际SSL 服务器的IP地址；然后./makefile.sh</li>
+<li>开发者必须调用espconn_secure_set_default_certificate和espconn_secure_set_default_private_key传入证书和密钥</li>
+<li>证书制作脚本makefile.sh生成默认SSL server证书由Espressif System颁发，并非由CA颁发。如果用户需要CA认证，请将运行脚本Makefile.sh生成的TLS.ca_x509.cer导入SSL client，并使用脚本make_cacert.py将CA文件生成eap_ca_cert.bin烧写到Flash对应的地址</li>
+</ol>
+</li>
+<li>ESP8266作为SSL client时，可支持双向认证。CA认证功能默认关闭，用户可调用接口espconn_secure_ca_enable使能CA认证</li>
+<li>ESP8266作为SSL client时支持证书认证功能，但此功能默认关闭，开发者可以调用接口espconn_secure_cert_req_enable使能证书认证，证书制作：<ol>
+<li>修改脚本makefile.sh，制作开发者自行签发的CA证书，例如，证书实例中的TLS.ca_x509.cer</li>
+<li>使用签发的CA制作供SSL client使用的证书，例如，证书示例中的TLS.x509_1024.cer</li>
+<li>去除制作SSL client使用的证书时所用的密钥，例如证书示例中的TLS.key_1024</li>
+<li>将证书合成脚本make_cacert.py与CA文件放在同一目录下</li>
+<li>运行脚本“make_cacert.py”将合成同一目录下的CA文件生成sap_ca_cert.bin，esp_ca_cert.bin的烧录位置由接口espconn_secure_ca_enable设置，用户可以自行定义</li>
+<li>重命名证书名称（例如TLS.x509_1024.cer）；重命名密钥名称，改为private_key.key_1024。</li>
+<li>将重命名后的文件，与脚本make_cert.py拷贝到同一目下下</li>
+<li>运行脚本make_cert.py生成esp_cert_private_key.bin，esp_cert_private_key.bin的烧录位置由接口espconn_secure_cert_enable设置，用户可自行定义</li>
+</ol>
+</li>
+<li>软件接口<ol>
+<li>SSL系列软件接口与普通TCP软件接口，在SDK底层是两套不同的处理流程，因此不能混用两种软件接口。SSL连接时，仅支持使用：<ol>
+<li>espconn_secure_XXX系列接口</li>
+<li>espconn_regist_XXX系列注册回调的接口</li>
+<li>espconn_port获得一个空闲的端口</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>在SSL中会使用密钥交换算法交换密钥；使用密钥对数据进行加密；使用散列算法对数据的完整性进行验证，使用数字证书证明自己的身份</li>
+<li>SSL/TLS协议的基本思路是采用<strong>公钥加密法</strong>，也就是说，客户端先向服务器所要公钥，然后用公钥加密信息，服务器收到密文后，用自己的私钥解密。<ol>
+<li>如何保证公钥不被篡改？<ul>
+<li>将公钥放在数字证书中。只要证书时可信的，公钥就是可信的</li>
+</ul>
+</li>
+<li>公钥加密计算量太大，如何减少耗用的时间？<ul>
+<li>每一次对话（session），客户端和服务器都生成一个“对话密钥”，用它来加密信息。由于“对话密钥”是对称加密，所以运算速度非常快，而服务器公钥只用于加密“对话密钥”本身，这样就减少了加密运算的消耗时间</li>
+</ul>
+</li>
+<li>SSL/TLS协议的基本过程是这样的：<ol>
+<li>客户端向服务端索要并验证公钥</li>
+<li>双方协商生成“对话密钥”</li>
+<li>双方采用“对话密钥”进行加密通信</li>
+</ol>
+</li>
+<li>为什么要用三个随机数来生成“会话密钥”？<ul>
+<li>不管是客户端还是服务器，都需要随机数，这样生成的密钥才不会每次都一样。由于SSL协议中证书是静态的，因此十分有必要引入一种随机因素来保证协商出来的密钥的随机性。对于RSA密钥交换算法来说，pre-master-key本身就是一个随机数，再加上hello消息中的随机，三个随机数通过一个密钥导出器最终导出一个对称密钥。pre master的存在在于SSL协议不信任每个主机都能产生完全随机的随机数，如果随机数不随机，那么pre master secret就有可能被猜出来，那么仅适用pre master secret作为密钥就不合适了，因此必须引入新的随机因素，那么客户端和服务器加上pre master secret三个随机数一同生成的密钥就不容易被猜出了，一个伪随机可能完全不随机，可是是三个伪随机就十分接近随机了，每增加一个自由度，随机性增加的可不是一。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-12-29T03:34:07.600Z" itemprop="dateUpdated">2018-12-29 11:34:07</time>
+</span><br>
+
+
+        
+        <a href="/2015/12/06/network-security/" target="_blank" rel="external">https://suda-morris.github.io/2015/12/06/network-security/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSL-TLS/">SSL/TLS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2015/12/06/network-security/&title=《Network Security》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2015/12/06/network-security/&title=《Network Security》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2015/12/06/network-security/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Network Security》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2015/12/06/network-security/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2015/12/06/network-security/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/12/07/json/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">JSON</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/11/22/verilog/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Verilog Basic</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Sun Dec 06 2015 18:06:10 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2015/12/06/network-security/&title=《Network Security》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2015/12/06/network-security/&title=《Network Security》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2015/12/06/network-security/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Network Security》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2015/12/06/network-security/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2015/12/06/network-security/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLElEQVR42u3awVIjMQwEUP7/p8MVCjLptgaqYj+fqCVZ+/kgJFkfH/F6fFlf/+X6kz+/9ezzz3a5eWFgYLwt43G5rjfID3p9Ecm+L64GAwPjAEYSCieheU59cWYMDAyMINROPr+WgGJgYGC0aVzyrTY0Y2BgYLRF7PWB8oba5MpuqMUxMDDekJGXpv//85+8b2BgYLwV41Gu6yB7nfzlaWJ9KgwMjK0ZeYBrHzXzJG8t4GJgYJzGSBLBdvvJoEZbJGNgYOzNmFe99w5VtFf2LcPFwMA4gHFXwVkncOUT6S/fwsDAOICx1pS/LVwOrgYDA+MERj4qkY9T5L/Ni9XocjEwMDZltONcSdKWPzq2zwxRhouBgbEpIy9ZJ4lgElLXHkQxMDBOYLRPlW2QXfv/F8tXDAyMTRn59m3jbF7WFkUsBgbGpowkCcvD5eQK2uGwp5eFgYGxHeNRrnz7CSYfzsDAwDiB0aZ3eQo4KWLbhwcMDIwTGGtHz58z8wJ1fn0YGBi7MtYeMieHaEvf6GowMDAOYLRN/7Vhi7tGMYp+IQYGxkaMeZt+0nTLV5QaYmBgbMSYPAzkm92bMtYzIxgYGG/OWAtzkwPNi958+AwDA2MnxiTIJiMX7S22Tw4YGBjnMPIWfN5cywvd/C/Ai5kRDAwMjKXmWh0619pzGBgYGGVAvCtNLIY/MDAwDmDkrbH2CSFp1U0aeRgYGCcw1sJo3m6bH6IdI8PAwNiI8QlQLxkGqxQINwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

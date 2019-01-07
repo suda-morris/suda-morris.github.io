@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>OV7670 Introduction | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="OV7670">
+    <meta name="description" content="OV7670简介 通过SCCB总线控制，可以输出整帧、子采样、取窗口等方式及各种分辨率的8位影响数据。VGA图像最高达到30帧/秒。用户可以完全控制图像质量、数据格式和传输方式 具有自动曝光控制、自动增益控制、自动白平衡，自动消除灯光条纹、自动黑电平校准等自动影像控制功能 支持VGA、GIF和从CIF到40X30的各种尺寸。 所有图像处理功能过程包括伽马曲线、白平衡、饱和度、色度等都可以通过SCC">
+<meta name="keywords" content="OV7670">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OV7670 Introduction">
+<meta property="og:url" content="https://suda-morris.github.io/2015/11/04/ov7670-introduce/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="OV7670简介 通过SCCB总线控制，可以输出整帧、子采样、取窗口等方式及各种分辨率的8位影响数据。VGA图像最高达到30帧/秒。用户可以完全控制图像质量、数据格式和传输方式 具有自动曝光控制、自动增益控制、自动白平衡，自动消除灯光条纹、自动黑电平校准等自动影像控制功能 支持VGA、GIF和从CIF到40X30的各种尺寸。 所有图像处理功能过程包括伽马曲线、白平衡、饱和度、色度等都可以通过SCC">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-05T01:38:09.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OV7670 Introduction">
+<meta name="twitter:description" content="OV7670简介 通过SCCB总线控制，可以输出整帧、子采样、取窗口等方式及各种分辨率的8位影响数据。VGA图像最高达到30帧/秒。用户可以完全控制图像质量、数据格式和传输方式 具有自动曝光控制、自动增益控制、自动白平衡，自动消除灯光条纹、自动黑电平校准等自动影像控制功能 支持VGA、GIF和从CIF到40X30的各种尺寸。 所有图像处理功能过程包括伽马曲线、白平衡、饱和度、色度等都可以通过SCC">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">OV7670 Introduction</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">OV7670 Introduction</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-11-04T12:19:43.000Z" itemprop="datePublished" class="page-time">
+  2015-11-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OV7670简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">OV7670简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OV7670参数"><span class="post-toc-number">2.</span> <span class="post-toc-text">OV7670参数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#视频帧存储器AL422B简介"><span class="post-toc-number">3.</span> <span class="post-toc-text">视频帧存储器AL422B简介</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-ov7670-introduce"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">OV7670 Introduction</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-11-04 20:19:43" datetime="2015-11-04T12:19:43.000Z"  itemprop="datePublished">2015-11-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="OV7670简介"><a href="#OV7670简介" class="headerlink" title="OV7670简介"></a>OV7670简介</h2><ol>
+<li>通过SCCB总线控制，可以输出整帧、子采样、取窗口等方式及各种分辨率的8位影响数据。VGA图像最高达到30帧/秒。用户可以完全控制图像质量、数据格式和传输方式</li>
+<li>具有自动曝光控制、自动增益控制、自动白平衡，自动消除灯光条纹、自动黑电平校准等自动影像控制功能</li>
+<li>支持VGA、GIF和从CIF到40X30的各种尺寸。</li>
+<li>所有图像处理功能过程包括伽马曲线、白平衡、饱和度、色度等都可以通过SCCB接口编程。</li>
+<li>OV7670 CMOS图像传感器通过减少或消除光学或电子缺陷（如固定图案噪声、拖尾、浮散等），提高图像质量，得到清晰的稳定的彩色图像</li>
+<li>OV7670芯片内部有：感光阵列、模拟信号处理模块（包括自动增益和自动白平衡）、10位的ADC、测试图案发生器（八色彩条图案渐变至黑白色条图案）、数字信号处理器（控制由原始信号差值到RGB信号的过程，并控制边缘锐化、颜色空间转换等图像质量处理）、图像缩放模块（按照预先设置的要求输出数据格式）、时许发生模块（产生阵列控制和帧率、帧率的时序、自动曝光控制、输出外部时序）、数字视频端口、SCCB接口、LED和闪光灯输出控制电路等</li>
+</ol>
+<h2 id="OV7670参数"><a href="#OV7670参数" class="headerlink" title="OV7670参数"></a>OV7670参数</h2><ol>
+<li>感光阵列：640*480</li>
+<li>稳定工作温度0~50℃</li>
+<li>输出格式：<ol>
+<li>YUV/YCbCr4:2:2</li>
+<li>RGB565/555/444</li>
+<li>GRB4:2:2</li>
+<li>Raw RGB Data</li>
+</ol>
+</li>
+<li>光学尺寸：1/6″</li>
+<li>视场角：25°</li>
+<li>最大帧率：VGA30 f/s</li>
+</ol>
+<h2 id="视频帧存储器AL422B简介"><a href="#视频帧存储器AL422B简介" class="headerlink" title="视频帧存储器AL422B简介"></a>视频帧存储器AL422B简介</h2><ol>
+<li>AL422B是一个存储容量为3Mb的视频帧存储器，能够配置为384KB（393，216）X8b FIFO，支持VGA、CCIR、NTSC、PAL和HDTV分辨率</li>
+<li>具有独立的读写操作能力，读/写周期时间为20ns，访问时间为15ns，具有高速异步串行存取、输出使能控制、自行刷新数据等功能。</li>
+<li>目前1帧图像信息通常包含640X480或者720X480字节。</li>
+<li>操作过程：<ol>
+<li>初始化。上电后，分别给nWRST和nRRST各0.1ms的初始化脉冲，使AL422B初始化。</li>
+<li>复位操作。通常，复位信号可在任何时候给出而不考虑nWE，nRE以及nOE的状态，但是它们仍然要参照时钟信号的输入情况，使它们满足建立时间和保持时间的要求。如果在禁止时钟周期内给给出复位信号，必须等到允许周期到来后才会执行复位操作。当nWRST和nRRST均为低电平时，数据的输入和输出均从地址0开始</li>
+<li>写操作。当写使能信号nWE为低电平时，在WCK信号的上升沿，数据通过DI7~DI0写入寄存器，参照WCK的输入周期，写入的数据必须满足建立时间和保持时间的要求。当nWE为高电平时，写操作被禁止，写地址指针停在当前位置上；当nWE再次变为低电平时，写地址指针从当前位置继续开始</li>
+<li>读操作。当读使能nRE和数据输出使能nOE均为低电平时，在RCK信号的上升沿，数据由DO7~DO0输出。当nRE为高电平时，读地址指针停在当前位置上；当nRE再次变为低电平时，读地址指针从当前位置开始。执行读操作时，nOE须为低电平，如nOE为高电平，则数据输出端均为高阻态，且读地址指针任然同步加1.nRE和nOE须参照RCK的输入周期，满足建立时间和保持时间的要求。</li>
+</ol>
+</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-05T01:38:09.642Z" itemprop="dateUpdated">2018-07-05 09:38:09</time>
+</span><br>
+
+
+        
+        <a href="/2015/11/04/ov7670-introduce/" target="_blank" rel="external">https://suda-morris.github.io/2015/11/04/ov7670-introduce/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OV7670/">OV7670</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2015/11/04/ov7670-introduce/&title=《OV7670 Introduction》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2015/11/04/ov7670-introduce/&title=《OV7670 Introduction》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2015/11/04/ov7670-introduce/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《OV7670 Introduction》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2015/11/04/ov7670-introduce/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2015/11/04/ov7670-introduce/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/11/10/star-uml-install/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">StarUML Install</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/10/30/sd-card-driver/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">SD Card Driver</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Wed Nov 04 2015 20:19:43 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2015/11/04/ov7670-introduce/&title=《OV7670 Introduction》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2015/11/04/ov7670-introduce/&title=《OV7670 Introduction》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2015/11/04/ov7670-introduce/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《OV7670 Introduction》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2015/11/04/ov7670-introduce/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2015/11/04/ov7670-introduce/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACN0lEQVR42u3aS27DMAxF0ex/0+6kgwCN7ftINYCp61GR2JGOByw/er3wdbxd759c33l2z9/7z1ZZfMmQIeOxjOPyumak2z17EWTdmxVlyJCxAYOEQv4UD6Pk9V3vTYYMGTJq95yxa2FdhgwZMmpbPAujZBNrX58MGTL2YfAUjW+UN9S+WovLkCHjgQzedf/+3/8y35AhQ8ajGEd4XSdnaRjt7+f3d2TIkDGakaZ3/QZcmnry/ciQIWMqI32gVtySEWb6ySv4WoYMGRMY8WPhoYp0eMlf2YcMV4YMGeMYaUgl4ZhEQj48CIagMmTI2ICRLtwZgqbNNfTiZMiQMZrBm/u8flxVY7aGmjJkyBjBIAGRh9TOyQfejPvwrQwZMjZgrMKkA4N0SBB0DWXIkDGOQUrEtOnGW//pIBOdFpEhQ8YgBl8gPeyVbrGTIMqQIWM2Ix0W1hLB2piTJ6kyZMjYgZEWqGmI7Ifsm2GDDBkyNmOkZSQPo7ys5UNTGTJk7MCoHbbgzX1SQ19TiwfXZMiQMY6RFpCrNtE/loGmHDJkyBjEIKlbut1VARoFfRkyZGzACPJHUEx2Bpl8XRkyZOzA6CdntZFnOvi8WVeGDBmjGZ0wx1O6NMimxzhkyJCxA6PW5OpftaQzqMVlyJAxjpE2wvqhs5b2nSJlyJAhoz2q5Mc7ilQZMmTIaCyWjkJ5Mbzg/4YMGTIexSBFbK1ATX+5GPRlyJAxmsFLx+AEx9JN1A6cyZAhYwTjB1Qd+gjyVCZcAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

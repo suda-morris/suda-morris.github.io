@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python Basic | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python">
+    <meta name="description" content="Python中的常量常量定义1234567891011121314class _const(object)	class ConstError(TypeError): pass		def __setattr__(self,name,value):		if self.__dict__.has_key(name):			raise self.ConstError,&quot;Can&apos;t rebind const(">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Basic">
+<meta property="og:url" content="https://suda-morris.github.io/2015/05/28/python-basic/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="Python中的常量常量定义1234567891011121314class _const(object)	class ConstError(TypeError): pass		def __setattr__(self,name,value):		if self.__dict__.has_key(name):			raise self.ConstError,&quot;Can&apos;t rebind const(">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://i.imgur.com/s0unbao.png">
+<meta property="og:image" content="http://i.imgur.com/d3bAmPU.png">
+<meta property="og:image" content="http://i.imgur.com/ojObujt.png">
+<meta property="og:image" content="http://i.imgur.com/pmBgVxd.png">
+<meta property="og:image" content="http://i.imgur.com/n9jBYXM.png">
+<meta property="og:image" content="http://i.imgur.com/q0yCMAT.png">
+<meta property="og:image" content="http://i.imgur.com/PK0vmFN.png">
+<meta property="og:image" content="http://i.imgur.com/BsWzsmx.png">
+<meta property="og:image" content="http://i.imgur.com/9RX4ISh.png">
+<meta property="og:image" content="http://i.imgur.com/ashlYUy.png">
+<meta property="og:image" content="http://i.imgur.com/s7wJNuN.png">
+<meta property="og:image" content="http://i.imgur.com/6CefLm3.png">
+<meta property="og:image" content="http://i.imgur.com/vyefEMa.png">
+<meta property="og:image" content="http://i.imgur.com/NEIDZxP.png">
+<meta property="og:image" content="http://i.imgur.com/QVe2hIH.png">
+<meta property="og:image" content="http://i.imgur.com/tgowXan.png">
+<meta property="og:image" content="http://i.imgur.com/n6lAydo.png">
+<meta property="og:image" content="http://i.imgur.com/IKM5dHA.png">
+<meta property="og:image" content="http://i.imgur.com/nwyIK0E.png">
+<meta property="og:image" content="http://i.imgur.com/jmscbxO.png">
+<meta property="og:image" content="http://i.imgur.com/G67viyS.png">
+<meta property="og:image" content="http://i.imgur.com/4gQEpov.png">
+<meta property="og:image" content="http://i.imgur.com/y983x7H.png">
+<meta property="og:image" content="http://i.imgur.com/G9XjFhU.png">
+<meta property="og:image" content="http://i.imgur.com/A358sfq.png">
+<meta property="og:image" content="http://i.imgur.com/7a826hS.png">
+<meta property="og:image" content="http://i.imgur.com/1vWI5ie.png">
+<meta property="og:image" content="http://i.imgur.com/u1hf8bi.png">
+<meta property="og:image" content="http://i.imgur.com/Nn7Krru.gif">
+<meta property="og:updated_time" content="2018-07-05T01:38:09.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python Basic">
+<meta name="twitter:description" content="Python中的常量常量定义1234567891011121314class _const(object)	class ConstError(TypeError): pass		def __setattr__(self,name,value):		if self.__dict__.has_key(name):			raise self.ConstError,&quot;Can&apos;t rebind const(">
+<meta name="twitter:image" content="http://i.imgur.com/s0unbao.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python Basic</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python Basic</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-05-28T13:42:00.000Z" itemprop="datePublished" class="page-time">
+  2015-05-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python中的常量"><span class="post-toc-number">1.</span> <span class="post-toc-text">Python中的常量</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引号的使用与区别"><span class="post-toc-number">2.</span> <span class="post-toc-text">引号的使用与区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据类型"><span class="post-toc-number">3.</span> <span class="post-toc-text">数据类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件拷贝"><span class="post-toc-number">4.</span> <span class="post-toc-text">文件拷贝</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数学库及其应用"><span class="post-toc-number">5.</span> <span class="post-toc-text">数学库及其应用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#随机数库及其应用"><span class="post-toc-number">6.</span> <span class="post-toc-text">随机数库及其应用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python异常处理机制"><span class="post-toc-number">7.</span> <span class="post-toc-text">Python异常处理机制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ETC"><span class="post-toc-number">8.</span> <span class="post-toc-text">ETC</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#turtle库的常用指令"><span class="post-toc-number">9.</span> <span class="post-toc-text">turtle库的常用指令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用turtle库绘制五角星"><span class="post-toc-number">10.</span> <span class="post-toc-text">使用turtle库绘制五角星</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用turtle库绘制蟒蛇"><span class="post-toc-number">11.</span> <span class="post-toc-text">使用turtle库绘制蟒蛇</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用turtle库绘制树"><span class="post-toc-number">12.</span> <span class="post-toc-text">使用turtle库绘制树</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据驱动的动态路径绘制"><span class="post-toc-number">13.</span> <span class="post-toc-text">数据驱动的动态路径绘制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用蒙特卡洛方法估计圆周率的值"><span class="post-toc-number">14.</span> <span class="post-toc-text">使用蒙特卡洛方法估计圆周率的值</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件循环"><span class="post-toc-number">15.</span> <span class="post-toc-text">文件循环</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#图形用户界面"><span class="post-toc-number">16.</span> <span class="post-toc-text">图形用户界面</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用graphics库实现交互式多边形绘制"><span class="post-toc-number">17.</span> <span class="post-toc-text">使用graphics库实现交互式多边形绘制</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用TKinter实现简单的聊天界面"><span class="post-toc-number">18.</span> <span class="post-toc-text">使用TKinter实现简单的聊天界面</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用Turtle库绘制模拟时钟"><span class="post-toc-number">19.</span> <span class="post-toc-text">使用Turtle库绘制模拟时钟</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用turtle库绘制雪花图"><span class="post-toc-number">20.</span> <span class="post-toc-text">使用turtle库绘制雪花图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python库"><span class="post-toc-number">21.</span> <span class="post-toc-text">Python库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OS库常用函数"><span class="post-toc-number">22.</span> <span class="post-toc-text">OS库常用函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#sched库"><span class="post-toc-number">23.</span> <span class="post-toc-text">sched库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#函数定时执行"><span class="post-toc-number">24.</span> <span class="post-toc-text">函数定时执行</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打印某一个目录下的全部文件"><span class="post-toc-number">25.</span> <span class="post-toc-text">打印某一个目录下的全部文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打包发布python应用程序（使用py2exe库）"><span class="post-toc-number">26.</span> <span class="post-toc-text">打包发布python应用程序（使用py2exe库）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#NumPy库"><span class="post-toc-number">27.</span> <span class="post-toc-text">NumPy库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Matplotlib库"><span class="post-toc-number">28.</span> <span class="post-toc-text">Matplotlib库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用Matplotlib库绘制曲线"><span class="post-toc-number">29.</span> <span class="post-toc-text">使用Matplotlib库绘制曲线</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用Matplotlib子图的功能"><span class="post-toc-number">30.</span> <span class="post-toc-text">使用Matplotlib子图的功能</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#wxPython"><span class="post-toc-number">31.</span> <span class="post-toc-text">wxPython</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用wxPython的绝对布局"><span class="post-toc-number">32.</span> <span class="post-toc-text">使用wxPython的绝对布局</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用wxPython的相对布局"><span class="post-toc-number">33.</span> <span class="post-toc-text">使用wxPython的相对布局</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#wxPython事件编程"><span class="post-toc-number">34.</span> <span class="post-toc-text">wxPython事件编程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python中的多线程编程"><span class="post-toc-number">35.</span> <span class="post-toc-text">Python中的多线程编程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#scipy库"><span class="post-toc-number">36.</span> <span class="post-toc-text">scipy库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#mpl-toolkits库"><span class="post-toc-number">37.</span> <span class="post-toc-text">mpl_toolkits库</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-python-basic"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python Basic</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-05-28 21:42:00" datetime="2015-05-28T13:42:00.000Z"  itemprop="datePublished">2015-05-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Python中的常量"><a href="#Python中的常量" class="headerlink" title="Python中的常量"></a>Python中的常量</h2><figure class="highlight python"><figcaption><span>常量定义</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_const</span><span class="params">(object)</span></span></span><br><span class="line"><span class="class">	<span class="title">class</span> <span class="title">ConstError</span><span class="params">(TypeError)</span>:</span> <span class="keyword">pass</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__setattr__</span><span class="params">(self,name,value)</span>:</span></span><br><span class="line">		<span class="keyword">if</span> self.__dict__.has_key(name):</span><br><span class="line">			<span class="keyword">raise</span> self.ConstError,<span class="string">"Can't rebind const(%s)"</span> % name</span><br><span class="line">		self.__dict__[name] = value</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__delattr__</span><span class="params">(self,name)</span>:</span></span><br><span class="line">		<span class="keyword">if</span> name <span class="keyword">in</span> self.__dict__:</span><br><span class="line">			<span class="keyword">raise</span> self.ConstError,<span class="string">"Can't unbind const(%s)"</span> % name</span><br><span class="line">		<span class="keyword">raise</span> NameError, name</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.modules[__name__] = _const()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>把以上代码变成const.py文件放到Python安装目录的Lib文件夹下</li>
+</ul>
+<h2 id="引号的使用与区别"><a href="#引号的使用与区别" class="headerlink" title="引号的使用与区别"></a>引号的使用与区别</h2><ol>
+<li>单引号与双引号可以交叉使用，即双引号中的单引号维持原样，单引号中的双引号维持原样</li>
+<li>三引号里面不能使用单引号和双引号，三引号中的格式维持不变，该回车就回车，该空格就空格</li>
+<li>当需要把转义字符原样输出的时候可以使用自然字符串，即在字符串前面加r</li>
+<li>子字符串运算方法：<ul>
+<li>索引运算（从0开始索引）</li>
+<li>切片运算（[a:b]是指从第a下标开始到第b-1下标结束，同样第一位下标为0）</li>
+</ul>
+</li>
+<li>列表中的元素是有序的<ul>
+<li>students=[“小明”,”小华”,”小李”,”小娟”,”小云”]，下标从0开始</li>
+</ul>
+</li>
+<li>元祖里面的内容只能读取，不能修改，列表里面的内容既可以修改，又能读取<ul>
+<li>students=(“小明”,”小华”,”小李”,”小娟”,”小云”)</li>
+</ul>
+</li>
+<li>Python中集合主要有两个功能，一个功能是建立关系，另一个是消除重复元素，集合的格式是：set(元素)<ul>
+<li>交集：&amp;</li>
+<li>并集：|</li>
+<li>差集：-</li>
+<li>消除重复元素：new=set(a)</li>
+</ul>
+</li>
+<li>字典也叫关联数组，用大括号括起来<ul>
+<li>k={“name”:”Java”,”IDE”:”Eclipse”}</li>
+<li>print k[“IDE”]</li>
+<li>添加字典里面的项目k[“User”]=”morris”</li>
+</ul>
+</li>
+<li>Python中的标识符第一个字符必须只能是字母或者下划线，之后的部分可以使字母，下划线或者数组</li>
+<li>在Python中，如果有一些对象需要持久性存储，并且不丢失我们这个对象的类型与数据，我们需要将这些对象进行序列化，序列化之后，需要使用的时候我们再回复为原来的数据。序列化的这种过程我们称之为pickle（腌制）<ul>
+<li>import pickle</li>
+<li>lista=[“mingyue”,”jishi”,”you”]</li>
+<li>listb=pickle.dumps(lista)#序列化</li>
+<li>listc=pickle.loads(listb)#将对象原样恢复</li>
+<li>group1=(“bajiu”,”wen”,”qingtian”)</li>
+<li>f1=file(‘1.pkl’,’wb’)</li>
+<li>pickle.dump(group1,f1,True)</li>
+<li>f1.close()</li>
+<li>f2=file(‘1.pkl’,’rb’)</li>
+<li>t=pickle.load(f2)</li>
+<li>f2.close()</li>
+</ul>
+</li>
+<li>Python的行连接符：\</li>
+</ol>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ol>
+<li>Python语言的类型有：数字类型，字符串类型，元组类型，列表类型，文件类型，字典类型</li>
+<li>数字类型<ol>
+<li>复数类型的表示：z=a+bj,其中a是实数部分，b是虚数部分，a和b都是浮点类型</li>
+</ol>
+</li>
+<li>字符串类型<ol>
+<li>假设字符串长度为L，那么字一个字符的序号为0或者-L，最后一字符的序号是L-1或者-1</li>
+<li>字符串之间可以通过+或*进行连接，加法操作将两个字符串连接成为一个新的字符串，乘法操作构建一个由其本身字符串重复连接而成的字符串</li>
+<li>大多数数据类型都可以通过str()函数转换为字符串</li>
+<li>遍历字符串中每个字符：<code>for &lt;var&gt; in &lt;string&gt;</code><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/s0unbao.png" alt="字符串处理方法" title="">
+                </div>
+                <div class="image-caption">字符串处理方法</div>
+            </figure></li>
+</ol>
+</li>
+<li>元祖类型<ol>
+<li>元祖是包含多个元素的类型，元素之间用逗号分隔。元祖可以是空的，元祖外侧可以使用括号，也可以不使用</li>
+<li>元祖中元素可以是不同类型，元组中各元素存在先后关系，可以通过索引访问元祖中元素，元祖定义后不能修改，也不能删除</li>
+</ol>
+</li>
+<li>列表类型<ol>
+<li>列表与元祖类似，列表中每个元素可以不一样，访问列表中元素时采用索引形式</li>
+<li>列表的大小没有限制，可以随时修改<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/d3bAmPU.png" alt="列表的操作" title="">
+                </div>
+                <div class="image-caption">列表的操作</div>
+            </figure></li>
+</ol>
+</li>
+<li>文件类型<ol>
+<li>文件的打开模式<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/ojObujt.png" alt="文件的打开模式" title="">
+                </div>
+                <div class="image-caption">文件的打开模式</div>
+            </figure></li>
+<li>文件读取<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/pmBgVxd.png" alt="文件读取" title="">
+                </div>
+                <div class="image-caption">文件读取</div>
+            </figure></li>
+<li>文件写入<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/n9jBYXM.png" alt="文件写入" title="">
+                </div>
+                <div class="image-caption">文件写入</div>
+            </figure></li>
+<li>遍历文件的模板<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/q0yCMAT.png" alt="遍历文件的模板" title="">
+                </div>
+                <div class="image-caption">遍历文件的模板</div>
+            </figure></li>
+</ol>
+</li>
+<li>字典<ol>
+<li>针对非序列集合而提供的一种数据类型</li>
+<li>通过任意键值查找集合中信息的过程叫映射，python中通过字典实现映射。字典就是一个键值对的集合</li>
+<li>使用大括号创建字典</li>
+<li>使用中括号为字典增加一项：dictionaryName[key]=value</li>
+<li>访问字典中的值：dictionaryName[key]返回键key对应的value</li>
+<li>删除字典中的一项：del dictionaryName[key]</li>
+<li>字典的遍历<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/PK0vmFN.png" alt="字典的遍历" title="">
+                </div>
+                <div class="image-caption">字典的遍历</div>
+            </figure></li>
+<li>判断一个键是否在字典中，可以使用命令in或者not in</li>
+<li>字典的标准操作符<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/BsWzsmx.png" alt="字典的标准操作符" title="">
+                </div>
+                <div class="image-caption">字典的标准操作符</div>
+            </figure></li>
+<li>字典方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/9RX4ISh.png" alt="字典方法" title="">
+                </div>
+                <div class="image-caption">字典方法</div>
+            </figure>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="文件拷贝"><a href="#文件拷贝" class="headerlink" title="文件拷贝"></a>文件拷贝</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    f1 = input(<span class="string">"Enter a source file name:"</span>).strip()</span><br><span class="line">    f2 = input(<span class="string">"Enter a destination file name:"</span>).strip()</span><br><span class="line"></span><br><span class="line">    infile = open(f1, <span class="string">'r'</span>)</span><br><span class="line">    outfile = open(f2, <span class="string">'w'</span>)</span><br><span class="line"></span><br><span class="line">    count_lines = count_chars = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> infile:</span><br><span class="line">        count_lines += <span class="number">1</span></span><br><span class="line">        count_chars += len(line)</span><br><span class="line">        outfile.write(line)</span><br><span class="line"></span><br><span class="line">    print(count_lines, <span class="string">"lines and"</span>, count_chars, <span class="string">"chars copied"</span>)</span><br><span class="line"></span><br><span class="line">    infile.close()</span><br><span class="line">    outfile.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<h2 id="数学库及其应用"><a href="#数学库及其应用" class="headerlink" title="数学库及其应用"></a>数学库及其应用</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/ashlYUy.png" alt="数学库及其应用" title="">
+                </div>
+                <div class="image-caption">数学库及其应用</div>
+            </figure>
+<h2 id="随机数库及其应用"><a href="#随机数库及其应用" class="headerlink" title="随机数库及其应用"></a>随机数库及其应用</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/s7wJNuN.png" alt="随机数库及其应用" title="">
+                </div>
+                <div class="image-caption">随机数库及其应用</div>
+            </figure>
+<h2 id="Python异常处理机制"><a href="#Python异常处理机制" class="headerlink" title="Python异常处理机制"></a>Python异常处理机制</h2><p>Python使用try…except…else…finally，可使程序不因运行错误而崩溃,异常捕获机制可以捕捉任何类型的错误，比如：输入非数值类型（NameError），输入无效的表达式(SyntaxError)等。只有当try中的语句没有发生异常，else语句才会被执行，finally无论有无异常都会被执行<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	&lt;body&gt;</span><br><span class="line"><span class="keyword">except</span> &lt;ErrorType1&gt;:</span><br><span class="line">	&lt;handler1&gt;</span><br><span class="line"><span class="keyword">except</span> &lt;ErrorType2&gt;:</span><br><span class="line">	&lt;handler2&gt;</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">	&lt;handler0&gt;</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	&lt;process_else&gt;</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">	&lt;process_finally&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="ETC"><a href="#ETC" class="headerlink" title="ETC"></a>ETC</h2><ol>
+<li>使用同步赋值语句实现x与y的值交换：x,y=y,x</li>
+<li>val=pow(2,1000),用一行代码返回val结果的长度值:len(str(val))</li>
+<li>布尔运算符的优先级从高到低依次是：not，and，or</li>
+<li>对于数字的零值被认为是false，任何非零值都是true。对序列类型来说，空序列被认为是false，非空序列认为是true</li>
+<li>常用编码<ol>
+<li>ASCII码是标准化字符集，用7个二进制位编码表示128个字符</li>
+<li>Unicode跨语言，跨平台，同意且唯一的二进制编码，每个字符两个字节长</li>
+<li>UTF8编码，可变长度的Unicode，英文对应1个字节，中文对应3个字节</li>
+</ol>
+</li>
+<li>python中字符串类型未编码，可以用encode()进行编码，decode()进行解码<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/6CefLm3.png" alt="python中的编解码" title="">
+                </div>
+                <div class="image-caption">python中的编解码</div>
+            </figure>
+</li>
+</ol>
+<h2 id="turtle库的常用指令"><a href="#turtle库的常用指令" class="headerlink" title="turtle库的常用指令"></a>turtle库的常用指令</h2><ol>
+<li>turtle库以屏幕中心为坐标原点</li>
+<li>forward（distance）将箭头移到某一指定坐标</li>
+<li>left（angle）/right（angle）向左/右旋转一个角度</li>
+<li>penup（）提起笔，用于另起一个地方绘制时使用，与pendown()配对使用</li>
+<li>goto(x,y)</li>
+<li>home()</li>
+<li>circle(radius)</li>
+<li>speed()</li>
+</ol>
+<h2 id="使用turtle库绘制五角星"><a href="#使用turtle库绘制五角星" class="headerlink" title="使用turtle库绘制五角星"></a>使用turtle库绘制五角星</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> turtle</span><br><span class="line"></span><br><span class="line">p = turtle.Turtle()</span><br><span class="line">p.speed(<span class="number">3</span>)</span><br><span class="line">p.pensize(<span class="number">5</span>)</span><br><span class="line">p.color(<span class="string">"black"</span>)</span><br><span class="line">p.fillcolor(<span class="string">"red"</span>)</span><br><span class="line">p.begin_fill()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    p.forward(<span class="number">200</span>)</span><br><span class="line">    p.right(<span class="number">144</span>)</span><br><span class="line">p.end_fill()</span><br></pre></td></tr></table></figure>
+<h2 id="使用turtle库绘制蟒蛇"><a href="#使用turtle库绘制蟒蛇" class="headerlink" title="使用turtle库绘制蟒蛇"></a>使用turtle库绘制蟒蛇</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> turtle</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_snake</span><span class="params">(rad, angle, len, neckrad)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len):</span><br><span class="line">        turtle.circle(rad, angle)</span><br><span class="line">        turtle.circle(-rad, angle)</span><br><span class="line">    turtle.circle(rad, angle, <span class="number">2</span>)</span><br><span class="line">    turtle.fd(rad)</span><br><span class="line">    turtle.circle(neckrad + <span class="number">1</span>, <span class="number">180</span>)</span><br><span class="line">    turtle.fd(rad * <span class="number">2</span> / <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    turtle.setup(<span class="number">1300</span>, <span class="number">800</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    pythonsize = <span class="number">30</span></span><br><span class="line">    turtle.pensize(pythonsize)</span><br><span class="line">    turtle.pencolor(<span class="string">"blue"</span>)</span><br><span class="line">    turtle.seth(<span class="number">-40</span>)</span><br><span class="line">    draw_snake(<span class="number">40</span>, <span class="number">80</span>, <span class="number">5</span>, pythonsize / <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<h2 id="使用turtle库绘制树"><a href="#使用turtle库绘制树" class="headerlink" title="使用turtle库绘制树"></a>使用turtle库绘制树</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> turtle</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tree</span><span class="params">(plist, l, a, f)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    plist is a list of pens</span></span><br><span class="line"><span class="string">    l is the length od branch</span></span><br><span class="line"><span class="string">    a is half of angle between 2 branches</span></span><br><span class="line"><span class="string">    f is factor by which branch is shortened from level to level</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">if</span> l &gt; <span class="number">5</span>:</span><br><span class="line">        lst = []</span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> plist:</span><br><span class="line">            p.forward(l)</span><br><span class="line">            q = p.clone()</span><br><span class="line">            p.left(a)</span><br><span class="line">            q.right(a)</span><br><span class="line">            lst.append(p)</span><br><span class="line">            lst.append(q)</span><br><span class="line">        tree(lst, l * f, a, f)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maketree</span><span class="params">(x, y)</span>:</span></span><br><span class="line">    p = turtle.Turtle()</span><br><span class="line">    p.color(<span class="string">"green"</span>)</span><br><span class="line">    p.pensize(<span class="number">5</span>)</span><br><span class="line">    p.hideturtle()</span><br><span class="line">    <span class="comment"># p.speed(5)</span></span><br><span class="line">    p.getscreen().tracer(<span class="number">30</span>, <span class="number">0</span>)  <span class="comment"># 调整绘画的速率</span></span><br><span class="line">    p.left(<span class="number">90</span>)</span><br><span class="line">    p.penup()</span><br><span class="line">    p.goto(x, y)</span><br><span class="line">    p.pendown()</span><br><span class="line">    tree([p], <span class="number">110</span>, <span class="number">65</span>, <span class="number">0.707</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    turtle.title(<span class="string">"使用turtle绘制树"</span>)</span><br><span class="line">    turtle.setup(<span class="number">1200</span>, <span class="number">800</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    maketree(<span class="number">-300</span>, <span class="number">-300</span>)</span><br><span class="line">    maketree(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    maketree(<span class="number">300</span>, <span class="number">-300</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<h2 id="数据驱动的动态路径绘制"><a href="#数据驱动的动态路径绘制" class="headerlink" title="数据驱动的动态路径绘制"></a>数据驱动的动态路径绘制</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> turtle</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    turtle.title(<span class="string">"数据驱动的动态路径绘制"</span>)</span><br><span class="line">    turtle.setup(<span class="number">800</span>, <span class="number">600</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    pen = turtle.Turtle()</span><br><span class="line">    pen.color(<span class="string">'red'</span>)</span><br><span class="line">    pen.width(<span class="number">5</span>)</span><br><span class="line">    pen.shape(<span class="string">"turtle"</span>)</span><br><span class="line">    pen.speed(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">    result = []</span><br><span class="line">    file = open(<span class="string">"a.txt"</span>, <span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> file:</span><br><span class="line">        result.append(list(map(float, line.split(<span class="string">','</span>))))</span><br><span class="line">    print(result)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(result)):</span><br><span class="line">        pen.color((result[i][<span class="number">3</span>], result[i][<span class="number">4</span>], result[i][<span class="number">5</span>]))</span><br><span class="line">        pen.forward(result[i][<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">if</span> result[i][<span class="number">1</span>]:</span><br><span class="line">            pen.right(result[i][<span class="number">2</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            pen.left(result[i][<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">    pen.goto(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="使用蒙特卡洛方法估计圆周率的值"><a href="#使用蒙特卡洛方法估计圆周率的值" class="headerlink" title="使用蒙特卡洛方法估计圆周率的值"></a>使用蒙特卡洛方法估计圆周率的值</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span>  *</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">DARTS = <span class="number">1000000</span></span><br><span class="line">hits = <span class="number">0</span></span><br><span class="line">clock()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,DARTS):</span><br><span class="line">    x,y=random(),random()</span><br><span class="line">    dist = sqrt(x**<span class="number">2</span>+y**<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">if</span>(dist &lt;= <span class="number">1.0</span>):</span><br><span class="line">        hits = hits+<span class="number">1</span></span><br><span class="line">pi = <span class="number">4</span>*(hits/DARTS)</span><br><span class="line">print(<span class="string">"Pi的值是:%s"</span>%pi)</span><br><span class="line">print(<span class="string">"程序运行时间是 %-5.5ss"</span>%clock())</span><br></pre></td></tr></table></figure>
+<p>##寻找素数<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">2</span>,<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">2</span>,n):</span><br><span class="line">        <span class="keyword">if</span> n % x == <span class="number">0</span>:</span><br><span class="line">            print(n, <span class="string">"equals"</span>, x, <span class="string">"*"</span>, n//x)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(n, <span class="string">"is a prime number"</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="文件循环"><a href="#文件循环" class="headerlink" title="文件循环"></a>文件循环</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    file_name = input(<span class="string">"What's the file path?"</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        infile = open(file_name, <span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">except</span> FileNotFoundError:</span><br><span class="line">        print(<span class="string">"\nFile not found"</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        msum = <span class="number">0.0</span></span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        line = infile.readline()</span><br><span class="line">        <span class="keyword">while</span> line != <span class="string">""</span>:</span><br><span class="line">            msum += eval(line)</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            line = infile.readline()</span><br><span class="line">        print(<span class="string">"\nThe average of the numbers is"</span>, msum / count)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<h2 id="图形用户界面"><a href="#图形用户界面" class="headerlink" title="图形用户界面"></a>图形用户界面</h2><ol>
+<li><p>TKinter——Python标准GUI</p>
+<ol>
+<li>15中常见的Tk控件<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/vyefEMa.png" alt="常见的Tk控件" title="">
+                </div>
+                <div class="image-caption">常见的Tk控件</div>
+            </figure></li>
+<li>3种布局管理方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/NEIDZxP.png" alt="Tkinter三种几何管理方法" title="">
+                </div>
+                <div class="image-caption">Tkinter三种几何管理方法</div>
+            </figure></li>
+<li>控件的共同属性<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/QVe2hIH.png" alt="共同属性" title="">
+                </div>
+                <div class="image-caption">共同属性</div>
+            </figure>
+</li>
+</ol>
+</li>
+<li><p>Graphics——基于Tkinter扩展</p>
+<ol>
+<li>GraphWin对象常用方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/tgowXan.png" alt="GraphWin对象常用方法" title="">
+                </div>
+                <div class="image-caption">GraphWin对象常用方法</div>
+            </figure></li>
+<li>图形对象通用方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/n6lAydo.png" alt="图形对象通用方法" title="">
+                </div>
+                <div class="image-caption">图形对象通用方法</div>
+            </figure></li>
+<li>Point对象方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/IKM5dHA.png" alt="Point对象方法" title="">
+                </div>
+                <div class="image-caption">Point对象方法</div>
+            </figure></li>
+<li>Line对象方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/nwyIK0E.png" alt="Line对象方法" title="">
+                </div>
+                <div class="image-caption">Line对象方法</div>
+            </figure></li>
+<li>Circle对象方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/jmscbxO.png" alt="Circle对象方法" title="">
+                </div>
+                <div class="image-caption">Circle对象方法</div>
+            </figure></li>
+<li>Rectangle对象方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/G67viyS.png" alt="Rectangle对象方法" title="">
+                </div>
+                <div class="image-caption">Rectangle对象方法</div>
+            </figure></li>
+<li>Oval对象方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/4gQEpov.png" alt="Oval对象方法" title="">
+                </div>
+                <div class="image-caption">Oval对象方法</div>
+            </figure></li>
+<li>Polygon对象方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/y983x7H.png" alt="Polygon对象方法" title="">
+                </div>
+                <div class="image-caption">Polygon对象方法</div>
+            </figure></li>
+<li>Text对象方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/G9XjFhU.png" alt="Text对象方法" title="">
+                </div>
+                <div class="image-caption">Text对象方法</div>
+            </figure>
+</li>
+</ol>
+</li>
+<li><p>Turtle——Python内置的图形库</p>
+</li>
+</ol>
+<h2 id="使用graphics库实现交互式多边形绘制"><a href="#使用graphics库实现交互式多边形绘制" class="headerlink" title="使用graphics库实现交互式多边形绘制"></a>使用graphics库实现交互式多边形绘制</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> graphics <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    win = GraphWin(<span class="string">"Draw a polygon"</span>, <span class="number">300</span>, <span class="number">300</span>)</span><br><span class="line">    win.setCoords(<span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>)</span><br><span class="line">    message = Text(Point(<span class="number">150</span>, <span class="number">20</span>), <span class="string">"CLick on five points"</span>)</span><br><span class="line">    message.draw(win)</span><br><span class="line"></span><br><span class="line">    p1 = win.getMouse()</span><br><span class="line">    p1.draw(win)</span><br><span class="line">    p2 = win.getMouse()</span><br><span class="line">    p2.draw(win)</span><br><span class="line">    p3 = win.getMouse()</span><br><span class="line">    p3.draw(win)</span><br><span class="line">    p4 = win.getMouse()</span><br><span class="line">    p4.draw(win)</span><br><span class="line">    p5 = win.getMouse()</span><br><span class="line">    p5.draw(win)</span><br><span class="line"></span><br><span class="line">    polygon = Polygon(p1, p2, p3, p4, p5)</span><br><span class="line">    polygon.setFill(<span class="string">"peachpuff"</span>)</span><br><span class="line">    polygon.setOutline(<span class="string">"black"</span>)</span><br><span class="line">    polygon.draw(win)</span><br><span class="line"></span><br><span class="line">    message.setText(<span class="string">"Click anywhere to quit."</span>)</span><br><span class="line">    win.getMouse()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<h2 id="使用TKinter实现简单的聊天界面"><a href="#使用TKinter实现简单的聊天界面" class="headerlink" title="使用TKinter实现简单的聊天界面"></a>使用TKinter实现简单的聊天界面</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tkinter <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">send_msg</span><span class="params">()</span>:</span></span><br><span class="line">        strMsg = <span class="string">"我："</span> + time.strftime(<span class="string">"%Y-%m-%d %H:%M:%S"</span>, time.localtime()) + <span class="string">"\n"</span></span><br><span class="line">        txtMsgList.insert(END, strMsg, <span class="string">'greencolor'</span>)</span><br><span class="line">        txtMsgList.insert(END, txtMsg.get(<span class="string">'0.0'</span>, END))</span><br><span class="line">        txtMsg.delete(<span class="string">'0.0'</span>, END)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cancelMsg</span><span class="params">()</span>:</span></span><br><span class="line">        txtMsg.delete(<span class="string">'0.0'</span>, END)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">send_msg_event</span><span class="params">(event)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> event.keysym == <span class="string">"Up"</span>:</span><br><span class="line">            send_msg()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建窗口</span></span><br><span class="line">    t = Tk()</span><br><span class="line">    t.title(<span class="string">"与Python聊天中"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建Frame容器</span></span><br><span class="line">    frmLT = Frame(width=<span class="number">500</span>, height=<span class="number">320</span>, bg=<span class="string">"white"</span>)</span><br><span class="line">    frmLC = Frame(width=<span class="number">500</span>, height=<span class="number">150</span>, bg=<span class="string">"white"</span>)</span><br><span class="line">    frmLB = Frame(width=<span class="number">500</span>, height=<span class="number">30</span>)</span><br><span class="line">    frmRT = Frame(width=<span class="number">200</span>, height=<span class="number">500</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建控件</span></span><br><span class="line">    txtMsgList = Text(frmLT)</span><br><span class="line">    txtMsgList.tag_configure(<span class="string">"greencolor"</span>, foreground=<span class="string">"#008c00"</span>)  <span class="comment"># 创建tag</span></span><br><span class="line"></span><br><span class="line">    txtMsg = Text(frmLC)</span><br><span class="line">    txtMsg.bind(<span class="string">"&lt;KeyPress-Up&gt;"</span>, send_msg_event)</span><br><span class="line"></span><br><span class="line">    btnSend = Button(frmLB, text=<span class="string">'发送'</span>, width=<span class="number">8</span>, command=send_msg)</span><br><span class="line">    btnCancel = Button(frmLB, text=<span class="string">'取消'</span>, width=<span class="number">8</span>, command=cancelMsg)</span><br><span class="line"></span><br><span class="line">    imgInfo = PhotoImage(file=<span class="string">"python.gif"</span>)</span><br><span class="line">    lblImage = Label(frmRT, image=imgInfo)</span><br><span class="line">    lblImage.image = imgInfo</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 窗口布局</span></span><br><span class="line">    frmLT.grid(row=<span class="number">0</span>, column=<span class="number">0</span>, columnspan=<span class="number">2</span>, padx=<span class="number">1</span>, pady=<span class="number">3</span>)</span><br><span class="line">    frmLC.grid(row=<span class="number">1</span>, column=<span class="number">0</span>, columnspan=<span class="number">2</span>, padx=<span class="number">1</span>, pady=<span class="number">3</span>)</span><br><span class="line">    frmLB.grid(row=<span class="number">2</span>, column=<span class="number">0</span>, columnspan=<span class="number">2</span>)</span><br><span class="line">    frmRT.grid(row=<span class="number">0</span>, column=<span class="number">2</span>, rowspan=<span class="number">3</span>, padx=<span class="number">2</span>, pady=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 固定大小</span></span><br><span class="line">    frmLT.grid_propagate(<span class="number">0</span>)</span><br><span class="line">    frmLC.grid_propagate(<span class="number">0</span>)</span><br><span class="line">    frmLB.grid_propagate(<span class="number">0</span>)</span><br><span class="line">    frmRT.grid_propagate(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    btnSend.grid(row=<span class="number">2</span>, column=<span class="number">0</span>)</span><br><span class="line">    btnCancel.grid(row=<span class="number">2</span>, column=<span class="number">1</span>)</span><br><span class="line">    lblImage.grid()</span><br><span class="line">    txtMsgList.grid()</span><br><span class="line">    txtMsg.grid()</span><br><span class="line"></span><br><span class="line">    t.mainloop()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+<h2 id="使用Turtle库绘制模拟时钟"><a href="#使用Turtle库绘制模拟时钟" class="headerlink" title="使用Turtle库绘制模拟时钟"></a>使用Turtle库绘制模拟时钟</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> turtle <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Skip</span><span class="params">(step)</span>:</span></span><br><span class="line">    penup()</span><br><span class="line">    forward(step)</span><br><span class="line">    pendown()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mkHand</span><span class="params">(name, length)</span>:</span></span><br><span class="line">    <span class="comment"># 注册Turtle形状，建立表针Turtle</span></span><br><span class="line">    reset()</span><br><span class="line">    Skip(-length * <span class="number">0.1</span>)</span><br><span class="line">    begin_poly()</span><br><span class="line">    forward(length * <span class="number">1.1</span>)</span><br><span class="line">    end_poly()</span><br><span class="line">    handForm = get_poly()</span><br><span class="line">    register_shape(name, handForm)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Init</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> secHand, minHand, hurHand, printer</span><br><span class="line">    mode(<span class="string">"logo"</span>)  <span class="comment"># 重置Turtle指向北</span></span><br><span class="line">    <span class="comment"># 建立三个表针Turtle并初始化</span></span><br><span class="line">    mkHand(<span class="string">"secHand"</span>, <span class="number">125</span>)</span><br><span class="line">    mkHand(<span class="string">"minHand"</span>, <span class="number">130</span>)</span><br><span class="line">    mkHand(<span class="string">"hurHand"</span>, <span class="number">90</span>)</span><br><span class="line">    secHand = Turtle()</span><br><span class="line">    secHand.shape(<span class="string">"secHand"</span>)</span><br><span class="line">    minHand = Turtle()</span><br><span class="line">    minHand.shape(<span class="string">"minHand"</span>)</span><br><span class="line">    hurHand = Turtle()</span><br><span class="line">    hurHand.shape(<span class="string">"hurHand"</span>)</span><br><span class="line">    <span class="keyword">for</span> hand <span class="keyword">in</span> secHand, minHand, hurHand:</span><br><span class="line">        hand.shapesize(<span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line">        hand.speed(<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># 建立输出文字Turtle</span></span><br><span class="line">    printer = Turtle()</span><br><span class="line">    printer.hideturtle()</span><br><span class="line">    printer.penup()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">SetupClock</span><span class="params">(radius)</span>:</span></span><br><span class="line">    <span class="comment"># 建立表的外框</span></span><br><span class="line">    reset()</span><br><span class="line">    pensize(<span class="number">7</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">60</span>):</span><br><span class="line">        Skip(radius)</span><br><span class="line">        <span class="keyword">if</span> i % <span class="number">5</span> == <span class="number">0</span>:</span><br><span class="line">            forward(<span class="number">20</span>)</span><br><span class="line">            Skip(-radius - <span class="number">20</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            dot(<span class="number">5</span>)</span><br><span class="line">            Skip(-radius)</span><br><span class="line">        right(<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Week</span><span class="params">(t)</span>:</span></span><br><span class="line">    week = [<span class="string">"星期一"</span>, <span class="string">"星期二"</span>, <span class="string">"星期三"</span>,</span><br><span class="line">            <span class="string">"星期四"</span>, <span class="string">"星期五"</span>, <span class="string">"星期六"</span>, <span class="string">"星期日"</span>]</span><br><span class="line">    <span class="keyword">return</span> week[t.weekday()]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Date</span><span class="params">(t)</span>:</span></span><br><span class="line">    y = t.year</span><br><span class="line">    m = t.month</span><br><span class="line">    d = t.day</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"%s %d %d"</span> % (y, m, d)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Tick</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 绘制表针的动态显示</span></span><br><span class="line">    t = datetime.today()</span><br><span class="line">    second = t.second + t.microsecond * <span class="number">0.000001</span></span><br><span class="line">    minute = t.minute + second / <span class="number">60.0</span></span><br><span class="line">    hour = t.hour + minute / <span class="number">60.0</span></span><br><span class="line">    secHand.setheading(<span class="number">6</span> * second)</span><br><span class="line">    minHand.setheading(<span class="number">6</span> * minute)</span><br><span class="line">    hurHand.setheading(<span class="number">30</span> * hour)</span><br><span class="line"></span><br><span class="line">    tracer(<span class="keyword">False</span>)</span><br><span class="line">    printer.forward(<span class="number">65</span>)</span><br><span class="line">    printer.write(Week(t), align=<span class="string">"center"</span>,</span><br><span class="line">                  font=(<span class="string">"Courier"</span>, <span class="number">14</span>, <span class="string">"bold"</span>))</span><br><span class="line">    printer.back(<span class="number">130</span>)</span><br><span class="line">    printer.write(Date(t), align=<span class="string">"center"</span>,</span><br><span class="line">                  font=(<span class="string">"Courier"</span>, <span class="number">14</span>, <span class="string">"bold"</span>))</span><br><span class="line">    printer.home()</span><br><span class="line">    tracer(<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    ontimer(Tick, <span class="number">100</span>)  <span class="comment"># 100ms后继续调用tick</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    tracer(<span class="keyword">False</span>)</span><br><span class="line">    Init()</span><br><span class="line">    SetupClock(<span class="number">160</span>)</span><br><span class="line">    tracer(<span class="keyword">True</span>)</span><br><span class="line">    Tick()</span><br><span class="line">    mainloop()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="使用turtle库绘制雪花图"><a href="#使用turtle库绘制雪花图" class="headerlink" title="使用turtle库绘制雪花图"></a>使用turtle库绘制雪花图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> turtle <span class="keyword">as</span> tt</span><br><span class="line"><span class="keyword">import</span> random <span class="keyword">as</span> rd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ground</span><span class="params">()</span>:</span></span><br><span class="line">    tt.hideturtle()</span><br><span class="line">    tt.speed(<span class="number">100</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">400</span>):</span><br><span class="line">        tt.pensize(rd.randint(<span class="number">5</span>, <span class="number">10</span>))</span><br><span class="line">        x = rd.randint(<span class="number">-400</span>, <span class="number">350</span>)</span><br><span class="line">        y = rd.randint(<span class="number">-280</span>, <span class="number">-1</span>)</span><br><span class="line">        r = -y / <span class="number">280</span></span><br><span class="line">        g = -y / <span class="number">280</span></span><br><span class="line">        b = -y / <span class="number">280</span></span><br><span class="line">        tt.pencolor((r, g, b))</span><br><span class="line">        tt.penup()</span><br><span class="line">        tt.goto(x, y)</span><br><span class="line">        tt.pendown()</span><br><span class="line">        tt.forward(rd.randint(<span class="number">40</span>, <span class="number">100</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">snow</span><span class="params">()</span>:</span></span><br><span class="line">    tt.hideturtle()</span><br><span class="line">    tt.pensize(<span class="number">2</span>)</span><br><span class="line">    tt.speed(<span class="number">100</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">        r = rd.random()</span><br><span class="line">        g = rd.random()</span><br><span class="line">        b = rd.random()</span><br><span class="line">        tt.pencolor(r, g, b)</span><br><span class="line">        tt.penup()</span><br><span class="line">        tt.setx(rd.randint(<span class="number">-350</span>, <span class="number">350</span>))</span><br><span class="line">        tt.sety(rd.randint(<span class="number">1</span>, <span class="number">270</span>))</span><br><span class="line">        tt.pendown()</span><br><span class="line">        dens = rd.randint(<span class="number">8</span>, <span class="number">12</span>)</span><br><span class="line">        snowsize = rd.randint(<span class="number">10</span>, <span class="number">14</span>)</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(dens):</span><br><span class="line">            tt.forward(snowsize)</span><br><span class="line">            tt.backward(snowsize)</span><br><span class="line">            tt.right(<span class="number">360</span> / dens)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    tt.setup(<span class="number">800</span>, <span class="number">600</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    tt.tracer(<span class="keyword">False</span>)</span><br><span class="line">    tt.bgcolor(<span class="string">"black"</span>)</span><br><span class="line">    snow()</span><br><span class="line">    ground()</span><br><span class="line">    tt.tracer(<span class="keyword">True</span>)</span><br><span class="line">    tt.mainloop()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="Python库"><a href="#Python库" class="headerlink" title="Python库"></a>Python库</h2><ol>
+<li><a href="https://pypi.python.org" target="_blank" rel="noopener">Python官网提供的Python库索引</a></li>
+<li>Python库的安装<ol>
+<li>自定义安装,去国内镜像站下载软件<a href="http://pypi.douban.com/simple/" target="_blank" rel="noopener">国内pipy镜像站</a></li>
+<li>使用pip工具<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/A358sfq.png" alt="pip常用命令" title="">
+                </div>
+                <div class="image-caption">pip常用命令</div>
+            </figure></li>
+<li>文件安装，通过.whl文件安装<ol>
+<li>pip inatall xxx.whl</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>pip工具的安装<ol>
+<li><a href="https://pypi.python.org/pypi/pip/" target="_blank" rel="noopener">pip源码下载地址</a></li>
+<li>解压后执行：python setup.py install即可</li>
+</ol>
+</li>
+</ol>
+<h2 id="OS库常用函数"><a href="#OS库常用函数" class="headerlink" title="OS库常用函数"></a>OS库常用函数</h2><ol>
+<li>OS库常用函数<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/7a826hS.png" alt="OS库常用函数" title="">
+                </div>
+                <div class="image-caption">OS库常用函数</div>
+            </figure></li>
+<li>os.path是处理操作系统的一个字库，os.path常用函数<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/1vWI5ie.png" alt="os.path常用函数" title="">
+                </div>
+                <div class="image-caption">os.path常用函数</div>
+            </figure></li>
+<li>os.walk(path)用于遍历一个目录，返回一个三元组<ol>
+<li>root,dirs,files = os.walk(path)</li>
+<li>root是字符串，dirs和files是列表类型，表示root中的所有目录和所有文件</li>
+</ol>
+</li>
+</ol>
+<h2 id="sched库"><a href="#sched库" class="headerlink" title="sched库"></a>sched库</h2><ol>
+<li>sched库用来进行任务调度</li>
+<li>sched.scheduler()用来创建一个调度任务</li>
+<li>当需要对一个任务进行时间调度时，用这个函数scheduler.enter(delay,priority,action,argument=())<ol>
+<li>delay表示延时多少时间去执行</li>
+<li>priority表示优先级</li>
+<li>action是具体需要调度的函数</li>
+<li>argument表示action函数需要的参数变量</li>
+</ol>
+</li>
+<li>scheduler.run（）运行调度任务中的全部调度事件</li>
+<li>scheduler.cancel(event)取消某个调度事件</li>
+</ol>
+<h2 id="函数定时执行"><a href="#函数定时执行" class="headerlink" title="函数定时执行"></a>函数定时执行</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sched</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_time</span><span class="params">(msg=<span class="string">'default'</span>)</span>:</span></span><br><span class="line">    print(<span class="string">"当前时间"</span>, time.time(), msg)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">s = sched.scheduler(time.time, time.sleep)</span><br><span class="line">print(time.time())</span><br><span class="line">s.enter(<span class="number">5</span>, <span class="number">1</span>, print_time, argument=(<span class="string">"延迟5秒，优先级1"</span>,))</span><br><span class="line">s.enter(<span class="number">3</span>, <span class="number">2</span>, print_time, argument=(<span class="string">"延迟3秒，优先级2"</span>,))</span><br><span class="line">s.enter(<span class="number">3</span>, <span class="number">1</span>, print_time, argument=(<span class="string">"延迟3秒，优先级1"</span>,))</span><br><span class="line">s.run()</span><br><span class="line">print(time.time())</span><br></pre></td></tr></table></figure>
+<h2 id="打印某一个目录下的全部文件"><a href="#打印某一个目录下的全部文件" class="headerlink" title="打印某一个目录下的全部文件"></a>打印某一个目录下的全部文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">path = input(<span class="string">"请输入一个路径:"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(path):</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> files:</span><br><span class="line">        print(os.path.join(root, name))</span><br></pre></td></tr></table></figure>
+<h2 id="打包发布python应用程序（使用py2exe库）"><a href="#打包发布python应用程序（使用py2exe库）" class="headerlink" title="打包发布python应用程序（使用py2exe库）"></a>打包发布python应用程序（使用py2exe库）</h2><ol>
+<li>确定python程序可以执行，比如lesson.py</li>
+<li><p>写一个发布脚本setup.py（与lesson.py同目录）,在里面指名需要调用运行的python程序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> distutils.core <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">import</span> py2exe</span><br><span class="line"></span><br><span class="line">setup(console=[<span class="string">'lesson.py'</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在命令行下执行python setup.py py2exe</p>
+</li>
+<li>程序正确执行后会生成dist目录和<strong>pycache</strong>目录，前者包含了发布的exe程序，后者可以删除</li>
+</ol>
+<h2 id="NumPy库"><a href="#NumPy库" class="headerlink" title="NumPy库"></a>NumPy库</h2><ol>
+<li>NumPy系统是Python的一种开源的数值计算扩展，能够存储和处理大型矩阵<ol>
+<li>N维数组对象Array</li>
+<li>函数库</li>
+<li>实用的线性代数、傅里叶变换和随机数生成函数</li>
+</ol>
+</li>
+<li>NumPy提供了许多高级的数值编程工具<ol>
+<li>矩阵数据类型</li>
+<li>矢量处理</li>
+<li>运算库</li>
+</ol>
+</li>
+<li>NumPy的主要对象是同种元素的多维数组<ol>
+<li>维度叫做轴</li>
+<li>轴的个数叫做秩</li>
+</ol>
+</li>
+<li>NumPy的数组类被称为ndarray，通常被称作数组<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/u1hf8bi.png" alt="ndarray主要属性" title="">
+                </div>
+                <div class="image-caption">ndarray主要属性</div>
+            </figure>
+<ol>
+<li>创建数组<ol>
+<li>使用array函数，利用常规的Python列表和元祖创造数组，所创建的数组类型由原序列中的元素类型决定，例如：a=array([[1,2],[3,4]],dtype=complex)</li>
+<li>使用占位符创建数组，例如函数zeros创建一个全是0的数组，函数ones创建一个全是1的数组，函数empty创建一个内容随机并且依赖于内存状态的数组</li>
+<li>利用arrange创建数组：arrange(10,30,5),从10开始，每次加5，直到30(不包括)</li>
+</ol>
+</li>
+<li>打印数组，类似于嵌套列表</li>
+<li>数组的算数运算按元素进行，NumPy中的乘法运算符*指示按元素计算</li>
+<li>矩阵乘法可以使用dot函数或创建矩阵对象实现</li>
+<li>NumPy提供常见的数学函数如sin、cos和exp</li>
+<li>NumPy对于多维数组的运算，缺省情况下并不使用矩阵运算，对数组进行矩阵运算，可调用相应的函数</li>
+<li>NumPy库提供了matrix类，使用matrix类创建的是矩阵对象，他们的加减乘除运算采用矩阵方式计算</li>
+<li>创建等比数列：numpy.logspace(1,10,3)表示在1到10中生成3个等比数列</li>
+<li>创建结构数组：<ol>
+<li>声明结构数组类型：person=np.dtype({‘names’:[‘name’,’age’],’formats’:[‘S32’,’i’]})</li>
+<li>创建结构数组：a = np.array([(‘zhang’,12)],dtype=person)</li>
+<li>访问结构数组的成员：<code>a[0][&#39;name&#39;]</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>更高级的运算：NumPy线型代数子库linalg<ol>
+<li>inv函数：计算逆矩阵</li>
+<li>solve函数：求解多元一次方程组</li>
+</ol>
+</li>
+</ol>
+<h2 id="Matplotlib库"><a href="#Matplotlib库" class="headerlink" title="Matplotlib库"></a>Matplotlib库</h2><ol>
+<li>Matplotlib是一个数据可视化函数库</li>
+<li>pyplot子库提供了2D图表制作的基本函数</li>
+<li>matplotlib提供的直方图绘制函数为hist()</li>
+<li>matplotlib的image子库可用来对图像进行操作<ol>
+<li>imread()函数将图像的各像素点的RGB值存入数组</li>
+<li>imshow()函数将存有RGB值的图像数组以图像的方式显示出来</li>
+</ol>
+</li>
+</ol>
+<h2 id="使用Matplotlib库绘制曲线"><a href="#使用Matplotlib库绘制曲线" class="headerlink" title="使用Matplotlib库绘制曲线"></a>使用Matplotlib库绘制曲线</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.linspace(-np.pi, np.pi, <span class="number">256</span>, endpoint=<span class="keyword">True</span>)</span><br><span class="line">y = np.sin(x)</span><br><span class="line">z = np.cos(x * x)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>, <span class="number">4</span>))</span><br><span class="line">plt.plot(x, z, <span class="string">"ro"</span>, label=<span class="string">"$cos(x^2)$"</span>)</span><br><span class="line">plt.plot(x, y, label=<span class="string">"$sin(x)$"</span>)</span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">"Time/s"</span>)</span><br><span class="line">plt.ylabel(<span class="string">""</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.title(<span class="string">"matplotlib"</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="使用Matplotlib子图的功能"><a href="#使用Matplotlib子图的功能" class="headerlink" title="使用Matplotlib子图的功能"></a>使用Matplotlib子图的功能</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">w = np.linspace(<span class="number">0.1</span>, <span class="number">1000</span>, <span class="number">1000</span>)</span><br><span class="line">p = np.abs(<span class="number">1</span> / (<span class="number">1</span> + <span class="number">0.1j</span> * w))</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">221</span>)</span><br><span class="line">plt.plot(w, p, linewidth=<span class="number">2</span>)</span><br><span class="line">plt.ylim(<span class="number">0</span>, <span class="number">1.5</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">222</span>)</span><br><span class="line">plt.semilogx(w, p, linewidth=<span class="number">2</span>)</span><br><span class="line">plt.ylim(<span class="number">0</span>, <span class="number">1.5</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">223</span>)</span><br><span class="line">plt.semilogy(w, p, linewidth=<span class="number">2</span>)</span><br><span class="line">plt.ylim(<span class="number">0</span>, <span class="number">1.5</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">224</span>)</span><br><span class="line">plt.loglog(w, p, linewidth=<span class="number">2</span>)</span><br><span class="line">plt.ylim(<span class="number">0</span>, <span class="number">1.5</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="wxPython"><a href="#wxPython" class="headerlink" title="wxPython"></a>wxPython</h2><ol>
+<li>wxPython是wxWidgets在python语言下的封装，wxWidgets是一个跨平台的GUI应用程序接口，使用C++编写</li>
+<li><a href="http://wxpython.org/Phoenix/snapshot-builds/" target="_blank" rel="noopener">对于Python3，wxPython的下载地址</a>,注意选择对应的python版本号以及电脑的位数</li>
+<li>控件的事件<ol>
+<li>按钮点击</li>
+<li>文本域内容的改变</li>
+<li>鼠标滑过</li>
+<li>鼠标双击</li>
+<li>键盘按下</li>
+</ol>
+</li>
+</ol>
+<h2 id="使用wxPython的绝对布局"><a href="#使用wxPython的绝对布局" class="headerlink" title="使用wxPython的绝对布局"></a>使用wxPython的绝对布局</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*-coding:utf8-*-</span></span><br><span class="line"><span class="keyword">import</span> wx</span><br><span class="line"></span><br><span class="line"><span class="string">'''堆砌各个控件，基于坐标位置的控件绝对布局'''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lesson</span><span class="params">(wx.Frame)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        wx.Frame.__init__(self, parent=<span class="keyword">None</span>, id=<span class="number">-1</span>, title=<span class="string">u'极客学院'</span>, size=(<span class="number">600</span>, <span class="number">600</span>))</span><br><span class="line">        panel = wx.Panel(self, <span class="number">-1</span>)</span><br><span class="line">        self.Centre()</span><br><span class="line"></span><br><span class="line">        button = wx.Button(panel, label=<span class="string">u'我是按钮'</span>, pos=(<span class="number">20</span>, <span class="number">0</span>), size=(<span class="number">100</span>, <span class="number">100</span>))</span><br><span class="line">        statictext = wx.StaticText(panel, <span class="number">-1</span>, <span class="string">u'我是不能编辑的文本框'</span>, pos=(<span class="number">20</span>, <span class="number">100</span>))</span><br><span class="line">        text = wx.TextCtrl(panel, <span class="number">-1</span>, <span class="string">u'请在这里输入内容'</span>, pos=(<span class="number">200</span>, <span class="number">210</span>))</span><br><span class="line">        password = wx.TextCtrl(panel, <span class="number">-1</span>, <span class="string">u'请在这里输入内容'</span>, style=wx.TE_PASSWORD, pos=(<span class="number">200</span>, <span class="number">250</span>))</span><br><span class="line">        mutiText = wx.TextCtrl(panel, <span class="number">-1</span>, <span class="string">u'我是多行\n文本框'</span>, style=wx.TE_MULTILINE, pos=(<span class="number">100</span>, <span class="number">300</span>))</span><br><span class="line">        checkBox1 = wx.CheckBox(panel, <span class="number">-1</span>, <span class="string">u"我是复选框1"</span>, pos=(<span class="number">150</span>, <span class="number">20</span>))</span><br><span class="line">        checkBox2 = wx.CheckBox(panel, <span class="number">-1</span>, <span class="string">u"我是复选框2"</span>, pos=(<span class="number">150</span>, <span class="number">40</span>))</span><br><span class="line"></span><br><span class="line">        radio1 = wx.RadioButton(panel, <span class="number">-1</span>, <span class="string">u"我是单选按钮1"</span>, pos=(<span class="number">150</span>, <span class="number">60</span>), style=wx.RB_GROUP)</span><br><span class="line">        radio2 = wx.RadioButton(panel, <span class="number">-1</span>, <span class="string">u"我是单选按钮2"</span>, pos=(<span class="number">150</span>, <span class="number">80</span>))</span><br><span class="line">        radio3 = wx.RadioButton(panel, <span class="number">-1</span>, <span class="string">u"我是单选按钮3"</span>, pos=(<span class="number">150</span>, <span class="number">100</span>))</span><br><span class="line"></span><br><span class="line">        radioList = [<span class="string">u'一组单选按钮之1'</span>, <span class="string">u'一组单选按钮之2'</span>, <span class="string">u'一组单选按钮之3'</span>]</span><br><span class="line">        wx.RadioBox(panel, <span class="number">-1</span>, <span class="string">u"一组单选按钮"</span>, (<span class="number">10</span>, <span class="number">120</span>), wx.DefaultSize, radioList, <span class="number">2</span>, wx.RA_SPECIFY_ROWS)</span><br><span class="line"></span><br><span class="line">        jikexueyuan = [<span class="string">u'极'</span>, <span class="string">u'客'</span>, <span class="string">u'学'</span>, <span class="string">u'院'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>]</span><br><span class="line">        listBox = wx.ListBox(panel, <span class="number">-1</span>, pos=(<span class="number">300</span>, <span class="number">20</span>), size=(<span class="number">100</span>, <span class="number">100</span>), choices=jikexueyuan, style=wx.LB_MULTIPLE)</span><br><span class="line"></span><br><span class="line">        img = wx.Image(<span class="string">r'python.gif'</span>, wx.BITMAP_TYPE_ANY).Scale(<span class="number">100</span>, <span class="number">200</span>)</span><br><span class="line">        sb1 = wx.StaticBitmap(panel, <span class="number">-1</span>, wx.BitmapFromImage(img), pos=(<span class="number">300</span>, <span class="number">300</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    app = wx.App()</span><br><span class="line">    frame = Lesson()</span><br><span class="line">    frame.Show()</span><br><span class="line">    app.MainLoop()</span><br></pre></td></tr></table></figure>
+<h2 id="使用wxPython的相对布局"><a href="#使用wxPython的相对布局" class="headerlink" title="使用wxPython的相对布局"></a>使用wxPython的相对布局</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*-coding:utf8-*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> wx</span><br><span class="line"></span><br><span class="line"><span class="string">'''基于Sizer的控件相对布局'''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lesson</span><span class="params">(wx.Frame)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        wx.Frame.__init__(self, parent=<span class="keyword">None</span>, id=<span class="number">-1</span>, title=<span class="string">u'极客学院'</span>, size=(<span class="number">600</span>, <span class="number">600</span>))</span><br><span class="line">        self.panel = wx.Panel(self, <span class="number">-1</span>)</span><br><span class="line">        self.Centre()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义我们需要的各个控件</span></span><br><span class="line"></span><br><span class="line">        commandStatic = wx.StaticText(self.panel, <span class="number">-1</span>, <span class="string">u'输命令:'</span>)</span><br><span class="line">        writePyStatic = wx.StaticText(self.panel, <span class="number">-1</span>, <span class="string">u'写代码:'</span>)</span><br><span class="line"></span><br><span class="line">        commandText = wx.TextCtrl(self.panel, <span class="number">-1</span>, <span class="string">u''</span>)</span><br><span class="line">        writePyText = wx.TextCtrl(self.panel, <span class="number">-1</span>, <span class="string">u'''#-*-coding:utf-8-*-\n#在这写Python代码'''</span>,</span><br><span class="line">                                  style=wx.TE_MULTILINE, size=(<span class="number">300</span>, <span class="number">200</span>))</span><br><span class="line"></span><br><span class="line">        send = wx.Button(self.panel, label=<span class="string">u'发送命令'</span>)</span><br><span class="line">        clear = wx.Button(self.panel, label=<span class="string">u'清空命令'</span>)</span><br><span class="line">        screen = wx.Button(self.panel, label=<span class="string">u'查看屏幕'</span>)</span><br><span class="line"></span><br><span class="line">        serverList = [<span class="string">'192.168.0.4'</span>, <span class="string">'10.19.2.1'</span>, <span class="string">'192.168.0.111'</span>, <span class="string">'172.26.123.5'</span>, <span class="string">'192.168.6.11'</span>, <span class="string">'192.99.8.8'</span>]</span><br><span class="line">        server = wx.ListBox(self.panel, <span class="number">-1</span>, size=(<span class="number">120</span>, <span class="number">100</span>), choices=serverList, style=wx.LB_SINGLE)</span><br><span class="line"></span><br><span class="line">        img = wx.Image(<span class="string">r'python_logo.gif'</span>, wx.BITMAP_TYPE_ANY).Scale(<span class="number">200</span>, <span class="number">200</span>)</span><br><span class="line">        screenBox = wx.StaticBitmap(self.panel, <span class="number">-1</span>, wx.BitmapFromImage(img))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 基于BoxSizer布局</span></span><br><span class="line">        <span class="comment"># hBoxAll = wx.BoxSizer(wx.HORIZONTAL)</span></span><br><span class="line">        <span class="comment"># vBoxControl = wx.BoxSizer(wx.VERTICAL)</span></span><br><span class="line">        <span class="comment"># hBoxCommand = wx.BoxSizer(wx.HORIZONTAL)</span></span><br><span class="line">        <span class="comment"># vBoxWrite = wx.BoxSizer(wx.VERTICAL)</span></span><br><span class="line">        <span class="comment"># hBoxButton = wx.BoxSizer(wx.HORIZONTAL)</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># hBoxCommand.Add(commandStatic, proportion=1, flag=wx.ALL | wx.EXPAND, border=5)</span></span><br><span class="line">        <span class="comment"># hBoxCommand.Add(commandText, proportion=2, flag=wx.ALL | wx.EXPAND, border=5)</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># vBoxWrite.Add(writePyStatic, proportion=0, flag=wx.ALL | wx.EXPAND, border=5)</span></span><br><span class="line">        <span class="comment"># vBoxWrite.Add(writePyText, proportion=0, flag=wx.ALL | wx.EXPAND, border=5)</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># vBoxControl.Add(hBoxCommand, proportion=0, flag=wx.ALL, border=5)</span></span><br><span class="line">        <span class="comment"># vBoxControl.Add(vBoxWrite, proportion=0, flag=wx.ALL, border=5)</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># hBoxButton.Add(send, proportion=0, flag=wx.ALL, border=5)</span></span><br><span class="line">        <span class="comment"># hBoxButton.Add(clear, proportion=0, flag=wx.ALL, border=5)</span></span><br><span class="line">        <span class="comment"># hBoxButton.Add(screen, proportion=0, flag=wx.ALL, border=5)</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># vBoxControl.Add(hBoxButton, proportion=0, flag=wx.ALL, border=5)</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># hBoxAll.Add(server, proportion=1, flag=wx.ALL | wx.EXPAND, border=5)</span></span><br><span class="line">        <span class="comment"># hBoxAll.Add(vBoxControl, proportion=2, flag=wx.ALL | wx.EXPAND, border=5)</span></span><br><span class="line">        <span class="comment"># hBoxAll.Add(screenBox, proportion=3, flag=wx.ALL | wx.EXPAND, border=5)</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># self.panel.SetSizer(hBoxAll)</span></span><br><span class="line">        <span class="comment"># hBoxAll.Fit(self)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 基于GridSizer布局</span></span><br><span class="line">        <span class="comment"># gridSizerAll= wx.GridSizer(rows=3, cols=3, hgap=5, vgap=5)</span></span><br><span class="line">        <span class="comment"># gridSizerAll.AddMany([(server, 0, wx.EXPAND), (commandStatic, 0, wx.EXPAND), (commandText, 0, wx.EXPAND),</span></span><br><span class="line">        <span class="comment"># (writePyStatic, 0, wx.EXPAND), (send, 0, wx.EXPAND), (clear, 0, wx.EXPAND),</span></span><br><span class="line">        <span class="comment">#                      (writePyText, 0, wx.EXPAND), (screen, 0, wx.EXPAND), (screenBox, 0, wx.EXPAND)])</span></span><br><span class="line">        <span class="comment"># self.panel.SetSizer(gridSizerAll)</span></span><br><span class="line">        <span class="comment"># gridSizerAll.Fit(self)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#基于FlexGridSizer布局</span></span><br><span class="line">        <span class="comment"># flexGridSizerAll = wx.FlexGridSizer(rows=3, cols=3, hgap=5, vgap=5)</span></span><br><span class="line">        <span class="comment"># flexGridSizerAll.AddMany([(server, 0, wx.EXPAND), (commandStatic, 0, wx.EXPAND), (commandText, 0, wx.EXPAND),</span></span><br><span class="line">        <span class="comment">#                           (writePyStatic, 0, wx.EXPAND), (send, 0, wx.EXPAND), (clear, 0, wx.EXPAND),</span></span><br><span class="line">        <span class="comment">#                           (writePyText, 0, wx.EXPAND), (screen, 0, wx.EXPAND), (screenBox, 0, wx.EXPAND)])</span></span><br><span class="line">        <span class="comment"># self.panel.SetSizer(flexGridSizerAll)</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># flexGridSizerAll.AddGrowableCol(2, 1)</span></span><br><span class="line">        <span class="comment"># flexGridSizerAll.AddGrowableRow(2, 1)</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># flexGridSizerAll.Fit(self)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#基于GirdBagSizer布局</span></span><br><span class="line">        gridBagSizerAll = wx.GridBagSizer(hgap=<span class="number">5</span>, vgap=<span class="number">5</span>)</span><br><span class="line">        gridBagSizerAll.Add(server, pos=(<span class="number">0</span>, <span class="number">0</span>),</span><br><span class="line">                            flag=wx.ALL | wx.EXPAND,</span><br><span class="line">                            span=(<span class="number">7</span>, <span class="number">2</span>), border=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">        gridBagSizerAll.Add(commandStatic, pos=(<span class="number">0</span>, <span class="number">2</span>),</span><br><span class="line">                            flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                            border=<span class="number">5</span>)</span><br><span class="line">        gridBagSizerAll.Add(commandText, pos=(<span class="number">0</span>, <span class="number">3</span>),</span><br><span class="line">                            flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                            span=(<span class="number">1</span>, <span class="number">2</span>), border=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">        gridBagSizerAll.Add(writePyStatic, pos=(<span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line">                            flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                            span=(<span class="number">1</span>, <span class="number">3</span>), border=<span class="number">5</span>)</span><br><span class="line">        gridBagSizerAll.Add(writePyText, pos=(<span class="number">2</span>, <span class="number">2</span>),</span><br><span class="line">                            flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                            span=(<span class="number">4</span>, <span class="number">3</span>), border=<span class="number">5</span>)</span><br><span class="line">        gridBagSizerAll.Add(send, pos=(<span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">                            flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                            span=(<span class="number">1</span>, <span class="number">1</span>), border=<span class="number">5</span>)</span><br><span class="line">        gridBagSizerAll.Add(clear, pos=(<span class="number">6</span>, <span class="number">3</span>),</span><br><span class="line">                            flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                            span=(<span class="number">1</span>, <span class="number">1</span>), border=<span class="number">5</span>)</span><br><span class="line">        gridBagSizerAll.Add(screen, pos=(<span class="number">6</span>, <span class="number">4</span>),</span><br><span class="line">                            flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                            span=(<span class="number">1</span>, <span class="number">1</span>), border=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">        gridBagSizerAll.Add(screenBox, pos=(<span class="number">0</span>, <span class="number">5</span>),</span><br><span class="line">                            flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                            span=(<span class="number">7</span>, <span class="number">2</span>), border=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">        self.panel.SetSizer(gridBagSizerAll)</span><br><span class="line"></span><br><span class="line">        self.SetSizeHints(<span class="number">250</span>, <span class="number">200</span>, <span class="number">700</span>, <span class="number">400</span>)  <span class="comment"># 设定窗口的最大最小值</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableCol(0, 1)</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableCol(1, 1)</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableCol(2, 1)</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableCol(3, 1)</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableCol(4, 1)</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableCol(5, 1)</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableCol(6, 1)</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableRow(0, 1)</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableRow(1, 1)</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableRow(2, 1)</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableRow(3, 1)</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableRow(4, 1)</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableRow(5, 1)</span></span><br><span class="line">        <span class="comment"># gridBagSizerAll.AddGrowableRow(6, 1)</span></span><br><span class="line">        gridBagSizerAll.Fit(self)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    app = wx.App()</span><br><span class="line">    frame = Lesson()</span><br><span class="line">    frame.Show()</span><br><span class="line">    app.MainLoop()</span><br></pre></td></tr></table></figure>
+<h2 id="wxPython事件编程"><a href="#wxPython事件编程" class="headerlink" title="wxPython事件编程"></a>wxPython事件编程</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*-coding:utf8-*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> wx</span><br><span class="line"></span><br><span class="line"><span class="string">'''基于Sizer的控件相对布局'''</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example3</span><span class="params">(wx.Frame)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        wx.Frame.__init__(self, parent=<span class="keyword">None</span>, id=<span class="number">-1</span>, title=<span class="string">u'极客学院'</span>, size=(<span class="number">600</span>, <span class="number">600</span>))</span><br><span class="line">        self.panel = wx.Panel(self, <span class="number">-1</span>)</span><br><span class="line">        self.Centre()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义我们需要的各个控件</span></span><br><span class="line"></span><br><span class="line">        commandStatic = wx.StaticText(self.panel, <span class="number">-1</span>, <span class="string">u'输命令:'</span>)</span><br><span class="line">        writePyStatic = wx.StaticText(self.panel, <span class="number">-1</span>, <span class="string">u'写代码:'</span>)</span><br><span class="line"></span><br><span class="line">        self.commandText = wx.TextCtrl(self.panel, <span class="number">-1</span>, <span class="string">u''</span>)</span><br><span class="line">        self.writePyText = wx.TextCtrl(self.panel, <span class="number">-1</span>, <span class="string">u'''#-*-coding:utf-8-*-\n#在这写Python代码'''</span>,</span><br><span class="line">                                       style=wx.TE_MULTILINE, size=(<span class="number">300</span>, <span class="number">200</span>))</span><br><span class="line"></span><br><span class="line">        self.send = wx.Button(self.panel, label=<span class="string">u'发送命令'</span>)</span><br><span class="line">        self.clear = wx.Button(self.panel, label=<span class="string">u'清空命令'</span>)</span><br><span class="line">        self.screen = wx.Button(self.panel, label=<span class="string">u'查看屏幕'</span>)</span><br><span class="line"></span><br><span class="line">        self.serverList = [<span class="string">'192.168.0.4'</span>, <span class="string">'10.19.2.1'</span>, <span class="string">'192.168.0.111'</span>, <span class="string">'172.26.123.5'</span>, <span class="string">'192.168.6.11'</span>, <span class="string">'192.99.8.8'</span>]</span><br><span class="line">        self.server = wx.ListBox(self.panel, <span class="number">-1</span>, size=(<span class="number">120</span>, <span class="number">100</span>), choices=self.serverList, style=wx.LB_SINGLE)</span><br><span class="line"></span><br><span class="line">        img = wx.Image(<span class="string">r'python_logo.gif'</span>, wx.BITMAP_TYPE_ANY).Scale(<span class="number">200</span>, <span class="number">200</span>)</span><br><span class="line">        self.screenBox = wx.StaticBitmap(self.panel, <span class="number">-1</span>, wx.BitmapFromImage(img))</span><br><span class="line"></span><br><span class="line">        self.Bind(wx.EVT_BUTTON, self.onSend, self.send)</span><br><span class="line">        self.Bind(wx.EVT_BUTTON, self.onClear, self.clear)</span><br><span class="line">        self.Bind(wx.EVT_BUTTON, self.onScreen, self.screen)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 基于GirdBagSizer布局</span></span><br><span class="line">        self.gridBagSizerAll = wx.GridBagSizer(hgap=<span class="number">5</span>, vgap=<span class="number">5</span>)</span><br><span class="line">        self.gridBagSizerAll.Add(self.server, pos=(<span class="number">0</span>, <span class="number">0</span>),</span><br><span class="line">                                 flag=wx.ALL | wx.EXPAND,</span><br><span class="line">                                 span=(<span class="number">7</span>, <span class="number">2</span>), border=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">        self.gridBagSizerAll.Add(commandStatic, pos=(<span class="number">0</span>, <span class="number">2</span>),</span><br><span class="line">                                 flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                                 border=<span class="number">5</span>)</span><br><span class="line">        self.gridBagSizerAll.Add(self.commandText, pos=(<span class="number">0</span>, <span class="number">3</span>),</span><br><span class="line">                                 flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                                 span=(<span class="number">1</span>, <span class="number">2</span>), border=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">        self.gridBagSizerAll.Add(writePyStatic, pos=(<span class="number">1</span>, <span class="number">2</span>),</span><br><span class="line">                                 flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                                 span=(<span class="number">1</span>, <span class="number">3</span>), border=<span class="number">5</span>)</span><br><span class="line">        self.gridBagSizerAll.Add(self.writePyText, pos=(<span class="number">2</span>, <span class="number">2</span>),</span><br><span class="line">                                 flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                                 span=(<span class="number">4</span>, <span class="number">3</span>), border=<span class="number">5</span>)</span><br><span class="line">        self.gridBagSizerAll.Add(self.send, pos=(<span class="number">6</span>, <span class="number">2</span>),</span><br><span class="line">                                 flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                                 span=(<span class="number">1</span>, <span class="number">1</span>), border=<span class="number">5</span>)</span><br><span class="line">        self.gridBagSizerAll.Add(self.clear, pos=(<span class="number">6</span>, <span class="number">3</span>),</span><br><span class="line">                                 flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                                 span=(<span class="number">1</span>, <span class="number">1</span>), border=<span class="number">5</span>)</span><br><span class="line">        self.gridBagSizerAll.Add(self.screen, pos=(<span class="number">6</span>, <span class="number">4</span>),</span><br><span class="line">                                 flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                                 span=(<span class="number">1</span>, <span class="number">1</span>), border=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">        self.gridBagSizerAll.Add(self.screenBox, pos=(<span class="number">0</span>, <span class="number">5</span>),</span><br><span class="line">                                 flag=wx.ALL | wx.ALIGN_CENTER_VERTICAL,</span><br><span class="line">                                 span=(<span class="number">7</span>, <span class="number">2</span>), border=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">        self.panel.SetSizer(self.gridBagSizerAll)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># self.SetSizeHints(250, 200, 700, 400) #设定窗口的最大最小值</span></span><br><span class="line">        self.gridBagSizerAll.AddGrowableCol(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.AddGrowableCol(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.AddGrowableCol(<span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.AddGrowableCol(<span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.AddGrowableCol(<span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.AddGrowableCol(<span class="number">5</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.AddGrowableCol(<span class="number">6</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        self.gridBagSizerAll.AddGrowableRow(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.AddGrowableRow(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.AddGrowableRow(<span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.AddGrowableRow(<span class="number">3</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.AddGrowableRow(<span class="number">4</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.AddGrowableRow(<span class="number">5</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.AddGrowableRow(<span class="number">6</span>, <span class="number">1</span>)</span><br><span class="line">        self.gridBagSizerAll.Fit(self)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">onSend</span><span class="params">(self, event)</span>:</span></span><br><span class="line">        time.sleep(<span class="number">0.5</span>)</span><br><span class="line">        <span class="keyword">if</span> self.server.GetSelection() != <span class="number">-1</span>:</span><br><span class="line">            server = self.serverList[self.server.GetSelection()]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            server = <span class="string">u'未选择服务器'</span></span><br><span class="line">        command = self.commandText.GetValue()</span><br><span class="line">        writePy = self.writePyText.GetValue()</span><br><span class="line">        print(<span class="string">u'选中的服务器是： %s'</span> % server)</span><br><span class="line">        print(<span class="string">u'执行的内置命令是： %s'</span> % command)</span><br><span class="line">        print(<span class="string">u'写入的Python代码是:\n%s'</span> % writePy)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">onClear</span><span class="params">(self, event)</span>:</span></span><br><span class="line">        self.commandText.Clear()</span><br><span class="line">        self.writePyText.Clear()</span><br><span class="line">        self.writePyText.AppendText(<span class="string">u'''#-*-coding:utf-8-*-\n#在这些Python代码'''</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">onScreen</span><span class="params">(self, event)</span>:</span></span><br><span class="line">        img = wx.Image(<span class="string">r'python.gif'</span>, wx.BITMAP_TYPE_ANY).Scale(<span class="number">300</span>, <span class="number">200</span>)</span><br><span class="line">        self.screenBox.SetBitmap(wx.BitmapFromImage(img))</span><br><span class="line">        self.gridBagSizerAll.Fit(self)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    app = wx.App()</span><br><span class="line">    frame = Example3()</span><br><span class="line">    frame.Show()</span><br><span class="line">    app.MainLoop()</span><br></pre></td></tr></table></figure>
+<h2 id="Python中的多线程编程"><a href="#Python中的多线程编程" class="headerlink" title="Python中的多线程编程"></a>Python中的多线程编程</h2><ol>
+<li>thread.start_new_thread(函数名，（参数1，参数2，···）)</li>
+<li>或者使用Threading模块创建线程</li>
+</ol>
+<h2 id="scipy库"><a href="#scipy库" class="headerlink" title="scipy库"></a>scipy库</h2><ol>
+<li><p>解非线性方程组</p>
+<ol>
+<li>scipy.optimize子库中的fsolve函数：fsolve(函数, 初始解, 雅可比矩阵)<figure class="highlight python"><figcaption><span>求解非线性方程组</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sin, cos</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> scipy.optimize <span class="keyword">import</span> fsolve</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(x)</span>:</span></span><br><span class="line">    x0, x1, x2 = x.tolist()</span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">        <span class="number">5</span> * x1 + <span class="number">3</span>,</span><br><span class="line">        <span class="number">4</span> * x0 * x0 - <span class="number">2</span> * sin(x1 * x2),</span><br><span class="line">        x1 * x2 - <span class="number">1.5</span></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">j</span><span class="params">(x)</span>:</span></span><br><span class="line">    x0, x1, x2 = x.tolist()</span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">        [<span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>],</span><br><span class="line">        [<span class="number">8</span> * x0, <span class="number">-2</span> * x2 * cos(x1 * x2), <span class="number">-2</span> * x1 * cos(x1 * x2)],</span><br><span class="line">        [<span class="number">0</span>, x2, x1]</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">r = fsolve(func, [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>], fprime=j)</span><br><span class="line">print(r)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>数值积分</p>
+<ol>
+<li>scipy.integrate子库中的quad函数：</li>
+<li>一重积分：quad(函数，定积分下限，定积分上限)</li>
+<li>双重积分：dblquad</li>
+<li>三重积分：tplquad<figure class="highlight python"><figcaption><span>求解一重积分</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.integrate <span class="keyword">import</span> quad</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="number">1</span> - x * x) ** <span class="number">0.5</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p, err = quad(func, <span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">print(<span class="number">2</span> * p)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>求解常微分方程</p>
+<ol>
+<li>scipy.integrate子库中的odeint<figure class="highlight python"><figcaption><span>常微分方程组求解方法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scipy.integrate <span class="keyword">import</span> odeint</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lorenz</span><span class="params">(w, t, p, r, b)</span>:</span></span><br><span class="line">    x, y, z = w</span><br><span class="line">    <span class="keyword">return</span> np.array([p * (y - x), x * (r - z), x * y - b * z])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">t = np.arange(<span class="number">0</span>, <span class="number">30</span>, <span class="number">0.01</span>)</span><br><span class="line">track = odeint(lorenz, (<span class="number">0.0</span>, <span class="number">1.00</span>, <span class="number">0.0</span>), t, args=(<span class="number">10.0</span>, <span class="number">28.0</span>, <span class="number">3.0</span>))</span><br><span class="line"></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = Axes3D(fig)</span><br><span class="line">ax.plot(track[:, <span class="number">0</span>], track[:,<span class="number">1</span>], track[:,<span class="number">2</span>])</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>数值微分</p>
+<ol>
+<li>scipu.misc子库中的derivative<figure class="highlight python"><figcaption><span>求解数值微分</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> scipy.misc <span class="keyword">import</span> derivative</span><br><span class="line"></span><br><span class="line">Ex = <span class="keyword">lambda</span> q: q ** <span class="number">2</span></span><br><span class="line">x0 = np.linspace(<span class="number">-10</span>, <span class="number">10</span>, <span class="number">1000</span>)</span><br><span class="line">dEx = derivative(Ex, x0, dx=<span class="number">1e-6</span>)</span><br><span class="line">plt.plot(x0, dEx)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="mpl-toolkits库"><a href="#mpl-toolkits库" class="headerlink" title="mpl_toolkits库"></a>mpl_toolkits库</h2><figure class="highlight python"><figcaption><span>3D效果图</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = Axes3D(fig)</span><br><span class="line">th = np.linspace(<span class="number">-4</span> * np.pi, <span class="number">4</span> * np.pi, <span class="number">100</span>)</span><br><span class="line">z = np.linspace(<span class="number">-2</span>, <span class="number">2</span>, <span class="number">100</span>)</span><br><span class="line">r = z ** <span class="number">2</span> + <span class="number">1</span></span><br><span class="line">x = r * np.sin(th)</span><br><span class="line">y = r * np.cos(th)</span><br><span class="line"></span><br><span class="line">ax.plot()</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/Nn7Krru.gif" alt="suda-morris" title="">
+                </div>
+                <div class="image-caption">suda-morris</div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-05T01:38:09.642Z" itemprop="dateUpdated">2018-07-05 09:38:09</time>
+</span><br>
+
+
+        
+        <a href="/2015/05/28/python-basic/" target="_blank" rel="external">https://suda-morris.github.io/2015/05/28/python-basic/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2015/05/28/python-basic/&title=《Python Basic》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2015/05/28/python-basic/&title=《Python Basic》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2015/05/28/python-basic/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python Basic》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2015/05/28/python-basic/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2015/05/28/python-basic/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/06/08/gns3-install/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">GNS3 Install</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/05/25/microsoft-office-word-skills/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Microsoft Office Word Skills</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Thu May 28 2015 21:42:00 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2015/05/28/python-basic/&title=《Python Basic》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2015/05/28/python-basic/&title=《Python Basic》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2015/05/28/python-basic/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python Basic》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2015/05/28/python-basic/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2015/05/28/python-basic/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACN0lEQVR42u3aS46DMBAFwNz/0ow0q5FQzOs2GQW7vIoiCC4WTv9er3gdv+vd57/rfM35d95df/7+5oWBgfFYxjFcCaO6lSNY+d4wMDD2YeSH7MzmegfxeG8YGBgY58dUvxk/a/wNBgYGxsyBWz1GZ0JDDAwMjGoyWd1ofognifENuTgGBsYDGfONgc99/tf+BgYGxlcyjtbK093xvfldF7+JgYGxNGMcos3PNvQS17x4F2XMGBgYCzHyB/eGw/INVYc2MDAw1mbkZbKZR+ZF/2ZjAAMDY2lGspXqJqpDFbddiYGBsShjpkGYF+DyFmY+ljGVT2NgYDyKkTw+T03z6/NkuDrMgYGBsR7j3jJ9vvV80xgYGBjVg28++KvWx6KXiIGBsQGjV1DrvYheU/MCj4GBsQGjOhiRz3FUD9Nqs+GVbx0DA+PhjHzEoVeyH6emeYhZnvjAwMBYlJEXv6rNy3tTZQwMjH0YvYSz9yJmCmpR2IqBgbENo3cU9hLdvKkZtRMwMDA2ZuSjY1VArxgXFd0wMDCWZvRK9nkqG20ozlgxMDD2YTRHHIoFuOpdH3kFGBgYD2TMF8uSktl8OHhRnsPAwFia0QvFqsFiNYiM2gC9ABEDA+OxjGoLMwkTq2FlNZItB4gYGBhLMJJDtldcu6tkdsHDwMDAyA++YULbG9eIwBgYGBjF4bAkxf1gKQ0DA2NRRpLEJsdor/2ZBH8Xz8LAwFia0TuU50O9mYGz2/5bMDAwvp3xA0IbiYdCSmOcAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>LwIP Introduction---Based on ESP32 | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="LwIP">
+    <meta name="description" content="TCP/IP协议栈                                                                                             TCP/IP协议栈              LwIP架构">
+<meta name="keywords" content="LwIP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LwIP Introduction---Based on ESP32">
+<meta property="og:url" content="https://suda-morris.github.io/2018/07/30/lwip/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="TCP/IP协议栈                                                                                             TCP/IP协议栈              LwIP架构">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/02/P0JwdJ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/09/PyrZkR.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/01/PwhSgK.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/01/Pw4Mz6.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/01/Pw4RWq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/10/P63kMq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/10/P61IaD.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/09/Pys12V.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/09/PysfPI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/09/Pysqaj.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/09/PysXin.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/02/P0CQUA.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/02/P0PcWt.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/02/P0CUbQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/02/P0keJA.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/02/P0AVmT.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/02/P0JfdH.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/02/P0JULF.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/10/P6l7j0.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/10/P6lLHU.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/10/P61AED.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/10/P61V4H.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/09/PyyVRx.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2018/08/10/P6GG5D.png">
+<meta property="og:updated_time" content="2018-08-10T10:54:45.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LwIP Introduction---Based on ESP32">
+<meta name="twitter:description" content="TCP/IP协议栈                                                                                             TCP/IP协议栈              LwIP架构">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/08/02/P0JwdJ.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank">
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">LwIP Introduction---Based on ESP32</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">LwIP Introduction---Based on ESP32</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-30T05:20:23.000Z" itemprop="datePublished" class="page-time">
+  2018-07-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP-IP协议栈"><span class="post-toc-number">1.</span> <span class="post-toc-text">TCP/IP协议栈</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LwIP架构"><span class="post-toc-number">2.</span> <span class="post-toc-text">LwIP架构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#进程模型"><span class="post-toc-number">3.</span> <span class="post-toc-text">进程模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#内存管理"><span class="post-toc-number">4.</span> <span class="post-toc-text">内存管理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#缓冲管理"><span class="post-toc-number">5.</span> <span class="post-toc-text">缓冲管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#pbuf管理API"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">pbuf管理API</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#网络接口层"><span class="post-toc-number">6.</span> <span class="post-toc-text">网络接口层</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ARP处理"><span class="post-toc-number">7.</span> <span class="post-toc-text">ARP处理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#IP处理"><span class="post-toc-number">8.</span> <span class="post-toc-text">IP处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#LwIP软件大致框架"><span class="post-toc-number">8.0.1.</span> <span class="post-toc-text">LwIP软件大致框架</span></a></li></ol></li></ol><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#ICMP处理"><span class="post-toc-number">9.</span> <span class="post-toc-text">ICMP处理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UDP处理"><span class="post-toc-number">10.</span> <span class="post-toc-text">UDP处理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP处理"><span class="post-toc-number">11.</span> <span class="post-toc-text">TCP处理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用API接口"><span class="post-toc-number">12.</span> <span class="post-toc-text">常用API接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#TCP-RAW-API"><span class="post-toc-number">12.1.</span> <span class="post-toc-text">TCP RAW API</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#TCP-RAW-API-1"><span class="post-toc-number">12.2.</span> <span class="post-toc-text">TCP RAW API</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Netconn-API"><span class="post-toc-number">12.3.</span> <span class="post-toc-text">Netconn API</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Socket-API"><span class="post-toc-number">12.4.</span> <span class="post-toc-text">Socket API</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LwIP移植"><span class="post-toc-number">13.</span> <span class="post-toc-text">LwIP移植</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LwIP配置"><span class="post-toc-number">14.</span> <span class="post-toc-text">LwIP配置</span></a></li>
+        </nav>
+    </aside>
+
+
+<article id="post-lwip" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">LwIP Introduction---Based on ESP32</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-30 13:20:23" datetime="2018-07-30T05:20:23.000Z" itemprop="datePublished">2018-07-30</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="TCP-IP协议栈"><a href="#TCP-IP协议栈" class="headerlink" title="TCP/IP协议栈"></a>TCP/IP协议栈</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/02/P0JwdJ.png" alt="TCP/IP协议栈" title="">
+                </div>
+                <div class="image-caption">TCP/IP协议栈</div>
+            </figure>
+<h2 id="LwIP架构"><a href="#LwIP架构" class="headerlink" title="LwIP架构"></a>LwIP架构</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/09/PyrZkR.png" alt="LwIP架构" title="">
+                </div>
+                <div class="image-caption">LwIP架构</div>
+            </figure>
+<h2 id="进程模型"><a href="#进程模型" class="headerlink" title="进程模型"></a>进程模型</h2><blockquote>
+<p>进程模型是指TCP/IP协议栈的各协议入IP协议、TCP协议、ICMP协议等是如何实现的。</p>
+</blockquote>
+<ul>
+<li>TCP/IP协议栈的每个协议都通过一个不同的进程实现。在该模型下，每个进程都严格地与一个协议相对应。这种进程模型的优点是网络协议的每一层都很清晰，每一层都可以随时参与系统运行。该模型的缺点是进程间的上下文切换比较频繁，系统将为频繁的上下文切换付出较大的代价。</li>
+<li>TCP/IP协议栈驻留在操作系统的内核中，应用程序通过系统调用与TCP/IP协议栈通信。该模型下，各协议栈并非严格地与一个进程相对应。</li>
+<li>TCP/IP协议栈驻留在同一个进程中，独立于操作系统内核空间。LwIP采用正是这种方式，LwIP作为一个独立的进程，运行在用户空间内，其优点是可以方便地移植到不同的操作系统中运行。</li>
+</ul>
+<h2 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h2><blockquote>
+<p>LwIP的动态内存管理机制大致上可以分成三种：标准C运行库自带的内存分配策略、LwIP的动态内存堆分配策略、LwIP的动态内存池分配策略。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/01/PwhSgK.png" alt="LwIP内存管理" title="">
+                </div>
+                <div class="image-caption">LwIP内存管理</div>
+            </figure>
+<ul>
+<li>将MEM_LIBC_MALLOC设置为1，表明使用标准C库自带的内存分配策略</li>
+<li>将MEMP_MEM_MALLOC设置为1，表明使用LwIP自己的动态内存堆分配策略</li>
+<li>LwIP还支持内存池，不过在ESP-IDF中并没有被使能。相较于内存堆的动态分配，内存池效率更高，碎片少，但是会消耗更多的内存</li>
+</ul>
+<h2 id="缓冲管理"><a href="#缓冲管理" class="headerlink" title="缓冲管理"></a>缓冲管理</h2><blockquote>
+<p>LwIP的缓冲管理机制的功能是尽量避免内存拷贝，尽量较少对内存和空间的需求，提高程序的执行效率。LwIP使用数据结构pbuf来描述内存的缓冲数据包。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/01/Pw4Mz6.png" alt="pbuf结构体" title="">
+                </div>
+                <div class="image-caption">pbuf结构体</div>
+            </figure>
+<ul>
+<li>由于实际发送或接收的数据包长度不一，而每个pbuf只能管理一部分数据，因此对于大容量的数据包，就必须使用多个pbuf才能完整地描述它</li>
+<li>type表明了该pbuf的类型，目前LwIP定义了四种类型的pbuf，分别是：<code>PBUF_RAM</code>，<code>PBUF_ROM</code>，<code>PBUF_REF</code>，<code>PBUF_POOL</code></li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/01/Pw4RWq.png" alt="pbuf类型定义" title="">
+                </div>
+                <div class="image-caption">pbuf类型定义</div>
+            </figure>
+<ul>
+<li>PBUF_RAM类型的pbuf是通过内存堆分配得到的，LwIP协议栈和应用程序要传递的数据一般都使用该类型的pbuf。</li>
+<li>PBUF_POOL类型的pbuf是通过内存池分配得到的，由于分配此类型的pbuf可以快速完成，适合中断处理，因此它更多地应用在网络设备驱动层。</li>
+<li>PBUF_REF和PBUF_ROM类型的pbuf基本相同，他们都是从内存池中申请分配pbuf结构首部空间，而不申请数据区的空间。两者的区别在于，前者指向RAM空间内的某段数据，后者指向ROM空间内的某段数据。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/10/P63kMq.png" alt="pbuf结构" title="">
+                </div>
+                <div class="image-caption">pbuf结构</div>
+            </figure>
+<h3 id="pbuf管理API"><a href="#pbuf管理API" class="headerlink" title="pbuf管理API"></a>pbuf管理API</h3><blockquote>
+<p>当使用Netconn API时，则使用netbuf（网络缓冲）发送/接收数据，netbuf只是pbuf结构的封装，它可容纳分配的或引用的数据。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/10/P61IaD.png" alt="pbuf管理API" title="">
+                </div>
+                <div class="image-caption">pbuf管理API</div>
+            </figure>
+<h2 id="网络接口层"><a href="#网络接口层" class="headerlink" title="网络接口层"></a>网络接口层</h2><blockquote>
+<p>在LwIP中，物理网络硬件的设备驱动通过网络接口结构体netif来描述一个硬件网络接口，并通过<code>netif_add</code>函数向全局变量netif链表结构增加一个硬件网络接口。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/09/Pys12V.png" alt="网络接口" title="">
+                </div>
+                <div class="image-caption">网络接口</div>
+            </figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Generic data structure used for all lwIP network interfaces.</span></span><br><span class="line"><span class="comment"> *  The following fields should be filled in by the initialization</span></span><br><span class="line"><span class="comment"> *  function for the device driver: hwaddr_len, hwaddr[], mtu, flags */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">netif</span> &#123;</span></span><br><span class="line">  <span class="comment">/** pointer to next in linked list */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">netif</span> *<span class="title">next</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_IPV4</span></span><br><span class="line">  <span class="comment">/** IP address configuration in network byte order */</span></span><br><span class="line">  <span class="keyword">ip_addr_t</span> ip_addr;</span><br><span class="line">  <span class="keyword">ip_addr_t</span> netmask;</span><br><span class="line">  <span class="keyword">ip_addr_t</span> gw;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_IPV4 */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_IPV6</span></span><br><span class="line">  <span class="comment">/** Array of IPv6 addresses for this netif. */</span></span><br><span class="line">  <span class="keyword">ip_addr_t</span> ip6_addr[LWIP_IPV6_NUM_ADDRESSES];</span><br><span class="line">  <span class="comment">/** The state of each IPv6 address (Tentative, Preferred, etc).</span></span><br><span class="line"><span class="comment">   * @see ip6_addr.h */</span></span><br><span class="line">  <span class="keyword">u8_t</span> ip6_addr_state[LWIP_IPV6_NUM_ADDRESSES];</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> ESP_LWIP</span></span><br><span class="line">  <span class="keyword">void</span> (*ipv6_addr_cb)(struct netif* netif, <span class="keyword">u8_t</span> ip_idex); <span class="comment">/* callback for ipv6 addr states changed */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_IPV6 */</span></span></span><br><span class="line">  <span class="comment">/** This function is called by the network device driver</span></span><br><span class="line"><span class="comment">   *  to pass a packet up the TCP/IP stack. */</span></span><br><span class="line">  netif_input_fn input;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_IPV4</span></span><br><span class="line">  <span class="comment">/** This function is called by the IP module when it wants</span></span><br><span class="line"><span class="comment">   *  to send a packet on the interface. This function typically</span></span><br><span class="line"><span class="comment">   *  first resolves the hardware address, then sends the packet. */</span></span><br><span class="line">  netif_output_fn output;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_IPV4 */</span></span></span><br><span class="line">  <span class="comment">/** This function is called by the ARP module when it wants</span></span><br><span class="line"><span class="comment">   *  to send a packet on the interface. This function outputs</span></span><br><span class="line"><span class="comment">   *  the pbuf as-is on the link medium. */</span></span><br><span class="line">  netif_linkoutput_fn linkoutput;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_IPV6</span></span><br><span class="line">  <span class="comment">/** This function is called by the IPv6 module when it wants</span></span><br><span class="line"><span class="comment">   *  to send a packet on the interface. This function typically</span></span><br><span class="line"><span class="comment">   *  first resolves the hardware address, then sends the packet. */</span></span><br><span class="line">  netif_output_ip6_fn output_ip6;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_IPV6 */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_NETIF_STATUS_CALLBACK</span></span><br><span class="line">  <span class="comment">/** This function is called when the netif state is set to up or down</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  netif_status_callback_fn status_callback;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_NETIF_STATUS_CALLBACK */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_NETIF_LINK_CALLBACK</span></span><br><span class="line">  <span class="comment">/** This function is called when the netif link is set to up or down</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  netif_status_callback_fn link_callback;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_NETIF_LINK_CALLBACK */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_NETIF_REMOVE_CALLBACK</span></span><br><span class="line">  <span class="comment">/** This function is called when the netif has been removed */</span></span><br><span class="line">  netif_status_callback_fn remove_callback;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_NETIF_REMOVE_CALLBACK */</span></span></span><br><span class="line">  <span class="comment">/** This field can be set by the device driver and could point</span></span><br><span class="line"><span class="comment">   *  to state information for the device. */</span></span><br><span class="line">  <span class="keyword">void</span> *state;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_DHCP</span></span><br><span class="line">  <span class="comment">/** the DHCP client state information for this netif */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">dhcp</span> *<span class="title">dhcp</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> ESP_LWIP</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">udp_pcb</span> *<span class="title">dhcps_pcb</span>;</span>	</span><br><span class="line">  dhcp_event_fn dhcp_event;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span>  </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_DHCP */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_AUTOIP</span></span><br><span class="line">  <span class="comment">/** the AutoIP client state information for this netif */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">autoip</span> *<span class="title">autoip</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_IPV6_AUTOCONFIG</span></span><br><span class="line">  <span class="comment">/** is this netif enabled for IPv6 autoconfiguration */</span></span><br><span class="line">  <span class="keyword">u8_t</span> ip6_autoconfig_enabled;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_IPV6_AUTOCONFIG */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_IPV6_SEND_ROUTER_SOLICIT</span></span><br><span class="line">  <span class="comment">/** Number of Router Solicitation messages that remain to be sent. */</span></span><br><span class="line">  <span class="keyword">u8_t</span> rs_count;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_IPV6_SEND_ROUTER_SOLICIT */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_IPV6_DHCP6</span></span><br><span class="line">  <span class="comment">/** the DHCPv6 client state information for this netif */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">dhcp6</span> *<span class="title">dhcp6</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_IPV6_DHCP6 */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_NETIF_HOSTNAME</span></span><br><span class="line">  <span class="comment">/* the hostname for this netif, NULL is a valid value */</span></span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span>*  hostname;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_NETIF_HOSTNAME */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_CHECKSUM_CTRL_PER_NETIF</span></span><br><span class="line">  <span class="keyword">u16_t</span> chksum_flags;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_CHECKSUM_CTRL_PER_NETIF*/</span></span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/** maximum transfer unit (in bytes) */</span></span><br><span class="line">  <span class="keyword">u16_t</span> mtu;</span><br><span class="line">  <span class="comment">/** number of bytes used in hwaddr */</span></span><br><span class="line">  <span class="keyword">u8_t</span> hwaddr_len;</span><br><span class="line">  <span class="comment">/** link level hardware address of this interface */</span></span><br><span class="line">  <span class="keyword">u8_t</span> hwaddr[NETIF_MAX_HWADDR_LEN];</span><br><span class="line">  <span class="comment">/** flags (see NETIF_FLAG_ above) */</span></span><br><span class="line">  <span class="keyword">u8_t</span> flags;</span><br><span class="line">  <span class="comment">/** descriptive abbreviation */</span></span><br><span class="line">  <span class="keyword">char</span> name[<span class="number">2</span>];</span><br><span class="line">  <span class="comment">/** number of this interface */</span></span><br><span class="line">  <span class="keyword">u8_t</span> num;</span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> MIB2_STATS</span></span><br><span class="line">  <span class="comment">/** link type (from "snmp_ifType" enum from snmp_mib2.h) */</span></span><br><span class="line">  <span class="keyword">u8_t</span> link_type;</span><br><span class="line">  <span class="comment">/** (estimate) link speed */</span></span><br><span class="line">  <span class="keyword">u32_t</span> link_speed;</span><br><span class="line">  <span class="comment">/** timestamp at last change made (up/down) */</span></span><br><span class="line">  <span class="keyword">u32_t</span> ts;</span><br><span class="line">  <span class="comment">/** counters */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">stats_mib2_netif_ctrs</span> <span class="title">mib2_counters</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* MIB2_STATS */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_IPV4 &amp;&amp; LWIP_IGMP</span></span><br><span class="line">  <span class="comment">/** This function could be called to add or delete an entry in the multicast</span></span><br><span class="line"><span class="comment">      filter table of the ethernet MAC.*/</span></span><br><span class="line">  netif_igmp_mac_filter_fn igmp_mac_filter;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_IPV4 &amp;&amp; LWIP_IGMP */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_IPV6 &amp;&amp; LWIP_IPV6_MLD</span></span><br><span class="line">  <span class="comment">/** This function could be called to add or delete an entry in the IPv6 multicast</span></span><br><span class="line"><span class="comment">      filter table of the ethernet MAC. */</span></span><br><span class="line">  netif_mld_mac_filter_fn mld_mac_filter;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_IPV6 &amp;&amp; LWIP_IPV6_MLD */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_NETIF_HWADDRHINT</span></span><br><span class="line">  <span class="keyword">u8_t</span> *addr_hint;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_NETIF_HWADDRHINT */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> ENABLE_LOOPBACK</span></span><br><span class="line">  <span class="comment">/* List of packets to be queued for ourselves. */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">pbuf</span> *<span class="title">loop_first</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">pbuf</span> *<span class="title">loop_last</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_LOOPBACK_MAX_PBUFS</span></span><br><span class="line">  <span class="keyword">u16_t</span> loop_cnt_current;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_LOOPBACK_MAX_PBUFS */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* ENABLE_LOOPBACK */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> ESP_LWIP</span></span><br><span class="line">  <span class="keyword">void</span> (*l2_buffer_free_notify)(<span class="keyword">void</span> *user_buf); <span class="comment">/* Allows LWIP to notify driver when a L2-supplied pbuf can be freed */</span></span><br><span class="line">  <span class="keyword">ip_addr_t</span> last_ip_addr; <span class="comment">/* Store last non-zero ip address */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/09/PysfPI.png" alt="IP信息" title="">
+                </div>
+                <div class="image-caption">IP信息</div>
+            </figure></li>
+<li>ip_addr，netmask，gw分别表示了IP地址、子网掩码、网关，建议这样子设定：<code>IP4_ADDR(&amp;ipaddr,192,168,1,100)</code></li>
+<li><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/09/Pysqaj.png" alt="硬件信息" title="">
+                </div>
+                <div class="image-caption">硬件信息</div>
+            </figure></li>
+<li>mtu表明最大的网络传输个数，以字节为单位</li>
+<li>hwaddr存放了硬件接口的地址，对于以太网而言，就是MAC地址</li>
+<li>flags是硬件接口状态信息标志位，如是否建立连接状态，是否允许广播功能等</li>
+<li>name用来表示硬件接口使用的驱动类型，缩写，2个字节，比如蓝牙设备为“bl”，wifi设备为”wl”</li>
+<li>num用来表示硬件接口的编号，当两个硬件接口的name字段相同时，该字段可以用来区分是哪一个硬件接口</li>
+<li><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/09/PysXin.png" alt="驱动功能" title="">
+                </div>
+                <div class="image-caption">驱动功能</div>
+            </figure></li>
+<li>input是一个函数指针，它指向的函数用于将网络硬件接口接收到的数据包传递给上层TCP/IP协议栈</li>
+<li>output是一个函数指针，它所指向的函数用于将IP层的数据包发送到网络硬件接口上</li>
+<li>linkoutput是一个函数指针，在ARP模块中调用，output指向的函数也是通过调用linkoutput指向的函数实现数据报发送的</li>
+</ul>
+<h2 id="ARP处理"><a href="#ARP处理" class="headerlink" title="ARP处理"></a>ARP处理</h2><blockquote>
+<p>ARP协议是TCP/IP协议的基础，本质是实现IP地址与底层物理地址的相互转换。ARP协议的核心是ARP缓存表，而ARP协议的实质就是对缓存表的建立、更新、查询等操作。ARP缓存表是由若干缓存表项组成，在LwIP中，描述缓存表项的数据结构叫etharp_entry。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/02/P0CQUA.png" alt="ARP协议数据包格式" title="">
+                </div>
+                <div class="image-caption">ARP协议数据包格式</div>
+            </figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">etharp_entry</span> &#123;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> ARP_QUEUEING</span></span><br><span class="line">  <span class="comment">/** Pointer to queue of pending outgoing packets on this ARP entry. */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">etharp_q_entry</span> *<span class="title">q</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span> <span class="comment">/* ARP_QUEUEING */</span></span></span><br><span class="line">  <span class="comment">/** Pointer to a single pending outgoing packet on this ARP entry. */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">pbuf</span> *<span class="title">q</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* ARP_QUEUEING */</span></span></span><br><span class="line">  <span class="keyword">ip4_addr_t</span> ipaddr;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">netif</span> *<span class="title">netif</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">eth_addr</span> <span class="title">ethaddr</span>;</span></span><br><span class="line">  <span class="keyword">u16_t</span> ctime;</span><br><span class="line">  <span class="keyword">u8_t</span> state;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ipaddr存放IP地址，ethaddr存放物理地址，state表示缓存项的状态（例如是否为空，是否稳定），ctime记录ARP缓存项处于某个状态的时间，当某表项的ctime值大于规定的表项最大生存值时，LwIP内核会删除该表项。因此使用ARP功能时，必须设置一个ARP超时事件，该超时事件的基本功能就是对每个表项的ctime字段值加1，然后删除那些生存时间大于最大生存值的表项</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/02/P0PcWt.jpg" alt="ARP处理流程" title="">
+                </div>
+                <div class="image-caption">ARP处理流程</div>
+            </figure>
+<ul>
+<li>函数ethernet_input根据报文首部的帧类型字段判断接收到的报文类型，如果是IP包，则将该包传递给etharp_ip_input，如果是ARP包，则将该包递交给etharp_arp_input</li>
+<li>函数etharp_ip_input调用函数update_arp_entry，它是将报文首部的MAC地址和IP地址更新到ARP缓存中</li>
+<li>函数etharp_arp_input首先判断接收到的ARP数据包的类型，如果是ARP请求包，那么首先判断这个包是否是给自己的，如果是给自己的，就在原有包的基础上重组一个ARP应答包发送出去；如果不是给自己的，则直接忽略而如果接收到的数据包是ARP应答包，那么就调用update_arp_entry更新ARP缓存表</li>
+</ul>
+<h2 id="IP处理"><a href="#IP处理" class="headerlink" title="IP处理"></a>IP处理</h2><p><img src="https://s1.ax1x.com/2018/08/02/P0CUbQ.png" alt="IP协议数据包格式"></p>
+<h4 id="LwIP软件大致框架"><a href="#LwIP软件大致框架" class="headerlink" title="LwIP软件大致框架"></a>LwIP软件大致框架</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/02/P0keJA.jpg" alt="LwIP整体框架图" title="">
+                </div>
+                <div class="image-caption">LwIP整体框架图</div>
+            </figure>
+<ul>
+<li>ip_input会做各项检查，包括协议版本号，IP首部的校验值，源IP地址是否有效等，然后检测IP数据包中的目的IP地址是否与本节点的IP地址相符，如果是本节点的IP地址，则根据该IP数据包首部的协议字段判断该数据包应该被递交到哪个上层协议，并调用相应的函数。如果是UDP协议，则调用udp_input函数；如果是TCP协议，则调用tcp_input函数；如果是ICMP协议，则调用icmp_input函数；如果是IGMP协议，则调用igmp_input函数；如果都不是，则调用函数icmp_dest_unreach返回一个协议不可达ICMP数据包给源主机。如果不是本节点的IP地址，则通过调用函数ip_forward对数据包进行转发。需要注意，由于一个节点可能含有多个IP地址，因此ip_input函数会遍历网络接口链表netif_list上的netif结构变量，来查找与IP数据包中相匹配的IP地址。</li>
+<li>ip_output使用ip_route函数查找目标网络接口netif来发送IP数据包。当网络接口netif确定后，IP数据包通过函数ip_output_if发送出去。若ip_route没有找到合适的网络接口，则丢弃该报文，终止本次发送。函数ip_route通过遍历网络接口链表netif_list，查找与目的IIP地址在同一个子网中的网络接口，并将该网络接口返回给变量netif。</li>
+</ul>
+<h2 id="ICMP处理"><a href="#ICMP处理" class="headerlink" title="ICMP处理"></a>ICMP处理</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/02/P0AVmT.jpg" alt="ICMP协议数据包格式" title="">
+                </div>
+                <div class="image-caption">ICMP协议数据包格式</div>
+            </figure>
+<ul>
+<li>icmp_input在ip_input中被调用，它处理接收到的ICMP数据包，并根据包类型做相应的处理。在LwIP协议栈中，它只处理ICMP回显请求包，对其他类型的ICMP包不作响应。icmp_input在处理ICMP回显请求时，首先判断该数据包是否为广播或者组播包，如果是，则直接返回，不再继续处理；如果不是，则继续判断该数据包长度是否小于ICMP回显请求头部长度，如果是则丢弃数据包；如果不是则将该ICMP报文类型字段变为0，重新计算校验和，并将IP报文首部的源IP地址和目的IP地址交换位置，并通过调用函数ip_output_if将数据包发送出去。</li>
+<li>函数icmp_dest_unreach在ip_input、udp_input中被调用，它的功能是通过调用函数icmp_send_response发送一个“目的不可到达”类型的icmp报文。在函数ip_input中，当所接收的IP报文协议字段不可识别时，icmp_dest_unreach就被调用。而在UDP处理器中，若不能找到与接收的报文相对应的端口号，则icmp_dest_unreach也将被调用。</li>
+<li>函数icmp_time_exceeded在ip_forward中被调用，它的功能是通过调用函数icmp_send_response发送一个“超时”类型的ICMP报文。在函数ip_forward中，当TTL减小为0时，调用该函数。</li>
+</ul>
+<h2 id="UDP处理"><a href="#UDP处理" class="headerlink" title="UDP处理"></a>UDP处理</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/02/P0JfdH.png" alt="UDP协议数据包" title="">
+                </div>
+                <div class="image-caption">UDP协议数据包</div>
+            </figure>
+<ul>
+<li>函数udp_input将检查报文的UDP校验，最终调用函数recv，将收到的报文传递给应用层程序</li>
+<li>当应用层程序要通过UDP协议向外发送IP报文时，将通过调用函数udp_send实现，函数udp_send通过调用IP层的函数ip_output_if实现报文的发送</li>
+<li>LwIP使用链表结构体udp_pcb来保存每一个UDP会话的状态</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">udp_pcb</span> &#123;</span></span><br><span class="line"><span class="comment">/* Common members of all PCB types */</span></span><br><span class="line">  IP_PCB;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Protocol specific PCB members */</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">udp_pcb</span> *<span class="title">next</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">u8_t</span> flags;</span><br><span class="line">  <span class="comment">/** ports are in host byte order */</span></span><br><span class="line">  <span class="keyword">u16_t</span> local_port, remote_port;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_MULTICAST_TX_OPTIONS</span></span><br><span class="line">  <span class="comment">/** outgoing network interface for multicast packets */</span></span><br><span class="line">  <span class="keyword">ip_addr_t</span> multicast_ip;</span><br><span class="line">  <span class="comment">/** TTL for outgoing multicast packets */</span></span><br><span class="line">  <span class="keyword">u8_t</span> mcast_ttl;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_MULTICAST_TX_OPTIONS */</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_UDPLITE</span></span><br><span class="line">  <span class="comment">/** used for UDP_LITE only */</span></span><br><span class="line">  <span class="keyword">u16_t</span> chksum_len_rx, chksum_len_tx;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_UDPLITE */</span></span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/** receive callback function */</span></span><br><span class="line">  udp_recv_fn recv;</span><br><span class="line">  <span class="comment">/** user-supplied argument for the recv callback */</span></span><br><span class="line">  <span class="keyword">void</span> *recv_arg;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="TCP处理"><a href="#TCP处理" class="headerlink" title="TCP处理"></a>TCP处理</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/02/P0JULF.png" alt="TCP协议数据包" title="">
+                </div>
+                <div class="image-caption">TCP协议数据包</div>
+            </figure>
+<ul>
+<li>TCP的滑动窗口协议是用于实现流量控制的</li>
+<li>TCP的超时和重传机制提高了数据传输的可靠性</li>
+<li>拥塞控制是通过慢启动算法和拥塞避免算法来实现的</li>
+<li>LwIP中含有两个定时器函数：tcp_fasttmr和tcp_slowtmr，tcp_fasttmr每250ms调用一次，tcp_slowtmr每500ms调用一次。快速定时器主要做两个方面的事情：向上层递交上层一直未接收的数据，二是发送该连接上的延迟ACK请求数据段。慢速定时器参与了较多功能，如超时与重传、拥塞控制等。</li>
+</ul>
+<h2 id="常用API接口"><a href="#常用API接口" class="headerlink" title="常用API接口"></a>常用API接口</h2><blockquote>
+<p>LwIP提供了3种应用程序接口：</p>
+<ol>
+<li>直接调用协议栈各模块的函数，它是基于回调函数的API接口，也成为RAW API接口，回调函数直接被协议栈代码调用，因此应用程序代码和TCP/IP协议栈运行在同一个进程里，无需使用操作系统，两者之间这种良好的结合可以使得程序的执行效率更高，而且在运行中它占用更少的内存资源</li>
+<li>使用LwIP提供的专用API接口，也称为Sequential API接口，程序的执行过程基于open-read-write-close模型，需要操作系统的支持，另外需要在文件lwipopts.h中把宏定义<code>NO_SYS</code>定义为0。Sequential API被分成两部分实现，一部分驻留在应用程序进程中，另一部分在TCP/IP协议栈进程内实现。这两部分API之间采用由操作系统模拟层提供的进程间通信机制进行通信。在LwIP中，操作系统模拟层是LwIP协议栈的一部分，它存在的目的是方面LwIP的移植，它在底层操作系统和LwIP协议栈之间提供了一个接口，当用户移植LwIP到一个新的目标系统的时候，只需要修改这个接口内的函数即可。驻留在应用程序进程中的API接口与TCP/IP协议栈进程中的API之间通过共享内存传递数据，对该共享内存区的描述是采用netbuf结构体</li>
+<li>BSD Socket兼容的Socket函数接口，但是BSD套接字需要将发送的数据从应用程序复制到TCP/IP协议栈的内部缓冲区，将会消耗系统有限的资源</li>
+</ol>
+</blockquote>
+<h3 id="TCP-RAW-API"><a href="#TCP-RAW-API" class="headerlink" title="TCP RAW API"></a>TCP RAW API</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/10/P6l7j0.png" alt="TCP RAW API" title="">
+                </div>
+                <div class="image-caption">TCP RAW API</div>
+            </figure>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>struct tcp_pcb* tcp_new()</td>
+<td>新建tcp协议控制块</td>
+</tr>
+<tr>
+<td>ert_t tcp_bind(struct tcp_pcb<em> pcb,struct ip_addr</em> ipaddr,u16_t port)</td>
+<td>绑定本地IP地址和端口号，如果ipaddr为IP_ADDR_ANY，则将连接绑定到所有的本地IP地址上</td>
+</tr>
+<tr>
+<td>struct tcp_pcb<em> tcp_listen(struct tcp_pcb</em> pcb)</td>
+<td>使指定的连接开始进入监听状态，如果监听成功，就返回一个新的连接控制块pcb</td>
+</tr>
+<tr>
+<td>void tcp_accepted(struct tcp_pcb* pcb)</td>
+<td>通知LwIP一个新来的连接已经被接收，这个函数通常在由tcp_accept指定的回调函数中被调用</td>
+</tr>
+<tr>
+<td>void tcp_accept(struct tcp_pcb* pcb,err_t (*accept)(void* arg,struct tcp_pcb* newpcb,err_t err))</td>
+<td>指定处于监听状态的连接，在成功建立连接后要调用的回调方法</td>
+</tr>
+<tr>
+<td>err_t tcp_connect(struct tcp_pcb* pcb,struct ip_addr* ipaddr,u16_t port,err_t (* connected)(void* arg,struct tcp_pcb* tpcb,err_t err))</td>
+<td>请求连接到执行的远程主机</td>
+</tr>
+<tr>
+<td>err_t tcp_write(struct tcp_pcb* pcb,void* dataptr,u16_t len,u8_t copy)</td>
+<td>发送TCP数据，将要发送的数据放入发送队列中，由协议栈内核发送，copy为0则不会为发送的数据分配新的内存空间</td>
+</tr>
+<tr>
+<td>void tcp_sent(struct tcp_pcb* pcb,err_t (*sent)(void* arg,struct tcp_pcb* tpcb,u16_t len))</td>
+<td>指定当远程主机成功接收数据后，应用程序调用的回调函数</td>
+</tr>
+<tr>
+<td>void tcp_recv(struct tcp_pcb* pcb,err_t (* recv)(void* arg,struct tcp_pcb* tpcb,struct pbuf* p,err_t err))</td>
+<td>指定接收数据时调用的回调函数</td>
+</tr>
+<tr>
+<td>void tcp_recved(struct tcp_pcb* pcb,u16_t len)</td>
+<td>用于获取接收到的数据的长度，必须在tcp_recv指定的回调函数中被调用</td>
+</tr>
+<tr>
+<td>err_t tcp_close(struct tcp_pcb* pcb)</td>
+<td>关闭一个指定的TCP连接，调用该函数后将会释放pcb控制块所占用的内存空间</td>
+</tr>
+<tr>
+<td>void tcp_abort(struct tcp_pcb* pcb)</td>
+<td>终止一个指定的连接，调用该函数后，pcb控制块所占用的内存空间将被释放</td>
+</tr>
+<tr>
+<td>void tcp_err(struct tcp_pcb* pcb,void (*err)(void* arg,err_t err))</td>
+<td>指定处理错误的回调函数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="TCP-RAW-API-1"><a href="#TCP-RAW-API-1" class="headerlink" title="TCP RAW API"></a>TCP RAW API</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/10/P6lLHU.png" alt="UDP RAW API" title="">
+                </div>
+                <div class="image-caption">UDP RAW API</div>
+            </figure>
+<h3 id="Netconn-API"><a href="#Netconn-API" class="headerlink" title="Netconn API"></a>Netconn API</h3><ul>
+<li>数据结构netconn描述了应用程序要使用API函数机那里一个连接的各种属性，包括了连接的类型、最近的故障代码、回调函数等。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** A netconn descriptor */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">netconn</span> &#123;</span></span><br><span class="line">  <span class="comment">/** type of the netconn (TCP, UDP or RAW) */</span></span><br><span class="line">  <span class="keyword">enum</span> netconn_type type;</span><br><span class="line">  <span class="comment">/** current state of the netconn */</span></span><br><span class="line">  <span class="keyword">enum</span> netconn_state state;</span><br><span class="line">  <span class="comment">/** the lwIP internal protocol control block */</span></span><br><span class="line">  <span class="keyword">union</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ip_pcb</span>  *<span class="title">ip</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tcp_pcb</span> *<span class="title">tcp</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">udp_pcb</span> *<span class="title">udp</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">raw_pcb</span> *<span class="title">raw</span>;</span></span><br><span class="line">  &#125; pcb;</span><br><span class="line">  <span class="comment">/** the last error this netconn had */</span></span><br><span class="line">  <span class="keyword">err_t</span> last_err;</span><br><span class="line">  </span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> !LWIP_NETCONN_SEM_PER_THREAD</span></span><br><span class="line">  <span class="comment">/** sem that is used to synchronously execute functions in the core context */</span></span><br><span class="line">  <span class="keyword">sys_sem_t</span> op_completed;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/** mbox where received packets are stored until they are fetched</span></span><br><span class="line"><span class="comment">      by the netconn application thread (can grow quite big) */</span></span><br><span class="line">  <span class="keyword">sys_mbox_t</span> recvmbox;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_TCP</span></span><br><span class="line">  <span class="comment">/** mbox where new connections are stored until processed</span></span><br><span class="line"><span class="comment">      by the application thread */</span></span><br><span class="line">  <span class="keyword">sys_mbox_t</span> acceptmbox;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_TCP */</span></span></span><br><span class="line">  <span class="comment">/** only used for socket layer */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_SOCKET</span></span><br><span class="line">  <span class="keyword">int</span> socket;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_SOCKET */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_SO_SNDTIMEO</span></span><br><span class="line">  <span class="comment">/** timeout to wait for sending data (which means enqueueing data for sending</span></span><br><span class="line"><span class="comment">      in internal buffers) in milliseconds */</span></span><br><span class="line">  <span class="keyword">s32_t</span> send_timeout;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_SO_RCVTIMEO */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_SO_RCVTIMEO</span></span><br><span class="line">  <span class="comment">/** timeout in milliseconds to wait for new data to be received</span></span><br><span class="line"><span class="comment">      (or connections to arrive for listening netconns) */</span></span><br><span class="line">  <span class="keyword">int</span> recv_timeout;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_SO_RCVTIMEO */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_SO_RCVBUF</span></span><br><span class="line">  <span class="comment">/** maximum amount of bytes queued in recvmbox</span></span><br><span class="line"><span class="comment">      not used for TCP: adjust TCP_WND instead! */</span></span><br><span class="line">  <span class="keyword">int</span> recv_bufsize;</span><br><span class="line">  <span class="comment">/** number of bytes currently in recvmbox to be received,</span></span><br><span class="line"><span class="comment">      tested against recv_bufsize to limit bytes on recvmbox</span></span><br><span class="line"><span class="comment">      for UDP and RAW, used for FIONREAD */</span></span><br><span class="line">  <span class="keyword">int</span> recv_avail;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_SO_RCVBUF */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_SO_LINGER</span></span><br><span class="line">   <span class="comment">/** values &lt;0 mean linger is disabled, values &gt; 0 are seconds to linger */</span></span><br><span class="line">  <span class="keyword">s16_t</span> linger;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_SO_LINGER */</span></span></span><br><span class="line">  <span class="comment">/** flags holding more netconn-internal state, see NETCONN_FLAG_* defines */</span></span><br><span class="line">  <span class="keyword">u8_t</span> flags;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> LWIP_TCP</span></span><br><span class="line">  <span class="comment">/** TCP: when data passed to netconn_write doesn't fit into the send buffer,</span></span><br><span class="line"><span class="comment">      this temporarily stores how much is already sent. */</span></span><br><span class="line">  <span class="keyword">size_t</span> write_offset;</span><br><span class="line">  <span class="comment">/** TCP: when data passed to netconn_write doesn't fit into the send buffer,</span></span><br><span class="line"><span class="comment">      this temporarily stores the message.</span></span><br><span class="line"><span class="comment">      Also used during connect and close. */</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">api_msg_msg</span> *<span class="title">current_msg</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* LWIP_TCP */</span></span></span><br><span class="line">  <span class="comment">/** A callback function that is informed about events for this netconn */</span></span><br><span class="line">  netconn_callback callback;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/10/P61AED.png" alt="Netconn API" title="">
+                </div>
+                <div class="image-caption">Netconn API</div>
+            </figure>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>struct netconn* netconn_new_with_proto_and_callback(enum netconn_type t,u8_t proto,netconn_callback callback)</td>
+<td>建立一个新的netconn连接</td>
+</tr>
+<tr>
+<td>err_t netconn_delete(struct netconn* conn)</td>
+<td>删除netconn所指向的连接</td>
+</tr>
+<tr>
+<td>err_t netconn_getaddr(struct netconn* conn,struct ip_addr* addr,u16_t* port,u8_t local)</td>
+<td>获取conn连接的主机IP地址和端口号</td>
+</tr>
+<tr>
+<td>err_t netconn_bind(struct netconn* conn,struct ip_addr* addr,u16_t port)</td>
+<td>将一个IP地址及端口号与conn指向的而连接绑定</td>
+</tr>
+<tr>
+<td>err_t netconn_connect(struct netconn* conn,struct ip_addr* addr,u16_t port)</td>
+<td>将服务器端的IP地址和端口号与conn指向的连接绑定</td>
+</tr>
+<tr>
+<td>err_t netconn_disconnect(struct netconn* conn)</td>
+<td>断开conn指向的连接</td>
+</tr>
+<tr>
+<td>err_t netconn_listen_with_backlog(struct netconn* conn，u8_t backlog)</td>
+<td>将conn指向的连接设定为监听状态</td>
+</tr>
+<tr>
+<td>struct netconn* netconn_accept(struct netconn* conn)</td>
+<td>接收客户端的连接，该函数会阻塞在acceptmbox邮箱上</td>
+</tr>
+<tr>
+<td>struct netbuf* netconn_recv(struct netconn* conn)</td>
+<td>接收数据，接收到的数据被封装为netbuf结构</td>
+</tr>
+<tr>
+<td>err_t netconn_sendto(struct netconn* conn,struct netbuf* buf,struct ip_addr* addr,u16_t port)</td>
+<td>向一个指定的IP地址和端口号发送数据，这个函数只能用在conn类型为UDP或者RAW的连接中</td>
+</tr>
+<tr>
+<td>err_t netconn_write(struct netconn* conn,const void* dataptr,size_t size,u8_t apiflag)</td>
+<td>向相应的TCP连接上发送数据，这个函数只能用于发送TCP的报文</td>
+</tr>
+<tr>
+<td>err_t nnetconn_close(struct netconn* conn)</td>
+<td>关闭conn指向的连接</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>netconn_new_with_proto_and_callback首先调用netconn_alloc函数分配并初始化一个netconn结构，接下来该函数会构建一个api_msg消息，该消息要求内核执行函数do_newconn，最后调用函数tcpip_apimsg来将消息包装成tcpip_msg结构并发送出去。tcpip_thread函数解析该消息并调用函数do_newconn，do_newconn根据参数的类型调用函数tcp_new创建一个TCP控制块</li>
+<li>tcpip_thread是处理TCP/IP的内核协议栈进程，它只接收tcpip_msg结构封装的消息，并根据消息的类型来判定该消息来自物理网卡或应用层程序。如果接收到网卡的IP报文，则将该报文递交给ip_input函数；如果是应用层程序发送的消息，则通过调用消息指定的内核处理函数来完成相应的功能</li>
+</ul>
+<h3 id="Socket-API"><a href="#Socket-API" class="headerlink" title="Socket API"></a>Socket API</h3><blockquote>
+<p>LwIP提供了标准BSD套接字API，它也是有序API，在内存构建于Netconn API之上。所谓“有序”是指其执行模型基于典型的阻塞式打开-读-写-关闭机制。</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/10/P61V4H.png" alt="Socket API" title="">
+                </div>
+                <div class="image-caption">Socket API</div>
+            </figure>
+<h2 id="LwIP移植"><a href="#LwIP移植" class="headerlink" title="LwIP移植"></a>LwIP移植</h2><blockquote>
+<ol>
+<li>以太网接口任务用于接收来自物理网卡的数据报文，同时将收到的报文通过FreeRTOS提供的邮箱传递给TCP/IP协议栈任务。以太网接口任务平时处于挂起状态，当硬件收到报文时，将产生接收报文中断，该终端以信号量的方式将以太网接口任务激活</li>
+<li>应用程序使用TCP/IP协议栈提供的Sequential API接口访问LwIP，同时这两个独立的任务需要使用FreeRTOS提供的邮箱机制实现彼此之间信息的交互。Sequential API接口函数在FreeRTOS操作系统运行环境下是“阻塞”函数，也就是说应用程序任务在调用Sequential API接口函数时，将会被阻塞，直到收到来自TCP/IP协议栈返回的消息应答</li>
+<li>基于LwIP的TCP/IP协议栈与应用程序运行在两个独立的任务中</li>
+</ol>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/09/PyyVRx.jpg" alt="网卡驱动移植" title="">
+                </div>
+                <div class="image-caption">网卡驱动移植</div>
+            </figure>
+<ol>
+<li>以太网接口文件ethernetif.c的移植，主要包含<code>ethernet_low_level_init</code>，<code>ethernet_low_level_output</code>，<code>ethernetif_input</code>，<code>ethernetif_init</code>这几个函数的功能<ul>
+<li><code>ethernetif_input</code>函数用于从底层物理网卡读取报文，并将该报文向上传递给LwIP协议栈函数ethernet_input进行处理</li>
+<li><code>ethernetif_init</code>函数指定了网络接口netif对应的主机名及网卡描述，并指定了该网卡的MAC地址，同事还指定了netif的发送数据报文函数</li>
+</ul>
+</li>
+<li>操作系统模拟层文件sys_arch.c的移植，总的来时操作系统模拟层主要完成了与信号量、消息邮箱机制、线程相关的功能<ul>
+<li>在sys_arch.h文件中对信号量、邮箱、线程对象进行重定义</li>
+<li>sys_mbox_new函数，使用FreeRTOS提供的消息队列机制创建一个空的消息队列</li>
+<li>sys_mbox_free函数，删除一个队列，当该队列中还有未被取出的消息时，该函数应当报错，并通知应用程序</li>
+<li>sys_mbox_post函数，将消息发送到消息队列中，该函数是一个阻塞函数，当消息被发送至队列后，该函数才会退出阻塞状态</li>
+<li>sys_mbox_trypost函数，用于尝试将某个消息发送至消息队列中，当消息被成功投递后，则返回成功，否则返回失败</li>
+<li>sys_arch_mbox_fetch函数，用于从消息队列中取出一条消息，该函数是一个阻塞函数，调用该函数的线程若未取到消息，则在形参timeout所指定的时间内，该线程被阻塞。当超过timeout所指定的时间后，该线程恢复至就绪状态。若timeout为0，则调用该函数的线程一直被阻塞，直到收到消息</li>
+<li>sys_arch_mbox_tryfetch函数尝试从消息队列中取出消息，它是一个非阻塞函数，当取到消息时，则返回成功，否则立即退出，返回队列空</li>
+<li>sys_sem_new函数创建一个信号量，并根据形参的值指定好当前信号量的状态</li>
+<li>sys_arch_sem_wait函数在形参timeout指定的时间被阻塞，若timeout为0，则调用该函数的线程将一直被阻塞，直到等待的信号量被释放。但该函数取到信号量时，它将返回取到的该信号量所占的时间</li>
+<li>sys_sem_signal函数用于释放一个信号量</li>
+<li>sys_sem_free函数用于删除一个信号量</li>
+<li>sys_thread_new函数用于创建一个新的线程</li>
+<li>sys_init函数是操作系统模拟层的初始化函数，主要对定时器管理数组进行了初始化</li>
+<li>sys_zrch_timeouts函数用于返回当前任务的定时器管理链表首地址</li>
+<li>sys_arch_protect函数和sys_arch_unprotect函数在访问临界区资源时成对使用</li>
+</ul>
+</li>
+<li>ethernet_input函数的实现在独立模式和RTOS模式时是不同的：<ul>
+<li>在独立应用中，此函数必须被插入到应用的主循环中，以便轮询任何收到的包</li>
+<li>在RTOS应用中，此函数为一个阻塞线程，只有当得到所等待的信号量时才处理接收到的数据包。当以太网外设收到数据并产生中断时，会在中断处理函数中释放此信号量</li>
+</ul>
+</li>
+</ol>
+<h2 id="LwIP配置"><a href="#LwIP配置" class="headerlink" title="LwIP配置"></a>LwIP配置</h2><blockquote>
+<p>LwIP提供了名为lwipopts.h的文件，它允许用户充分配置栈及其所有模块。用户不需要定义所有LwIP选项：如果未定义某选项，则使用opt.h文件中定义的默认值</p>
+</blockquote>
+<ul>
+<li>内存配置</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/08/10/P6GG5D.png" alt="LwIP内存配置" title="">
+                </div>
+                <div class="image-caption">LwIP内存配置</div>
+            </figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-08-10T10:54:45.357Z" itemprop="dateUpdated">2018-08-10 18:54:45</time>
+</span><br>
+
+
+        
+        <a href="/2018/07/30/lwip/" target="_blank" rel="external">https://suda-morris.github.io/2018/07/30/lwip/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LwIP/">LwIP</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2018/07/30/lwip/&title=《LwIP Introduction---Based on ESP32》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2018/07/30/lwip/&title=《LwIP Introduction---Based on ESP32》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2018/07/30/lwip/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《LwIP Introduction---Based on ESP32》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2018/07/30/lwip/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2018/07/30/lwip/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/08/03/chisel/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">chisel-notes</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/07/05/esp32/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">ESP32 介绍</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Mon Jul 30 2018 13:20:23 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2018/07/30/lwip/&title=《LwIP Introduction---Based on ESP32》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2018/07/30/lwip/&title=《LwIP Introduction---Based on ESP32》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2018/07/30/lwip/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《LwIP Introduction---Based on ESP32》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2018/07/30/lwip/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2018/07/30/lwip/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMUlEQVR42u3ay26DMBAF0Pz/T9NtpBZzZwyVsA+rKiUxh8VoXp9PfB1f1/cn4zvP7vl9/9kpN18YGBivZRzDa/xw+ZFnj1g995SKgYGxASMJhUmIrAbNhDF+NgwMDIw8sCbU6ivAwMDAmGEkIXImEcTAwMDoFbG9ttpMk+6RWhwDA+OFjLzU/P+/H5lvYGBgvIpxFK9xcpYnguPvlp8KAwNjaUa1ldZ7oKR8TYrqi4EoBgbG0oxqKz9pjSVDzZlQXshhMTAwXs7Iv9CD9caZ5bMwMDCWZsyMB54bHuShFgMDYzdGcnC+1HXv75RfDQYGxnKMXpu+GjTHj9v7hUIpi4GB8VpG74eS9YgkxewVwH/8FwMDY2lGvipR/Tx5Nb3QXxhhYmBgLMEoW4vl7nyrrly+YmBgbMDIk7bywlZrzaK8bIGBgbEoIw+X1RWuJ9bITlNDDAyMRRn5QsNzATcffF6cgoGBsQ0jT87yEjQff/buxMDA2IHRK25nGv03J4UYGBgbMKrLEL00rtfgKwR6DAyMDRh5EjZTavYeOlrgwMDA2IbRKx17KV010bz4FgYGxqKMo3glrbG70scCGwMDY2lGNcz1Qmo+QkiK3t5gFQMD4+2MPMjOjBN6pW8+UsXAwNiBUW3oV1v/N0xW850RDAwMjGIo7K1rJGsZNwRcDAyMpRn5qHJmCJqXxxgYGDsw8oPn23DV4ejN7TYMDIwXMmY2NaqDz5nCNV8NwcDAWIjxA+sd+gjePkL0AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

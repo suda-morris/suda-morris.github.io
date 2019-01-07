@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Logistic Regression | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Logistic">
+    <meta name="description" content="Logistic Regression  Logistic回归虽然是名字中带有“回归”，但实际上它是一种分类算法，主要应用与二分类问题(输出只有两种结果，比如0和1) 逻辑回归实质上可以看作是一种简单的神经网络">
+<meta name="keywords" content="Logistic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Logistic Regression">
+<meta property="og:url" content="https://suda-morris.github.io/2018/10/15/logistic-regression/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="Logistic Regression  Logistic回归虽然是名字中带有“回归”，但实际上它是一种分类算法，主要应用与二分类问题(输出只有两种结果，比如0和1) 逻辑回归实质上可以看作是一种简单的神经网络">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://s1.ax1x.com/2018/10/15/ialgpR.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/10/15/ialR6x.png">
+<meta property="og:updated_time" content="2018-10-29T02:46:05.859Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Logistic Regression">
+<meta name="twitter:description" content="Logistic Regression  Logistic回归虽然是名字中带有“回归”，但实际上它是一种分类算法，主要应用与二分类问题(输出只有两种结果，比如0和1) 逻辑回归实质上可以看作是一种简单的神经网络">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/10/15/ialgpR.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank">
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Logistic Regression</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Logistic Regression</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-10-15T04:36:12.000Z" itemprop="datePublished" class="page-time">
+  2018-10-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AI/">AI</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Logistic-Regression"><span class="post-toc-number">1.</span> <span class="post-toc-text">Logistic Regression</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数学公式推导"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">数学公式推导</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python程序编写"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Python程序编写</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-logistic-regression" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Logistic Regression</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-10-15 12:36:12" datetime="2018-10-15T04:36:12.000Z" itemprop="datePublished">2018-10-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/AI/">AI</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Logistic-Regression"><a href="#Logistic-Regression" class="headerlink" title="Logistic Regression"></a>Logistic Regression</h1><blockquote>
+<ol>
+<li>Logistic回归虽然是名字中带有“回归”，但实际上它是一种<strong>分类算法</strong>，主要应用与<strong>二分类</strong>问题(输出只有两种结果，比如0和1)</li>
+<li>逻辑回归实质上可以看作是一种简单的<strong>神经网络</strong></li>
+</ol>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/10/15/ialgpR.png" alt="LogReg_kiank" title="">
+                </div>
+                <div class="image-caption">LogReg_kiank</div>
+            </figure>
+<h2 id="数学公式推导"><a href="#数学公式推导" class="headerlink" title="数学公式推导"></a>数学公式推导</h2><p>假设神经元的突触的权重向量为<strong>w</strong>，线性偏置为<strong>b</strong>(标量)，对于第i个样本$x^{(i)}$来说：</p>
+<p>$$z^{(i)} = w^T x^{(i)} + b\tag{1}$$</p>
+<p>得到的$z^{(i)}$需要进一步输入激活函数，激活函数的选择有很多种，考虑到Logistic回归的输出只有0和1两种情况，因此选用sigmoid函数会比较符合要求：</p>
+<p>$$\hat{y}^{(i)}=a^{(i)}=sigmoid(z^{(i)})\tag{2}$$ </p>
+<p>sigmoid函数的导数：</p>
+<p>$$\frac{da}{dz}=a(1-a)\tag{3}$$</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://s1.ax1x.com/2018/10/15/ialR6x.png" alt="Sigmoid" title="">
+                </div>
+                <div class="image-caption">Sigmoid</div>
+            </figure>
+<p>如何衡量预测结果的好坏，需要定义损失函数<strong>L</strong>：</p>
+<p>$$ L(a^{(i)},y^{(i)})=- y^{(i)}\ln(a^{(i)})-(1-y^{(i)})\ln(1-a^{(i)})\tag{4}$$</p>
+<p>那么价值函数<strong>J</strong>就是所有样本的损失值的平均：</p>
+<p>$$ J=\frac{1}{m}\sum_{i=1}^mL(a^{(i)}, y^{(i)})\tag{5}$$</p>
+<p>我们的目标是通过多次的迭代，求得使得<strong>J</strong>最小的自变量参数w和b，这里使用的优化算法为梯度下降法，其中α称为学习率，是0~1之间的浮点数：</p>
+<p>$$\theta=\theta-\alpha d\theta\tag{6}$$</p>
+<p>我们把求解价值函数的过程称为<strong>正向传播</strong>，把求解梯度的过程称为<strong>反向传播</strong></p>
+<p>价值函数对于第j个突触$w_j$的梯度：<br>$$<br>\frac{\partial J}{\partial w_j}=\frac{1}{m}\sum_{i=1}^m\frac{\partial}{\partial w_j}[-y^{(i)}\ln{(a^{(i)})}-(1-y^{(i)})\ln{(1-a^{(i)})}]\<br>=\frac{1}{m}\sum_{i=1}^{m}[\frac{-y^{(i)}}{a^{(i)}}\cdot\frac{\partial{a^{(i)}}}{\partial{w_j}}+\frac{(1-y^{i})}{1-a^{(i)}}\cdot\frac{\partial{a^{i}}}{\partial{w_j}}]\<br>=\frac{1}{m}\sum_{i=1}^{m}[\frac{\partial{a^{(i)}}}{\partial{w_j}}\cdot(\frac{1-y^{(i)}}{1-a^{(i)}}-\frac{y^{(i)}}{a^{(i)}})]\<br>=\frac{1}{m}\sum_{i=1}^{m}[\frac{d{a^{(i)}}}{d{z^{(i)}}}\cdot\frac{\partial{z^{(i)}}}{\partial{w_j}}\cdot(\frac{1-y^{(i)}}{1-a^{(i)}}-\frac{y^{(i)}}{a^{(i)}})]\<br>=\frac{1}{m}\sum_{i=1}^{m}[a^{(i)}\cdot(1-a^{(i)})\cdot x_j^{(i)}\cdot\frac{a^{(i)}-y^{(i)}}{a^{(i)}\cdot(1-a^{(i)})}]\<br>=\frac{1}{m}\sum_{i=1}^{m}[x_j^{(i)}\cdot(a^{(i)}-y^{(i)})]<br>$$<br>价值函数<strong>J</strong>对于所有突触的权重向量<strong>w</strong>的梯度：</p>
+<p>$$ \frac{\partial J}{\partial w}=\frac{1}{m}X(A-Y)^T\tag{7}$$</p>
+<p>价值函数<strong>J</strong>对偏置<strong>b</strong>的梯度：</p>
+<p>$$ \frac{\partial J}{\partial b}=\frac{1}{m}\sum_{i=1}^m (a^{(i)}-y^{(i)})\tag{8}$$</p>
+<p>所以，每一次迭代的过程中，对w和b的<strong>更新规则</strong>为：</p>
+<p>$$w:=w-\alpha\frac{\partial{J}}{\partial{w}}\tag{9}$$</p>
+<p>$$b:=b-\alpha\frac{\partial{J}}{\partial{b}}\tag{10}$$</p>
+<h2 id="Python程序编写"><a href="#Python程序编写" class="headerlink" title="Python程序编写"></a>Python程序编写</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(z)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Compute the sigmoid of z</span></span><br><span class="line"><span class="string">    :param z: A scalar or numpy array of any size.</span></span><br><span class="line"><span class="string">    :return: sigmoid(z)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    s = <span class="number">1.0</span> / (<span class="number">1</span> + np.exp(<span class="number">-1</span> * z))</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LogisticRegression</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_iterations=<span class="number">2000</span>, learning_rate=<span class="number">0.001</span>, print_cost=False)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Builds the logistic regression model</span></span><br><span class="line"><span class="string">        :param num_iterations: hyperparameter representing the number of iterations to optimize the parameters</span></span><br><span class="line"><span class="string">        :param learning_rate: hyperparameter representing the learning rate when update the parameters</span></span><br><span class="line"><span class="string">        :param print_cost: Set to true to print the cost every 100 iterations</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.n_iter = num_iterations</span><br><span class="line">        self.learn_rate = learning_rate</span><br><span class="line">        self.print_cost = print_cost</span><br><span class="line">        self.w = <span class="keyword">None</span>  <span class="comment"># weights, a numpy array of size</span></span><br><span class="line">        self.b = <span class="keyword">None</span>  <span class="comment"># bias, a scalar</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__initialize_with_zeros</span><span class="params">(self, dim)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        This function creates a vector of zeros of shape (dim, 1) for w and initializes b to 0.</span></span><br><span class="line"><span class="string">        :param dim: size of the w vector we want</span></span><br><span class="line"><span class="string">        :return: w -- initialized vector of shape (dim, 1); b -- initialized scalar (corresponds to the bias)</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        w = np.zeros((dim, <span class="number">1</span>))</span><br><span class="line">        b = <span class="number">0</span></span><br><span class="line">        <span class="keyword">assert</span> (w.shape == (dim, <span class="number">1</span>))</span><br><span class="line">        <span class="keyword">assert</span> (isinstance(b, float) <span class="keyword">or</span> isinstance(b, int))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> w, b</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__propagate</span><span class="params">(self, X, Y)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Implement the cost function and its gradient for the propagation</span></span><br><span class="line"><span class="string">        :param X: input data</span></span><br><span class="line"><span class="string">        :param Y: label vector</span></span><br><span class="line"><span class="string">        :return: grads --- results of backward propagation; cost --- results of forward propagation</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        m = X.shape[<span class="number">1</span>]</span><br><span class="line">        <span class="comment"># FORWARD PROPAGATION (FROM X TO COST)</span></span><br><span class="line">        Z = np.dot(self.w.T, X) + self.b</span><br><span class="line">        A = sigmoid(Z)  <span class="comment"># compute activation</span></span><br><span class="line">        cost = <span class="number">-1</span> / m * (np.dot(Y, np.log(A).T) + np.dot(<span class="number">1</span> - Y, np.log((<span class="number">1</span> - A)).T))  <span class="comment"># compute cost</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># BACKWARD PROPAGATION (TO FIND GRAD)</span></span><br><span class="line">        dw = <span class="number">1</span> / m * (np.dot(X, (A - Y).T))  <span class="comment"># gradient of the loss with respect to w, thus same shape as w</span></span><br><span class="line">        db = np.sum(A - Y) / m  <span class="comment"># gradient of the loss with respect to b, thus same shape as b</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">assert</span> (dw.shape == self.w.shape)</span><br><span class="line">        <span class="keyword">assert</span> (db.dtype == float)</span><br><span class="line">        cost = np.squeeze(cost)</span><br><span class="line">        <span class="keyword">assert</span> (cost.shape == ())</span><br><span class="line"></span><br><span class="line">        grads = &#123;<span class="string">"dw"</span>: dw,</span><br><span class="line">                 <span class="string">"db"</span>: db&#125;</span><br><span class="line">        <span class="keyword">return</span> grads, cost</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fit</span><span class="params">(self, X_train, Y_train)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        This function optimizes w and b by running a gradient descent algorithm</span></span><br><span class="line"><span class="string">        :param X_train: input data</span></span><br><span class="line"><span class="string">        :param Y_train: label vector</span></span><br><span class="line"><span class="string">        :return: costs -- list of all the costs computed during the optimization</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment"># initialize parameters with zeros</span></span><br><span class="line">        self.w, self.b = self.__initialize_with_zeros(X_train.shape[<span class="number">0</span>])</span><br><span class="line">        costs = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.n_iter):</span><br><span class="line">            grads, cost = self.__propagate(X_train, Y_train)  <span class="comment"># Cost and gradient calculation</span></span><br><span class="line">            dw = grads[<span class="string">"dw"</span>]</span><br><span class="line">            db = grads[<span class="string">"db"</span>]</span><br><span class="line">            <span class="comment"># update rule</span></span><br><span class="line">            self.w -= self.learn_rate * dw</span><br><span class="line">            self.b -= self.learn_rate * db</span><br><span class="line">            <span class="comment"># Record the costs</span></span><br><span class="line">            <span class="keyword">if</span> i % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">                costs.append(cost)</span><br><span class="line">            <span class="comment"># Print the cost every 100 training examples</span></span><br><span class="line">            <span class="keyword">if</span> self.print_cost <span class="keyword">and</span> i % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">                print(<span class="string">"Cost after iteration %i: %f"</span> % (i, cost))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> costs</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(self, X_test)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Predict whether the label is 0 or 1 using learned logistic regression parameters (w, b)</span></span><br><span class="line"><span class="string">        :param X_test: input data</span></span><br><span class="line"><span class="string">        :return: Y_prediction -- a numpy array (vector) containing all predictions (0/1) for the examples in X_test</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        m = X_test.shape[<span class="number">1</span>]</span><br><span class="line">        Y_prediction = np.zeros((<span class="number">1</span>, m))</span><br><span class="line">        w = self.w.reshape(X_test.shape[<span class="number">0</span>], <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># Compute vector "A" predicting the probabilities</span></span><br><span class="line">        A = sigmoid(np.dot(w.T, X_test) + self.b)</span><br><span class="line">        <span class="comment"># Convert probabilities A[0,i] to actual predictions p[0,i]</span></span><br><span class="line">        Y_prediction = np.where(A &gt; <span class="number">0.5</span>, [<span class="number">1</span>], [<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">assert</span> (Y_prediction.shape == (<span class="number">1</span>, m))</span><br><span class="line">        <span class="keyword">return</span> Y_prediction</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    train_size = <span class="number">150</span></span><br><span class="line">    df = pd.read_csv(<span class="string">"iris.csv"</span>, header=<span class="keyword">None</span>)</span><br><span class="line">    Y_train = df.loc[<span class="number">0</span>:train_size - <span class="number">1</span>, <span class="number">4</span>].values</span><br><span class="line">    Y_train = np.where(Y_train == <span class="string">"Iris-setosa"</span>, [<span class="number">1</span>], [<span class="number">0</span>])</span><br><span class="line">    Y_train = Y_train.reshape((<span class="number">1</span>, train_size))</span><br><span class="line">    X_train = df.loc[<span class="number">0</span>:train_size - <span class="number">1</span>, [<span class="number">0</span>, <span class="number">2</span>]].values</span><br><span class="line">    feature1_min, feature1_max = X_train[:, <span class="number">0</span>].min() - <span class="number">1</span>, X_train[:, <span class="number">0</span>].max() + <span class="number">1</span></span><br><span class="line">    feature2_min, feature2_max = X_train[:, <span class="number">1</span>].min() - <span class="number">1</span>, X_train[:, <span class="number">1</span>].max() + <span class="number">1</span></span><br><span class="line">    X_train = X_train.T.reshape((<span class="number">2</span>, train_size))</span><br><span class="line">    clf = LogisticRegression(num_iterations=<span class="number">2000</span>, learning_rate=<span class="number">0.001</span>, print_cost=<span class="keyword">True</span>)</span><br><span class="line">    clf.fit(X_train, Y_train)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将向量扩充为二维矩阵，作为测试样本</span></span><br><span class="line">    xx1, xx2 = np.meshgrid(np.arange(feature1_min, feature1_max, <span class="number">0.02</span>), np.arange(feature2_min, feature2_max, <span class="number">0.02</span>))</span><br><span class="line">    X_test = np.array([xx1.ravel(), xx2.ravel()])</span><br><span class="line">    <span class="comment"># 预测结果</span></span><br><span class="line">    Y_prediction = clf.predict(X_test)</span><br><span class="line">    Y_prediction = Y_prediction.reshape(xx1.shape)</span><br><span class="line">    <span class="comment"># 数据可视化</span></span><br><span class="line">    markers = (<span class="string">'s'</span>, <span class="string">'x'</span>)</span><br><span class="line">    colors = (<span class="string">"red"</span>, <span class="string">"blue"</span>)</span><br><span class="line">    plt.contourf(xx1, xx2, Y_prediction, c=<span class="string">"gray"</span>)</span><br><span class="line">    plt.xlim(feature1_min, feature1_max)</span><br><span class="line">    plt.ylim(feature2_min, feature2_max)</span><br><span class="line">    <span class="keyword">for</span> idx, y_train <span class="keyword">in</span> enumerate(np.unique(Y_train)):</span><br><span class="line">        plt.scatter(x=X_train[<span class="number">0</span>, np.squeeze(Y_train == y_train)], y=X_train[<span class="number">1</span>, np.squeeze(Y_train == y_train)],</span><br><span class="line">                    alpha=<span class="number">0.8</span>, c=colors[idx],</span><br><span class="line">                    marker=markers[idx], label=y_train)</span><br><span class="line">    plt.xlabel(<span class="string">u"花瓣长度"</span>, fontproperties=<span class="string">'SimHei'</span>)</span><br><span class="line">    plt.ylabel(<span class="string">u"花茎长度"</span>, fontproperties=<span class="string">'SimHei'</span>)</span><br><span class="line">    plt.legend(loc=<span class="string">"upper left"</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-10-29T02:46:05.859Z" itemprop="dateUpdated">2018-10-29 10:46:05</time>
+</span><br>
+
+
+        
+        <a href="/2018/10/15/logistic-regression/" target="_blank" rel="external">https://suda-morris.github.io/2018/10/15/logistic-regression/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Logistic/">Logistic</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2018/10/15/logistic-regression/&title=《Logistic Regression》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2018/10/15/logistic-regression/&title=《Logistic Regression》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2018/10/15/logistic-regression/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Logistic Regression》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2018/10/15/logistic-regression/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2018/10/15/logistic-regression/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/10/17/python-socket/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Python Socket</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/08/14/nfc-pn532/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">NFC-PN532</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Mon Oct 15 2018 12:36:12 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2018/10/15/logistic-regression/&title=《Logistic Regression》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2018/10/15/logistic-regression/&title=《Logistic Regression》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2018/10/15/logistic-regression/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Logistic Regression》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2018/10/15/logistic-regression/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2018/10/15/logistic-regression/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLElEQVR42u3awY6DMAxFUf7/p5ntSCPofTZUE+dmVakUcli4ju3jwOv8tfiV97/6+y1/SnHJkCFjWcZ5u8gDUh5nk73JkCFjH8b95ggpvf4ew/cmQ4YMGXyLtdDJnytDhgwZ6e34du/vQI61MmTIkMHDJd9QbVtfOovLkCFjQQavun//8yv9DRkyZCzFOMPVL7elRTe0KxkyZIxmdBqQ6aY7qSdqiMqQIWMo472jY2dQgx+SXz8By5Ah498wyKVPnZU7yd/lq5EhQ8YGDNKe7IB5qvchh736lQwZMrZhpI8MAmLjWzTkIUOGjA0Y97dOByk6o13pKMbB35AMGTKWZaRDFbXS2Btt0Q9JqgwZMoYyOmWvdMyrFoLRn4EMGTJGM566aW3YIi3ABc0JGTJkLM5Iw2vaquwH3OLMiAwZMoYyalskhTYSZNPjMRq2kCFDxggGT/v4mAUppXXaCTJkyNiNkZ53ecJXw6StUxkyZOzA6CR2HMwPqPz1oc6GDBkyRjN44Z6kdLWkME5VZciQsQGjliCmAbTWX0U7kSFDxmaMTkugFog7bQkZMmTMZpzhSgttteJd3CqQIUPGaEYa5tLuaK0M128eyJAhYx4jDbLkHfDwHTQpOwmiDBkyRjBI4Sx9JA+X6UH6MuDKkCFDBr6m1pJME82HA64MGTLGMfi2+FBFrSEhQ4aMfRidcVV+iOVtgBfLbTJkyFiQ0RmzSEN2+jrS4C5DhoxxjB/P3pNhOh4CkAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

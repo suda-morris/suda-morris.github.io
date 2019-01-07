@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>esp-idf-build-system | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="esp-idf">
+    <meta name="description" content="本文将介绍乐鑫 IoT 开发框架的编译器系统和其中”组件“的概念。 如果您想知道如何组织新的 ESP-IDF 项目，阅读本文档即可。 我们建议您使用 esp-idf-template 项目作为您新项目的起点。 使用编译系统esp-idf 的 README 文件包含有关如何使用编译系统构建项目的说明。 概述一个 ESP-IDF 项目可以看作是许多组件的集合，例如对于一个显示当前湿度的网站服务器来说，">
+<meta name="keywords" content="esp-idf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="esp-idf-build-system">
+<meta property="og:url" content="https://suda-morris.github.io/2018/08/03/esp-idf-build-system/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="本文将介绍乐鑫 IoT 开发框架的编译器系统和其中”组件“的概念。 如果您想知道如何组织新的 ESP-IDF 项目，阅读本文档即可。 我们建议您使用 esp-idf-template 项目作为您新项目的起点。 使用编译系统esp-idf 的 README 文件包含有关如何使用编译系统构建项目的说明。 概述一个 ESP-IDF 项目可以看作是许多组件的集合，例如对于一个显示当前湿度的网站服务器来说，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-03T10:40:22.383Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="esp-idf-build-system">
+<meta name="twitter:description" content="本文将介绍乐鑫 IoT 开发框架的编译器系统和其中”组件“的概念。 如果您想知道如何组织新的 ESP-IDF 项目，阅读本文档即可。 我们建议您使用 esp-idf-template 项目作为您新项目的起点。 使用编译系统esp-idf 的 README 文件包含有关如何使用编译系统构建项目的说明。 概述一个 ESP-IDF 项目可以看作是许多组件的集合，例如对于一个显示当前湿度的网站服务器来说，">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">esp-idf-build-system</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">esp-idf-build-system</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-08-03T10:34:44.000Z" itemprop="datePublished" class="page-time">
+  2018-08-03
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用编译系统"><span class="post-toc-number">1.</span> <span class="post-toc-text">使用编译系统</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概述"><span class="post-toc-number">2.</span> <span class="post-toc-text">概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#概念"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#示例项目"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">示例项目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#项目-Makefiles"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">项目 Makefiles</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#最小示例-Makefile"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">最小示例 Makefile</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#必须的项目变量"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">必须的项目变量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#可选的项目变量"><span class="post-toc-number">2.3.3.</span> <span class="post-toc-text">可选的项目变量</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#组件-Makefiles"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">组件 Makefiles</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#搜索组件"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">搜索组件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#具有相同名字的多个组件"><span class="post-toc-number">2.5.1.</span> <span class="post-toc-text">具有相同名字的多个组件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#最小组件-Makefile"><span class="post-toc-number">2.5.2.</span> <span class="post-toc-text">最小组件 Makefile</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#预设的组件变量"><span class="post-toc-number">2.5.3.</span> <span class="post-toc-text">预设的组件变量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#可选的项目通用组件变量"><span class="post-toc-number">2.5.4.</span> <span class="post-toc-text">可选的项目通用组件变量</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#可选的特定组件变量"><span class="post-toc-number">2.5.5.</span> <span class="post-toc-text">可选的特定组件变量</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置组件"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">配置组件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#预处理器定义"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">预处理器定义</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-esp-idf-build-system"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">esp-idf-build-system</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-08-03 18:34:44" datetime="2018-08-03T10:34:44.000Z"  itemprop="datePublished">2018-08-03</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Geek-Hobbies/">Geek Hobbies</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文将介绍乐鑫 IoT 开发框架的编译器系统和其中”组件“的概念。</p>
+<p>如果您想知道如何组织新的 ESP-IDF 项目，阅读本文档即可。</p>
+<p>我们建议您使用 <a href="https://github.com/espressif/esp-idf-template" target="_blank" rel="noopener">esp-idf-template</a> 项目作为您新项目的起点。</p>
+<h2 id="使用编译系统"><a href="#使用编译系统" class="headerlink" title="使用编译系统"></a>使用编译系统</h2><p>esp-idf 的 <a href="https://github.com/espressif/esp-idf/blob/master/README.md" target="_blank" rel="noopener">README</a> 文件包含有关如何使用编译系统构建项目的说明。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>一个 ESP-IDF 项目可以看作是许多组件的集合，例如对于一个显示当前湿度的网站服务器来说，可能会包括如下一些组件：</p>
+<ul>
+<li>ESP32 基础库（libc，rom binding等）</li>
+<li>WiFi 驱动</li>
+<li>TCP/IP 协议栈</li>
+<li>FreeRTOS 操作系统</li>
+<li>网站服务器</li>
+<li>湿度传感器的驱动</li>
+<li>将上述组件捆绑在一起的主代码</li>
+</ul>
+<p>ESP-IDF 使这些组件具有显式性和可配置性。为此，在编译项目时，编译环境将查找 ESP-IDF 目录，项目目录和其他自定义组件目录（可选）中的所有组件，然后，它允许用户使用基于文本的菜单系统配置 ESP-IDF 项目，以自定义每个组件。在配置完项目中的组件之后，编译系统将开始编译当前项目。</p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>”项目“是一个目录，其中包含构建单个”app“（可执行文件）的所有文件和配置，以及其他支持型输出文件，比如分区表，数据/文件系统分区和引导程序。</li>
+<li>”系统配置“保存在项目根目录中名为 sdkconfig 的单个文件中，可以通过 <code>make menuconfig</code> 来修改此配置文件以自定义项目的配置。一个项目只包含一个项目配置。</li>
+<li>”app“是由esp-idf构建的可执行文件。一个项目通常会构建两个应用程序——一个”项目应用程序“（主可执行文件，即用户自定义的固件），和一个”引导程序”（启动项目应用程序的初始化引导程序）。</li>
+<li>”组件“是独立代码的模块化部分，他们被编译成静态库（.a文件）并链接到应用程序。有些组件是 esp-idf 本身提供的，有些则可能来自其他地方。</li>
+</ul>
+<p>有些东西并不是项目的一部分：</p>
+<ul>
+<li>”ESP-IDF“不是项目的一部分，相反它是独立的，并通过 IDF_PATH 环境变量链接到项目，该变量保存 esp-idf 目录的路径。这允许 IDF 框架与您的项目分离。</li>
+<li>用于编译的工具链不是项目的一部分。工具链应安装在系统命令行 PATH 中，或者将工具链的路径设置为项目配置中编译器的前缀部分。</li>
+</ul>
+<h3 id="示例项目"><a href="#示例项目" class="headerlink" title="示例项目"></a>示例项目</h3><p>示例项目的目录树结构可能如下所示：</p>
+<pre><code>- myProject/
+             - Makefile
+             - sdkconfig
+             - components/ - component1/ - component.mk
+                                         - Kconfig
+                                         - src1.c
+                           - component2/ - component.mk
+                                         - Kconfig
+                                         - src1.c
+                                         - include/ - component2.h
+             - main/       - src1.c
+                           - src2.c
+                           - component.mk
+
+             - build/
+</code></pre><p>此示例”myProject“包含以下元素：</p>
+<ul>
+<li>顶层项目Makefile。这个Makefile设置了 <code>PROJECT_NAME</code> 变量，并定义了项目范围内的其他make变量（可选）。它还导入了核心Makefile文件： <code>$(IDF_PATH)/make/project.mk</code> ，它实现了 ESP-IDF 编译系统的其余部分。</li>
+<li>项目配置文件sdkconfig。当 <code>make menuconfig</code> 运行时，将创建/更新此文件，并保存项目中所有组件的配置（包括 esp-idf 本身）。”sdkconfig“文件可能会也可能不会被添加到项目的源代码管理系统中。</li>
+<li>可选的 ”components“ 目录包含了属于项目一部分的组件，项目不必包含此类自定义组件，但它可用于构造可重用代码或包括不属于 ESP-IDF 的第三方组件。</li>
+<li>”main“目录是一个特殊的”伪组件“，它包含项目本身的源代码。”main“是默认名称，Makefile变量 <code>COMPONENT_DIRS</code> 包含此组件，但您可以修改此变量（或者设置t <code>EXTRA_COMPONENT_DIRS</code>） 以查找其他位置的组件。</li>
+<li>”build“ 目录是编译输出的时候创建的目录，该目录将包含临时目标文件和库以及最终的二进制输出文件。此目录通常不会添加到源代码管理中，也不会随着项目源代码一起分发。</li>
+</ul>
+<p>组件目录包含组件 makefile —— <code>component.mk</code>， 里面可能会定义一些变量来控制组件的编译过程，以及它与整个项目的集成。有关更多详细信息，请参阅组件 <a href="#组件 Makefiles">组件 Makefiles</a> 。</p>
+<p>每个组件还可以包括一个 <code>Kconfig</code> 文件，用于定义可以通过项目配置设置的组件配置选项。某些组件还可能包含 <code>Kconfig.projbuild</code> 和 <code>Makefile.projbuild</code> 文件，这些文件是用于覆盖部分项目的特殊文件。</p>
+<h3 id="项目-Makefiles"><a href="#项目-Makefiles" class="headerlink" title="项目 Makefiles"></a>项目 Makefiles</h3><p>每个项目都有一个 Makefile ，其中包含整个项目的构建设置。默认情况下，项目 Makefile 可以非常小。</p>
+<h4 id="最小示例-Makefile"><a href="#最小示例-Makefile" class="headerlink" title="最小示例 Makefile"></a>最小示例 Makefile</h4><pre><code>PROJECT_NAME := myProject
+
+include $(IDF_PATH)/make/project.mk
+</code></pre><h4 id="必须的项目变量"><a href="#必须的项目变量" class="headerlink" title="必须的项目变量"></a>必须的项目变量</h4><ul>
+<li><code>PROJECT_NAME</code>: 项目名称，最终输出的二进制文件将使用此名称，即myProject.bin，myProject.elf。</li>
+</ul>
+<h4 id="可选的项目变量"><a href="#可选的项目变量" class="headerlink" title="可选的项目变量"></a>可选的项目变量</h4><p>这些变量都有默认值，用户可以重写这些变量以实现自定义的编译行为。查看 <code>make/project.mk</code> 以获得所有的实现细节。</p>
+<ul>
+<li><code>PROJECT_PATH</code>：顶层项目目录。默认是包含Makefile的目录。许多其他项目变量都基于此变量。项目路径中不能包含有空格。</li>
+<li><code>BUILD_DIR_BASE</code>：所有对象/库/二进制文件的构建目录，默认为 <code>$(PROJECT_PATH)/build</code>。</li>
+<li><code>COMPONENT_DIRS</code>：组件的搜索目录，默认为 <code>$(IDF_PATH)/components</code>，<code>$(PROJECT_PATH)/components</code>， <code>$(PROJECT_PATH)/main</code> 和 <code>EXTRA_COMPONENT_DIRS</code>。如果您不想从这些目录搜索组件，请重写此变量。</li>
+<li><code>EXTRA_COMPONENT_DIRS</code>：组件额外的搜索目录，可选。</li>
+<li><code>COMPONENTS</code>：要编译到项目中的组件名称列表，默认为<code>COMPONENT\_DIRS</code>指定的目录中所有的组件。</li>
+<li><code>EXCLUDE_COMPONENTS</code>： 在编译的过程中需要排除的组件名称的列表，可选。请注意这会减少编译的时间，但不会减少二进制文件的大小。</li>
+<li><code>TEST_EXCLUDE_COMPONENTS</code>： 在单元测试的编译过程中需要排除的组件名称的列表，可选。</li>
+</ul>
+<p>以上这些Makefile变量中的任何路径都应该使用绝对路径，您可以使用 <code>$(PROJECT_PATH)/xxx</code>，<code>$(IDF_PATH)/xxx</code>，或者使用Make内置函数<code>$(abspath xxx)</code>来将相对路径转换为绝对路径。</p>
+<p>这些变量应该在Makefile中 <code>include $(IDF_PATH)/make/project.mk</code> 的前面进行设置。</p>
+<h3 id="组件-Makefiles"><a href="#组件-Makefiles" class="headerlink" title="组件 Makefiles"></a>组件 Makefiles</h3><p>每个项目都包含一个或者多个组件，这些组件可以是 esp-idf 的一部分，也可以从其他组件目录添加。</p>
+<p>组件是包含 <code>component.mk</code> 文件的任何目录。</p>
+<h3 id="搜索组件"><a href="#搜索组件" class="headerlink" title="搜索组件"></a>搜索组件</h3><p>搜索 <code>COMPONENT_DIRS</code> 指定的目录以查找项目使用到的组件，此列表中的目录可以是组件本身（即他们包含<code>component.mk</code>文件），也可以是子目录是组件的顶层目录。</p>
+<p>用户运行 <code>make list-components</code> 命令可以获得这些变量的值，这有助于调试组件的搜索路径是否正确。</p>
+<h4 id="具有相同名字的多个组件"><a href="#具有相同名字的多个组件" class="headerlink" title="具有相同名字的多个组件"></a>具有相同名字的多个组件</h4><p>当 esp-idf 收集要编译的所有组件时，它将按照 <code>COMPONENT_DIRS</code>指定的顺序依次执行，默认情况下，这意味着首先是idf组件，第二个是项目组件，最后是<code>EXTRA_COMPONENT_DIRS</code> 中的组件。如果这些目录中的两个或者多个包含具有相同名字的组件子目录，则使用搜索到的最后一个位置的组件。例如，这允许通过简单地将组件目录复制到项目组件树中，然后在那里修改来覆盖esp-idf组件。如果使用这种方式，esp-idf目录本身可以保持不变。</p>
+<h4 id="最小组件-Makefile"><a href="#最小组件-Makefile" class="headerlink" title="最小组件 Makefile"></a>最小组件 Makefile</h4><p>最小的 <code>component.mk</code> 文件是一个空文件，如果文件为空，则组件的默认行为会被设置为：</p>
+<ul>
+<li>与makefile在相同目录中的所有源文件（<code>*.c</code>，<code>*.cpp</code>，<code>*.cc</code>，<code>*.S</code>）将会被编译到组件库中。</li>
+<li>子目录 “include” 将被添加到其他组件的全局头文件搜索路径中。</li>
+<li>组件库将会被链接到项目的应用程序中。</li>
+</ul>
+<p>更完整的组件makefile可以查看<a href="#组件Makefile示例">组件Makefile示例</a>。</p>
+<p>请注意，空的 <code>component.mk</code> 文件和没有 <code>component.mk</code> 文件之间存在本质差异，前者会调用默认的组件编译行为，后者不会发生默认的组件编译行为。一个组件中如果只包含影响项目配置或编译过程的文件，那么它可以没有 <code>component.mk</code> 文件。</p>
+<h4 id="预设的组件变量"><a href="#预设的组件变量" class="headerlink" title="预设的组件变量"></a>预设的组件变量</h4><p>以下特定于组件的变量可以在 <code>component.mk</code> 中使用，但不应该修改。</p>
+<ul>
+<li><code>COMPONENT_PATH</code>：组件的目录，计算包含 <code>component.mk</code> 的目录的绝对路径，路径中不能包含空格。</li>
+<li><code>COMPONENT_NAME</code>：组件的名称，默认为组件目录的名称。</li>
+</ul>
+<p>一下变量在项目顶层中设置，被导出到组件中编译时使用：</p>
+<ul>
+<li><code>PROJECT_NAME</code>：项目名称，在项目的Makefile中设置。</li>
+<li><code>PROJECT_PATH</code>： 包含项目Makefile的项目目录的绝对路径。</li>
+<li><code>COMPONENTS</code>：此次编译中包含的所有组件的名字。</li>
+<li><code>CONFIG_*</code>： 项目配置中的每个值在make中都有一个相应的变量，它们以<code>CONFIG_</code>开头。</li>
+<li><code>CC</code>, <code>LD</code>, <code>AR</code>, <code>OBJCOPY</code>： gcc xtensa 交叉编译工具链中每个工具的完整路径。</li>
+<li><code>HOSTCC</code>, <code>HOSTLD</code>, <code>HOSTAR</code>： 主机本地工具链中每个工具的全名。</li>
+<li><code>IDF_VER</code>： ESP-IDF的版本，可以通过检索 <code>$(IDF_PATH)/version.txt</code> 文件（假如存在的话）或者使用git命令 <code>git describe</code> 来获得。这里推荐的格式是在一行中指定主IDF发布版本，例如用于标记发布本版的 <code>v2.0</code> 或者是标记任意一次提交的 <code>v2.0-275-g0efaa4f</code> 。应用程序可以通过调用 :cpp[esp_get_idf_version]{role=”func”} 函数来使用它。</li>
+</ul>
+<p>如果您修改 <code>component.mk</code> 中的任何一些变量，那么这不会阻碍编译其他组件，但这可能会使您的组件难以编译或调试。</p>
+<h4 id="可选的项目通用组件变量"><a href="#可选的项目通用组件变量" class="headerlink" title="可选的项目通用组件变量"></a>可选的项目通用组件变量</h4><p>可以在 <code>component.mk</code> 中设置以下变量来控制整个项目的编译行为：</p>
+<ul>
+<li><code>COMPONENT_ADD_INCLUDEDIRS</code>： 相对于组件目录的路径，将被添加到项目中所有组件的头文件搜索路径中。如果未被覆盖，则默认为 <code>include</code>。如果一个包含路径仅仅被当前的组件使用到，那么将该路径添加到 <code>COMPONENT_PRIV_INCLUDEDIRS</code> 即可。</li>
+<li><code>COMPONENT_ADD_LDFLAGS</code>： 添加链接参数到 <code>LDFLAGS</code> 中用以指导生成最终的应用程序可执行文件，默认为 <code>-l$(COMPONENT_NAME)</code>。 如果将预编译库添加到此目录，请将它们添加为绝对路径，即 <code>$(COMPONENT_PATH)/libwhatever.a</code>。</li>
+<li><code>COMPONENT_DEPENDS</code>： 应在此组件之前编译的组件列表，这对于链接时依赖不是必需的，因为所有组件的头文件目录始终可用。如果一个组件生成一个头文件，然后另外一个组件需要包含它，那么该变量就有必要进行设定。大多数的组件不需要设置此变量。</li>
+<li><code>COMPONENT_ADD_LINKER_DEPS</code>： 保存一些文件的路径，当这些文件发生改变，会触发ELF文件的重新链接。该变量通常用于链接脚本文件和二进制文件，大多数的组件不需要设置此变量。</li>
+</ul>
+<p>一下变量仅适用于属于esp-idf的组件：</p>
+<ul>
+<li><code>COMPONENT_SUBMODULES</code>： 组件使用的git子模块的路径列表（相对于<code>COMPONENT\_PATH</code>）。这些路径会在编译的过程中被检查（并在必要的时候初始化）。如果组件位于<code>IDF_PATH</code>目录之外，则忽略此变量。</li>
+</ul>
+<h4 id="可选的特定组件变量"><a href="#可选的特定组件变量" class="headerlink" title="可选的特定组件变量"></a>可选的特定组件变量</h4><p>一下变量可以在 <code>component.mk</code> 中被设置，用以控制该组件的编译行为：</p>
+<ul>
+<li><code>COMPONENT_PRIV_INCLUDEDIRS</code>：目录路径，必须相对于组件目录。该目录仅会被添加到此组件源文件的头文件搜索路径中。    </li>
+<li><code>COMPONENT_EXTRA_INCLUDES</code>：编译组件的源文件时需要指定的额外的头文件搜索路径，这些路径将以”-l“为前缀传递给编译器。这和 <code>COMPONENT_PRIV_INCLUDEDIRS</code> 变量的功能有点类似，但是这些路径不会相对于组件目录进行扩展。</li>
+<li><code>COMPONENT_SRCDIRS</code>： 目录路径，必须相对于组件目录，这些路径用于搜索源文件（<code>*.cpp</code>， <code>*.c</code>， <code>*.S</code>）。默认为”.”，即组件目录本身。重写该变量可以指定包含源文件的不同目录列表。</li>
+<li><code>COMPONENT_OBJS</code>： 要编译生成的目标文件，默认是<code>COMPONENT_SRCDIRS</code>中每个源文件的.o文件。重写此列表将允许您排除 <code>COMPONENT_SRCDIRS</code> 中的源文件，否则他们将会被编译。请参阅<a href="#指定源文件">指定源文件</a>。</li>
+<li><code>COMPONENT_EXTRA_CLEAN</code>：相对于组件编译目录的路径，指向<code>component.mk</code>文件中自定义make规则生成的任何文件，他们也是<code>make clean</code>命令需要删除的文件。有关示例，请参阅 <a href="#源代码生成">源代码生成</a> 。</li>
+<li><code>COMPONENT_OWNBUILDTARGET</code> &amp; <code>COMPONENT_OWNCLEANTARGET</code>： 这些目标允许您完全覆盖组件的默认编译行为。有关详细信息，请参阅<a href="#完全覆盖组件的Makefile">完全覆盖组件的Makefile </a>。</li>
+<li><code>COMPONENT_CONFIG_ONLY</code>：如果设置了此标志，表示组件根本不会产生编译输出（即不会编译得到 <code>COMPONENT_LIBRARY</code>），并且会忽略大多数其他组件变量。此标志用于IDF内部组件，其中仅包含 <code>KConfig.projbuild</code> 和/或 <code>Makefile.projbuild</code> 文件来配置项目，但是没有源文件。</li>
+<li><code>CFLAGS</code>：传递给C编译器的标志。根据项目设置定义一组默认的 <code>CFLAGS</code>。可以通过 <code>CFLAGS +=</code>为组件添加特定的标志，也可以完全重写该变量（尽管不推荐）。</li>
+<li><code>CPPFLAGS</code>：传递给C预处理器的标志（用于<code>.c</code>，<code>.cpp</code>和<code>.S</code>文件）。根据项目设置定义一组默认的 <code>CPPFLAGS</code> 。可以通过 <code>CPPFLAGS +=</code>为组件添加特定的标志，也可以完全重写该变量（尽管不推荐）。</li>
+<li><code>CXXFLAGS</code>：传递给C++编译器的标志。根据项目设置定义一组默认的 <code>CXXFLAGS</code> 。可以通过 <code>CXXFLAGS +=</code>为组件添加特定的标志，也可以完全重写该变量（尽管不推荐）。</li>
+</ul>
+<p>如果要将编译标志应用于单个源文件，您可以将该源文件的变量覆盖，例如：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">apps/dhcpserver.o: CFLAGS += -Wno-unused-variable</span></span><br></pre></td></tr></table></figure>
+<p>如果存在发出警告的上游代码，这么做可能很有用。</p>
+<h3 id="配置组件"><a href="#配置组件" class="headerlink" title="配置组件"></a>配置组件</h3><p>每个组件都可以包含一个Kconfig文件， 和 <code>component.mk</code>放在同一个目录下。其中包含要添加到此组件的“make menuconfig”的相关配置的设置。</p>
+<p>运行menuconfig时，可以在”Component Settings“菜单栏下找到这些设置。</p>
+<p>要创建一个组件的Kconfig文件，最简单的方法就是使用esp-idf中已有的Kconfig文件为模板，再做修改。</p>
+<p>有关示例，请参阅<a href="#添加条件配置">添加条件配置</a>.</p>
+<h3 id="预处理器定义"><a href="#预处理器定义" class="headerlink" title="预处理器定义"></a>预处理器定义</h3><p>ESP-IDF编译系统会在命令行中添加以下C预处理定义：</p>
+<ul>
+<li><code>ESP_PLATFORM</code> — 可以用来检测在ESP-IDF内发生的编译行为。</li>
+<li><code>IDF_VER</code> — ESP-IDF的版本，请参阅<a href="#预设的组件变量">预设的组件变量</a>。</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-08-03T10:40:22.383Z" itemprop="dateUpdated">2018-08-03 18:40:22</time>
+</span><br>
+
+
+        
+        <a href="/2018/08/03/esp-idf-build-system/" target="_blank" rel="external">https://suda-morris.github.io/2018/08/03/esp-idf-build-system/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp-idf/">esp-idf</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2018/08/03/esp-idf-build-system/&title=《esp-idf-build-system》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2018/08/03/esp-idf-build-system/&title=《esp-idf-build-system》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2018/08/03/esp-idf-build-system/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《esp-idf-build-system》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2018/08/03/esp-idf-build-system/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2018/08/03/esp-idf-build-system/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/08/03/chisel-notes/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">chisel-notes</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Fri Aug 03 2018 18:34:44 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2018/08/03/esp-idf-build-system/&title=《esp-idf-build-system》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2018/08/03/esp-idf-build-system/&title=《esp-idf-build-system》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2018/08/03/esp-idf-build-system/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《esp-idf-build-system》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2018/08/03/esp-idf-build-system/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2018/08/03/esp-idf-build-system/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKklEQVR42u3aS3KjQBAFQN//0pqtJ8Zi3quyFjTJSkFAQ7IodX2+vuLj9e34fubd73+vz9e8vmt1YGBg3Jbxujyur0ken8Da5/6wDgYGxgMY75Z+d831met7W8b1u2FgYGDkG8FZ6Gw/HwYGBkYbcDeJ6LsrMTAwMDZJ7KZUtwnuv5yLY2Bg3JCxeZVP//5IfwMDA+NWjFd5zBqWSbjMg+wP62BgYBzN2BfuNyH1txoJGBgYZzPyYNqmlEkBLrk3gmFgYBzNmAXWtg0wGzhrPzEGBsapjKQBMNvqzdqZeWL8110YGBhHM2YDFvn4RVKAm206o/8NDAyMIxizcnybObaYdsOKgYFxNqMtxLcJ7T63zv8AMDAwzmbMFsrTzrY9mT8dAwPjCYx80U35vg2+eZJcdzgxMDBuyJgNWLRBNs832/MYGBhPYLSl/E0DYLZ+dA0GBsbRjKRAP/udnGlHK/6TcmNgYBzNyDdnbXjNG5abII6BgfEExmx716apH9wUYmBgPIZRV+lGIxGv8si3pBgYGE9gtA/73fGLNohH/xsYGBhHM9pm56YMNxv76CtwGBgYd2VsNmqza37rA2FgYDyH0aapm+QzD7Kz8I2BgXE2Y/NC1+f3KydUDAyM5zDawFc8YDFaUQ9bYGBgYIwesGEX74CBgYERDGTkg2WzhkSUxGJgYBzN2DQDckCbsn6k3IaBgXFDRjvikCydjFbMBixWTU0MDIz7Mf4ALFcZBopJ1VQAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

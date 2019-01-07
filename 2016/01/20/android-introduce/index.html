@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Android Introduction | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android">
+    <meta name="description" content="Android系统架构图                                                                                             Android系统架构               应用程序框架 Activity Manager：管理各个应用程序生命周期以及通常的导航回退功能 Window Manager：管理所有的窗">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Introduction">
+<meta property="og:url" content="https://suda-morris.github.io/2016/01/20/android-introduce/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="Android系统架构图                                                                                             Android系统架构               应用程序框架 Activity Manager：管理各个应用程序生命周期以及通常的导航回退功能 Window Manager：管理所有的窗">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://i.imgur.com/fNWm4KQ.png">
+<meta property="og:image" content="http://i.imgur.com/gzlBPwv.png">
+<meta property="og:updated_time" content="2018-07-05T01:38:09.630Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Introduction">
+<meta name="twitter:description" content="Android系统架构图                                                                                             Android系统架构               应用程序框架 Activity Manager：管理各个应用程序生命周期以及通常的导航回退功能 Window Manager：管理所有的窗">
+<meta name="twitter:image" content="http://i.imgur.com/fNWm4KQ.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android Introduction</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android Introduction</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-01-20T10:01:40.000Z" itemprop="datePublished" class="page-time">
+  2016-01-20
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mobile/">Mobile</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android系统架构图"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android系统架构图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Adnroid-UI基础"><span class="post-toc-number">2.</span> <span class="post-toc-text">Adnroid UI基础</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android开发中高效的数据结构"><span class="post-toc-number">3.</span> <span class="post-toc-text">Android开发中高效的数据结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Intent"><span class="post-toc-number">4.</span> <span class="post-toc-text">Intent</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Activity的启动模式"><span class="post-toc-number">5.</span> <span class="post-toc-text">Activity的启动模式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Get-a-string-resource-from-you-app’s-Resources"><span class="post-toc-number">6.</span> <span class="post-toc-text">Get a string resource from you app’s Resources</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Toast使用方法"><span class="post-toc-number">7.</span> <span class="post-toc-text">Toast使用方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#适配不同的屏幕"><span class="post-toc-number">8.</span> <span class="post-toc-text">适配不同的屏幕</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Activity的生命周期"><span class="post-toc-number">9.</span> <span class="post-toc-text">Activity的生命周期</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Context"><span class="post-toc-number">10.</span> <span class="post-toc-text">Context</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Application"><span class="post-toc-number">11.</span> <span class="post-toc-text">Application</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Service"><span class="post-toc-number">12.</span> <span class="post-toc-text">Service</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#普通辅线程不允许修改UI线程中的资源！"><span class="post-toc-number">13.</span> <span class="post-toc-text">普通辅线程不允许修改UI线程中的资源！</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AIDL-Android-Interface-Definition-Language"><span class="post-toc-number">14.</span> <span class="post-toc-text">AIDL(Android Interface Definition Language)</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-android-introduce"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android Introduction</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-01-20 18:01:40" datetime="2016-01-20T10:01:40.000Z"  itemprop="datePublished">2016-01-20</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Mobile/">Mobile</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Android系统架构图"><a href="#Android系统架构图" class="headerlink" title="Android系统架构图"></a>Android系统架构图</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/fNWm4KQ.png" alt="Android系统架构" title="">
+                </div>
+                <div class="image-caption">Android系统架构</div>
+            </figure>
+<ol>
+<li>应用程序框架<ol>
+<li>Activity Manager：管理各个应用程序生命周期以及通常的导航回退功能</li>
+<li>Window Manager：管理所有的窗口程序</li>
+<li>Content Provider：使得不同应用程序之间存取或者分享数据</li>
+<li>View System：构建应用程序的基本组件</li>
+<li>NotificationManager：使得应用程序可以在状态栏中显示自定义的提示信息</li>
+<li>Package Manager：Android系统内的程序管理</li>
+<li>TelephonyManager：管理所有的移动设备功能</li>
+<li>Resource Manager：提供应用程序使用的各种非代码资源，如本地化字符串、图片、布局文件、颜色文件等</li>
+<li>LocationManager：提供位置服务</li>
+<li>XMPP Service：提供GoogleTalk服务</li>
+</ol>
+</li>
+<li>系统运行库分成两个部分，分别是系统库和Android运行时。<ol>
+<li>系统库是应用程序框架的支撑，是连接应用程序框架层与Linux内核层的重要纽带。<ol>
+<li>Surface Manager：执行多个应用程序的时候，负责管理显示与存取操作间的互动，另外也负责2D绘图与3D绘图进行显示合成</li>
+<li>Media Framework：多媒体库，基于PacketVideo OpenCore；支持多种常用的音频、视频格式录制和回放，编码格式包络MPEG4、MP3、H.264、AAC、ARM</li>
+<li>SQLite：小型的关系型数据库引擎</li>
+<li>OpenGL|ES：根据OpenGLES1.0API标准实现的3D绘图函数库</li>
+<li>FreeType：提供点阵字与向量字的描绘与显示</li>
+<li>WebKit：一套网页浏览器的软件引擎</li>
+<li>SGL：底层的2D图形渲染引擎</li>
+<li>SSL:在Android上通信过程中实现握手</li>
+<li>Libc：从BSD继承来的标准C系统函数库，专门为基于embedded linux的设备定制</li>
+</ol>
+</li>
+<li>Android运行时，程序在Android运行时中执行，其运行分为核心库和Dalvik虚拟机两部分<ol>
+<li>核心库：核心库提供了Java语言API中的大多数功能，同时也包含了Android的一些核心API，如android.os、android.net、android.media等等</li>
+<li>Dalvik虚拟机：Android程序不同于J2ME程序，每个Android应用程序都有一个专有的进程，并且不是多个程序运行在一个虚拟机中，而是每个Android程序都有一个Dalvik虚拟机的实例，并在该实例中执行。Dalvik虚拟机是一种基于寄存爱的Java虚拟机，而不是传统的基于栈的虚拟机，并进行了内存资源使用的优化，以及支持多个虚拟机的特点。需要注意，不同于J2ME，Android程序在虚拟机中执行的并非编译后的字节码，而是通过转换工具dx将java字节码转换成dex格式的中间码</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="Adnroid-UI基础"><a href="#Adnroid-UI基础" class="headerlink" title="Adnroid UI基础"></a>Adnroid UI基础</h2><ol>
+<li>Android UI由View和ViewGroup组成，ViewGroup是不可见的，用于组织和排版View和ViewGroup。View显示用户内容，以及相应用户的操作。Android UI可以在code中生产，不过更加方便的方式是在Android的XML文件中定义UI</li>
+<li>可以通过2种方式定义界面结构，一种是在XML中定义视图结构，另一种是在运行时动态创建视图结构，<ol>
+<li>通过XML定义视图结构，可以有效做到代码与界面的分离，并且提高界面的可读性。XML的文件西部包含一个root，可以是View或者ViewGroup。在节点下面增加子界面的方式来构造界面结构</li>
+<li>在编译阶段，所有的XML layout文件都会编译到一个统一的View资源里面，在需要使用layout资源的时候，需要将资源加载到程序中，一般做法是在Activity.onCreate()中做加载的资源操作</li>
+</ol>
+</li>
+<li>每一个View或者ViewGroup都有一个ID属性，该属性由class View定义。其定义语法为：android:id=”@+id/my_button”。<ol>
+<li>@的意思是指示XML parser解析并且展开后面的内容，将其作为一个ID的资源</li>
+<li>+的意思是指示这是一个新的ID，需要将其加到资源定义文件R.java中去。有一些系统自定的ID，如果引用这些系统自定的ID，则不需要加+号，但是要加上包的命名空间，其定义非语法为：android：id=“@android：id/empty”</li>
+</ol>
+</li>
+<li>在XML文件中，通常使用layout_something来定义View在ViewGroup中的位置。ViewGroup类会实现一个嵌套类来扩展ViewGroup.LayoutParms。这个内嵌的子类会定义类型来指定字View的位置和大小。每个view group一般都会包含width和height参数，因此每个在其内部的view都需要定义这两个属性。一般不会将其指定为某一个宽度或者高度，一般写为相对的，这样可以保证适用于多种屏幕大小的设备。其中，wrap_content会根据内容的大小来调节大小。fill_parent，最大化达到父几点所允许的，在API level8后名字改为match_parent</li>
+<li>View作为一个几何图形，具有4个属性对应于它所属的容器，分别是left，top，width和height，每个属性的单位是pixel。参考API文档，可以很多函数获取位置以及View的大小信息。getLeft()，getTop(),getRight(),getBottom()。获取的值一本都是相对应与父节点的位置和大小信息。Padding是内容与View空间直接的间隔。View并未提供Margin属性，该属性一般由ViewGroup设置</li>
+<li>如果需要在界面上显示的内容是动态获取的话，可以使用Adapter和继承AdapterView的View来动态显示。Adapter是数据源和AdapterView之间的桥梁，由它从数据源获取数据，然后转换为一组实体，填充到View</li>
+<li>可以简单的使用继承自AdapterView的View来绑定Adapter，来获取外部数据源的数据。Android也提供了一些继承自Adapter的子类用于处理不同的数据形式来建立View，下面是三种比较常见的Adapter：<ol>
+<li>ArrayAdapter，当数据源是一个数组的时候，可以使用这个Adapter，默认，ArrayAdapter在调用toString()后会为每个Item创建一个TextView</li>
+<li>SimpleCursorAdapter，如果数据源是来自于游标的时候，使用这个Adapter。使用这个Adapter的时候，需要指定Cursor的哪个行，哪个列插入Layout的View</li>
+</ol>
+</li>
+<li>可以通过实现AdapterView.OnItemClickListener接口来让AdapterView响应点击事件</li>
+</ol>
+<h2 id="Android开发中高效的数据结构"><a href="#Android开发中高效的数据结构" class="headerlink" title="Android开发中高效的数据结构"></a>Android开发中高效的数据结构</h2><ol>
+<li>SimpleArrayMap与ArrayMap<ol>
+<li>实质上ArrayMap继承自SimpleArrayMap，主要是为了实现像HashMap一样的api方法，让习惯使用HashMap的开发者感觉不到差异，本质上是SimpleArrayMap+Map的再封装。一般来说使用这两个类来代替HashMap，因为它们比HashMap更加高效，也对内存进行了优化</li>
+</ol>
+</li>
+<li>SparseArray与SparseArrayCompat和LongSparseArray<ol>
+<li>这3个类中，前2个基本上是同一类，只不过第二个类有removeAt方法，第三个是Long类型的。这3个类也是用来代替HashMap，只不过它们的键的类型是整形Integer或者Long类型，在实际开发中，如月份缩写的映射，或者进行文件缓存映射，viewHolder都特别适用</li>
+</ol>
+</li>
+<li>AtomicFile<ol>
+<li>AtomicFile首先不是用来代替File的，而是作为File的辅助类存在，AtomicFile的作用是实现事务性原子操作，即文件读写必须完整，适合多线程中的文件读写操作</li>
+</ol>
+</li>
+</ol>
+<h2 id="Intent"><a href="#Intent" class="headerlink" title="Intent"></a>Intent</h2><ol>
+<li>Intent是不同组件中提供运行时绑定的对象。Intent代表一个应用“想去做什么事情”，你可以用它做各种各样的任务，不过大部分的时候他们被用来启动另一个Activity。</li>
+<li><p>在Activity之间传递数据包Bundle</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//发送端</span></span><br><span class="line">Bundle b = <span class="keyword">new</span> Bundle();</span><br><span class="line">b.putString(<span class="string">"name"</span>,<span class="string">"morris"</span>);</span><br><span class="line">b.putInt(<span class="string">"age"</span>,<span class="number">20</span>);</span><br><span class="line">intent.putExtras(b);</span><br><span class="line"><span class="comment">//接收端</span></span><br><span class="line">Bundle data = intent.getExtras();</span><br><span class="line">String name = data.getString(<span class="string">"name"</span>);</span><br><span class="line"><span class="keyword">int</span> age = data.getInt(<span class="string">"age"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Activity之间传递值对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*方法1，使用Java的序列化，效率比较低*/</span></span><br><span class="line"><span class="comment">//前提要求User类实现Serializable接口</span></span><br><span class="line"><span class="comment">//发送端</span></span><br><span class="line">intent.putExtra(<span class="string">"user"</span>,<span class="keyword">new</span> User(<span class="string">"name"</span>,<span class="number">20</span>));</span><br><span class="line"><span class="comment">//接收端</span></span><br><span class="line">User user = (User)intent.getSerializableExtra(<span class="string">"user"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*方法2，使用Android的Parcelable，效率比较高*/</span></span><br><span class="line"><span class="comment">//前提要求User类实现了Parcelable接口,并且重写了writeToParcel方法来手动实现序列化</span></span><br><span class="line"><span class="comment">//在User类中实现方法</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeToParcel</span><span class="params">(Parcel dest,<span class="keyword">int</span> flags)</span></span>&#123;</span><br><span class="line">	dest.writeString(getName());</span><br><span class="line">	dest.writeInt(getAge());</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//在User类中实现常量对象CREATOR</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Creator&lt;User&gt; CREATOR = <span class="keyword">new</span> CREATOR&lt;User&gt;()&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> User <span class="title">createFromParcel</span><span class="params">(Parcel source)</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> User(source.readString(),source.readInt());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> User[] newArray(<span class="keyword">int</span> size)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> User[size];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//发送端</span></span><br><span class="line">intent.putExtra(<span class="string">"user"</span>,<span class="keyword">new</span> User(<span class="string">"name"</span>,<span class="number">20</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">//接收端</span></span><br><span class="line">User user = intent.getParcelableExtra(<span class="string">"user"</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取Activity的返回参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//发送端</span></span><br><span class="line">startActivityForResult(intent,requestCode);</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode,Intent data)</span></span>&#123;</span><br><span class="line">	<span class="keyword">super</span>.onActivityResult(requestCode,resultCode,data);</span><br><span class="line">	<span class="comment">//ToDo</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//接收端</span></span><br><span class="line">setResult(resultCode,intent);</span><br><span class="line">finish();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>隐式Intent</p>
+<ol>
+<li><p>在AndroidManifest文件中，为activity添加<intent-filter>标签，并为其指名category和action</intent-filter></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&gt; //表示该intent-filter的行为方式是activity</span><br><span class="line">&lt;action android:name=&quot;字符串A&quot;/&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后在创建Intent实例的时候把“字符串A”传入构造函数</p>
+</li>
+<li>一般来说，字符串A约定的格式为：包名.intent.action.类名</li>
+<li>通过这种方式能够访问其他应用中的activity，但是如果在activity的标签中指名<code>android:exported=&quot;false&quot;</code>的话，别的应用便无法访问该activity</li>
+</ol>
+</li>
+</ol>
+<h2 id="Activity的启动模式"><a href="#Activity的启动模式" class="headerlink" title="Activity的启动模式"></a>Activity的启动模式</h2><ol>
+<li>在AndroidManifest文件中，为activity添加参数：android:lanuchMode=”standard”。在standard启动模式中，所有实例放入同一个任务栈，因此支持后退键导航</li>
+<li>在AndroidManifest文件中，为activity添加参数：android:lanuchMode=”singleTop”。singleTop模式和standard模式都会将intent发送给新的实例，不过，singleTop要求如果创建intent的时候栈顶已经有了要创建的Activity的实例，则将intent发送给该实例，而不创建新的实例。singleTop模式，可用来解决栈顶多个重复相同的Activity的问题。如果是A activity跳转到B activity，在跳转到A activity，行为就和standard模式一样了，会在B activity跳转到A activity的时候创建A activity的新实例，因为当时的栈顶不是A activity实例。</li>
+<li>在AndroidManifest文件中，为activity添加参数：android:lanuchMode=”singleTask”。当intent到来，需要穿件singleTask模式Activity的时候，系统会检查任务栈里面是否已经有该Activity的实例，如果有直接将intent发送给它。</li>
+<li>在AndroidManifest文件中，为activity添加参数：android:lanuchMode=”singleInstance”。<strong>一个任务栈只包括一个activity</strong>。比如有A，B，C三个Activity，其中B为sigleInstance模式，他们之间的跳转关系是A-&gt;B-&gt;C，现在在C中按下返回键，由于B位于独立的task中，它不属于C的上下文activity，所以此时直接返回到A中。</li>
+</ol>
+<h2 id="Get-a-string-resource-from-you-app’s-Resources"><a href="#Get-a-string-resource-from-you-app’s-Resources" class="headerlink" title="Get a string resource from you app’s Resources"></a>Get a string resource from you app’s Resources</h2><blockquote>
+<p>String hello = getResources().getString(R.string.hello_world);</p>
+</blockquote>
+<h2 id="Toast使用方法"><a href="#Toast使用方法" class="headerlink" title="Toast使用方法"></a>Toast使用方法</h2><blockquote>
+<p>Toast.makeText(activity对象，“显示内容”，Toast.LENGTH_SHORT).show();</p>
+</blockquote>
+<h2 id="适配不同的屏幕"><a href="#适配不同的屏幕" class="headerlink" title="适配不同的屏幕"></a>适配不同的屏幕</h2><ol>
+<li>安卓设备的屏幕的分类指标：大小(size)和分辨率(density)</li>
+<li>有四种size：small，normal，large，xlarge</li>
+<li>有四种density：low（ldpi），medium（mdpi），high（hdpi），extra high（xhdpi）</li>
+<li>每份图片需要四种分辨率的备份，比如，如果你为xhdpi设备生成一张200X200的照片，同样，你需要为hdpi设备生成150X150的照片，为mdpi设备生成100X100的照片，为ldpi设备生成75X75的照片<ol>
+<li>xhdpi：2.0</li>
+<li>hdpi：1.5</li>
+<li>mdpi：1.0（baseline）</li>
+<li>ldpi：0.75</li>
+</ol>
+</li>
+<li>一般来说，ldpi的素材是可以不需要的，因为如果你提供了hdpi的素材，系统会自动将它缩小一半来适应ldpi的设备</li>
+</ol>
+<h2 id="Activity的生命周期"><a href="#Activity的生命周期" class="headerlink" title="Activity的生命周期"></a>Activity的生命周期</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/gzlBPwv.png" alt="Activity生命周期" title="">
+                </div>
+                <div class="image-caption">Activity生命周期</div>
+            </figure>
+<ol>
+<li>onPause主要完成的工作（为了快速切换到下一个Activity，这个函数里面的操作内容应该尽量简单些）<ol>
+<li>停止动画或者其他正在消耗CPU的动作</li>
+<li>提交未保存的变化，比如草稿邮件</li>
+<li>释放系统资源，包括broadcast receiver，传感器句柄等</li>
+</ol>
+</li>
+<li>onStop函数用来执行占用CPU大的shut-down操作，比如往数据库中写入数据</li>
+</ol>
+<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><ol>
+<li>它是用来访问全局信息（比如，应用程序的资源）的接口，一些常用的资源都会实现Context，这样就可以方便访问资源</li>
+<li>System.out.println(R.string.hello_world)等同于System.out.println(getContext().getResources().getText(R.string.hello_world));</li>
+</ol>
+<h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><ol>
+<li>安装一个app应用后可以在桌面上显示多个应用图标(即同一个应用程序有多个主Activity)，那是因为在Manifest文件中设置了多个activity的category为android.intent.category.LAUNCHER，action为android.intent.category.LAUNCHER。但是这几个应用同属于一个Application，表现为在Manifest文件中，这些activity在同一个application标签下。</li>
+<li>在Manifest文件中，为application标签设置属性name,其值为一个继承自Application的某个自定义类，这样在任意一个activity中可以通过getApplicationContext来获取该自定义Application类的实例。从某种意义上来说，该自定义Appliacation类中的资源可以更加方便的为全局共享，里面可以存放一些全局的逻辑资源（区别于UI的资源）</li>
+<li>Application的生命周期相关的方法<ol>
+<li>onCreate，创建Application的时候调用，先于activity的onCreate</li>
+<li>onTerminate，结束后调用</li>
+<li>onLowMemory，低内存时候调用</li>
+<li>onTrimMemory，操作系统内存整理的时候调用</li>
+<li>onConfigurationChanged，配置改变的时候调用</li>
+</ol>
+</li>
+</ol>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><ol>
+<li>启动服务：startService，service内部会执行onStartCommand</li>
+<li>停止服务：stopService</li>
+<li>绑定服务：bindService</li>
+<li>解绑服务：unbindService</li>
+<li>当activity与service绑定后，如果activity退出，响应的service也会停止。即service的生命周期伴随着activity的存在于消亡。若是是使用startService来启动service的话，service的生命将会独立于activity，只有通过调用stopService才能将其停止。当startService与bindService都调用了的话，若想退出服务，unbindService与stopService都必须执行</li>
+<li>同一个service只会创建1次</li>
+</ol>
+<h2 id="普通辅线程不允许修改UI线程中的资源！"><a href="#普通辅线程不允许修改UI线程中的资源！" class="headerlink" title="普通辅线程不允许修改UI线程中的资源！"></a>普通辅线程不允许修改UI线程中的资源！</h2><h2 id="AIDL-Android-Interface-Definition-Language"><a href="#AIDL-Android-Interface-Definition-Language" class="headerlink" title="AIDL(Android Interface Definition Language)"></a>AIDL(Android Interface Definition Language)</h2>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-05T01:38:09.630Z" itemprop="dateUpdated">2018-07-05 09:38:09</time>
+</span><br>
+
+
+        
+        <a href="/2016/01/20/android-introduce/" target="_blank" rel="external">https://suda-morris.github.io/2016/01/20/android-introduce/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2016/01/20/android-introduce/&title=《Android Introduction》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2016/01/20/android-introduce/&title=《Android Introduction》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2016/01/20/android-introduce/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android Introduction》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2016/01/20/android-introduce/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2016/01/20/android-introduce/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/21/latex-basic/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Latex Basic</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/01/19/android-studio-install/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Android Studio Install</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Wed Jan 20 2016 18:01:40 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2016/01/20/android-introduce/&title=《Android Introduction》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2016/01/20/android-introduce/&title=《Android Introduction》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2016/01/20/android-introduce/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android Introduction》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2016/01/20/android-introduce/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2016/01/20/android-introduce/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACM0lEQVR42u3aQY6DMAwF0N7/0ow02w7w7aSakrysqooCLwvXsf16xev4Xdefz371fv37Ort+8sLAwHgs47hcZ9dcPzjhVWFn12BgYOzDyB92vQXXoXYkuN+8MwYGBkbwEtekJNRiYGBgzGI0U7cgEOdhGgMDY09GcpjMi2hJ+WzyNmFgYCzNmNUY+MTnf+hvYGBgfBnjKK4qL2kYJCW8m7fCwMBYmpGXvXpF/OpYRjW6lqt9GBgYD2T0xrbK+9TarOtwf/q/gYGBsTQjCZ29glq+TflWYmBg7MPoFfrnFsuqLYfTZ2FgYCzKmNAUHGhGjhxiC1kkBgbGwxkjIxdJAyBJJXujFdMmRzAwML6e0Quyn2hPVrfpj9QQAwNjG0Zyo3zwotoA6BXsMDAw1mbkt6sCEljvSHyzNRgYGMsxkkGupCQ3dzhswiEWAwNjIUavAVlO1+Kyft46xcDA2I3RS86qATEfzshHLjAwMHZg5AMQ1ZJ9LylMvi/PjGBgYDycMevxvZSulwIWElkMDIwlGOONxt7IV/6sqJCHgYGxPaP3Ta9MVm1wFuZBMDAwHssYP0zmLc/8wDzhZIqBgbEQ4yiuPClMDq7jx1cMDIwdGPmqpo95zlatCxY6sRgYGAsx8oDYGxobKdsVjsEYGBgbMPIgmz+mmj72QjYGBgbG+ARHTu3dBwMDA2OkrJ+kgCOpJwYGxm6MamKXv2KvMJc3SjEwMHZgfKIxMKtgN3IfDAyMJRg/0WP+9WedYjMAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

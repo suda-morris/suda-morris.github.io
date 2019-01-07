@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>QT4 Basic | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Qt4">
+    <meta name="description" content="Qt核心模块Qt是一个大库，由数个较小的库或者模块组成，其中最为常见的有如下这些，除了core和gui，其余模块都需要在qmake的工程文件中启用：  core：包括QObject，QThread，QFile，Qvariant等等 gui：所有从QWidget派生的类外加一些相关的类 xml：用于解析和序列化XML sql：用于与SQL数据库通信 phonon：用于播放多媒体文件 webkit：用">
+<meta name="keywords" content="Qt4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QT4 Basic">
+<meta property="og:url" content="https://suda-morris.github.io/2015/07/19/qt4/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="Qt核心模块Qt是一个大库，由数个较小的库或者模块组成，其中最为常见的有如下这些，除了core和gui，其余模块都需要在qmake的工程文件中启用：  core：包括QObject，QThread，QFile，Qvariant等等 gui：所有从QWidget派生的类外加一些相关的类 xml：用于解析和序列化XML sql：用于与SQL数据库通信 phonon：用于播放多媒体文件 webkit：用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-07-05T01:38:09.642Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QT4 Basic">
+<meta name="twitter:description" content="Qt核心模块Qt是一个大库，由数个较小的库或者模块组成，其中最为常见的有如下这些，除了core和gui，其余模块都需要在qmake的工程文件中启用：  core：包括QObject，QThread，QFile，Qvariant等等 gui：所有从QWidget派生的类外加一些相关的类 xml：用于解析和序列化XML sql：用于与SQL数据库通信 phonon：用于播放多媒体文件 webkit：用">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank">
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank">
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">QT4 Basic</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">QT4 Basic</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2015-07-19T12:52:44.000Z" itemprop="datePublished" class="page-time">
+  2015-07-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/GUI/">GUI</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Qt核心模块"><span class="post-toc-number">1.</span> <span class="post-toc-text">Qt核心模块</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#工程文件-pro"><span class="post-toc-number">2.</span> <span class="post-toc-text">工程文件.pro</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Qt中获取命令行参数"><span class="post-toc-number">3.</span> <span class="post-toc-text">Qt中获取命令行参数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Qt中的字符串"><span class="post-toc-number">4.</span> <span class="post-toc-text">Qt中的字符串</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#去掉最大、最小、关闭按钮"><span class="post-toc-number">5.</span> <span class="post-toc-text">去掉最大、最小、关闭按钮</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用中文"><span class="post-toc-number">6.</span> <span class="post-toc-text">使用中文</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#隐藏鼠标箭头"><span class="post-toc-number">7.</span> <span class="post-toc-text">隐藏鼠标箭头</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QStringList与迭代"><span class="post-toc-number">8.</span> <span class="post-toc-text">QStringList与迭代</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QDir，QFileInfo和QDirIterator"><span class="post-toc-number">9.</span> <span class="post-toc-text">QDir，QFileInfo和QDirIterator</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QDate"><span class="post-toc-number">10.</span> <span class="post-toc-text">QDate</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Qt中字符串的数据流操作"><span class="post-toc-number">11.</span> <span class="post-toc-text">Qt中字符串的数据流操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#容器（Qt容器被定义成模板类）"><span class="post-toc-number">12.</span> <span class="post-toc-text">容器（Qt容器被定义成模板类）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QFile"><span class="post-toc-number">13.</span> <span class="post-toc-text">QFile</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#序列化器模式：QTextStream和QDataStream"><span class="post-toc-number">14.</span> <span class="post-toc-text">序列化器模式：QTextStream和QDataStream</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QObject"><span class="post-toc-number">15.</span> <span class="post-toc-text">QObject</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QEvent"><span class="post-toc-number">16.</span> <span class="post-toc-text">QEvent</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#信号和槽"><span class="post-toc-number">17.</span> <span class="post-toc-text">信号和槽</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#堆还是栈"><span class="post-toc-number">18.</span> <span class="post-toc-text">堆还是栈</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QWidget和其余GUI开发中常用的类"><span class="post-toc-number">19.</span> <span class="post-toc-text">QWidget和其余GUI开发中常用的类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对话框"><span class="post-toc-number">20.</span> <span class="post-toc-text">对话框</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#图标、图像与资源"><span class="post-toc-number">21.</span> <span class="post-toc-text">图标、图像与资源</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#布局"><span class="post-toc-number">22.</span> <span class="post-toc-text">布局</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QTimer"><span class="post-toc-number">23.</span> <span class="post-toc-text">QTimer</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#绘制事件和画图"><span class="post-toc-number">24.</span> <span class="post-toc-text">绘制事件和画图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QMainWindow"><span class="post-toc-number">25.</span> <span class="post-toc-text">QMainWindow</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QAction"><span class="post-toc-number">26.</span> <span class="post-toc-text">QAction</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QSettings"><span class="post-toc-number">27.</span> <span class="post-toc-text">QSettings</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#剪切板"><span class="post-toc-number">28.</span> <span class="post-toc-text">剪切板</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QImage"><span class="post-toc-number">29.</span> <span class="post-toc-text">QImage</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#模板类"><span class="post-toc-number">30.</span> <span class="post-toc-text">模板类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#反射与元对象"><span class="post-toc-number">31.</span> <span class="post-toc-text">反射与元对象</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QMetaType"><span class="post-toc-number">32.</span> <span class="post-toc-text">QMetaType</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#invokeMethod"><span class="post-toc-number">33.</span> <span class="post-toc-text">invokeMethod()</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QRegExp"><span class="post-toc-number">34.</span> <span class="post-toc-text">QRegExp</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Qt环境变量的获取与设置"><span class="post-toc-number">35.</span> <span class="post-toc-text">Qt环境变量的获取与设置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#QProcess和进程控制"><span class="post-toc-number">36.</span> <span class="post-toc-text">QProcess和进程控制</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-qt4" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">QT4 Basic</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2015-07-19 20:52:44" datetime="2015-07-19T12:52:44.000Z" itemprop="datePublished">2015-07-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/GUI/">GUI</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="Qt核心模块"><a href="#Qt核心模块" class="headerlink" title="Qt核心模块"></a>Qt核心模块</h2><p>Qt是一个大库，由数个较小的库或者模块组成，其中最为常见的有如下这些，除了core和gui，其余模块都需要在qmake的工程文件中启用：</p>
+<ol>
+<li>core：包括QObject，QThread，QFile，Qvariant等等</li>
+<li>gui：所有从QWidget派生的类外加一些相关的类</li>
+<li>xml：用于解析和序列化XML</li>
+<li>sql：用于与SQL数据库通信</li>
+<li>phonon：用于播放多媒体文件</li>
+<li>webkit：用于使用一种嵌入式web浏览器，QtWebkit</li>
+</ol>
+<h2 id="工程文件-pro"><a href="#工程文件-pro" class="headerlink" title="工程文件.pro"></a>工程文件.pro</h2><ol>
+<li>对于Qt程序，程序不必编写Makefile文件，Qt提供了一个qmake工具，它会根据工程文件来产生对应的Makefile文件。亦可以用qmake -project命令产生一个简单的工程文件，当执行这个命令的时候，qmake会将当前工作目录下的全部源文件(<em>.cpp)作为SOURCES列出来，而将该目录下的全部头文件(</em>.h)作为HEADERS列出来。最终生成的可执行文件的名称由TARGET变量指定，其默认为工程的名称 </li>
+<li>TEMPLATE=app，表明qmake应该以一个适合建立这个应用的模板化的Makefile开始，如果这个工程文件用于建立库，则应当使用语句TEMPLATE=lib，以表明应使用Makefile库模板。第三种可能是源代码文件分布在多个子目录下，而每一个子目录下的文件都具有自己的工程文件，这种情况下，位于父目录的工程文件中应该包含语句TMPLATE=subdirs，这会导致在父目录和每一个子目录下都生成Malefile</li>
+<li>添加库：LIBS += -Lpathtolibs</li>
+<li>CONFIG += console表示是控制台程序</li>
+<li>当编写并测试完库之后，在编译链接过程结束后它将被安装到由qmake变量DESTDIR指定的目录下。例如，dataobjects库的工程文件包含如下相关的行：<ul>
+<li>TEMPLATE = lib</li>
+<li>DESTDIR = pathto_install_libs</li>
+</ul>
+</li>
+<li>对于库模板，qmake将产生一个包含install目标的Makefile，这样，在成功编译链接之后执行命令make install将会把这个库复制到某个特定的位置</li>
+</ol>
+<h2 id="Qt中获取命令行参数"><a href="#Qt中获取命令行参数" class="headerlink" title="Qt中获取命令行参数"></a>Qt中获取命令行参数</h2><ul>
+<li>QCoreApplication app(argc,argv);</li>
+<li>QStringList arglist = app.arguments();</li>
+<li>arglist.size等于命令行参数的个数</li>
+</ul>
+<h2 id="Qt中的字符串"><a href="#Qt中的字符串" class="headerlink" title="Qt中的字符串"></a>Qt中的字符串</h2><ol>
+<li>const char*，主要用于与C语言库的接口</li>
+<li>来自C++标准库的string，任何地方都可以使用这种类型</li>
+<li>QString，优于STL中的字符串类型，有着更加丰富的API而且更加容易使用。</li>
+<li>在Qt中使用类似于iostream中的cin，cout：<ul>
+<li>#include &lt;QString></li>
+<li>#include &lt;QTextStream></li>
+<li>QTextStream cout(stdout)</li>
+<li>QTextStream cin(stdin)</li>
+<li>cin.readLine()</li>
+</ul>
+</li>
+<li>sizeof(QString)=4,sizeof(QChar)=2,sizeof(QDate)=4,sizeof(qint32)=4,sizeof(qint64)=8;QString是一个使用动态内存的复杂类，因此必须调用length()来获得字符串中QChar的数量。由于QChar的大小为char的两倍，所以在计算内存中QString中实际大小时需要将长度乘以2，在运行时，QString能够与具有同一个值的另一个字符串共享内存</li>
+</ol>
+<h2 id="去掉最大、最小、关闭按钮"><a href="#去掉最大、最小、关闭按钮" class="headerlink" title="去掉最大、最小、关闭按钮"></a>去掉最大、最小、关闭按钮</h2><blockquote>
+<p>setWindowFlags(windowFlags()|Qt::FramelessWindowHint|Qt::WindowTitleHint);</p>
+</blockquote>
+<h2 id="使用中文"><a href="#使用中文" class="headerlink" title="使用中文"></a>使用中文</h2><blockquote>
+<ol>
+<li>下载qpf格式的font_wenquanyi字体，将下载的字库文件复制到qt安装目录的lib/fonts子目录下</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">\#include &lt;QTextCodec&gt;</span><br><span class="line">	QApplication a(argc, argv);</span><br><span class="line">    QTextCodec::setCodecForLocale(QTextCodec::codecForName(&quot;UTF-8&quot;)); 	//中文支持</span><br><span class="line">    QTextCodec::setCodecForTr(QTextCodec::codecForName(&quot;UTF-8&quot;));       //支持Tr中文</span><br><span class="line">    QTextCodec::setCodecForCStrings(QTextCodec::codecForName(&quot;UTF-8&quot;)); //支持中文文件名显示</span><br><span class="line">    QFont font;</span><br><span class="line">    font.setPointSize(160); 											//实际上是16的字号，但设成16却不行</span><br><span class="line">    font.setFamily((&quot;wenquanyi&quot;));</span><br><span class="line">    font.setBold(false);</span><br><span class="line">    a.setFont(font);</span><br></pre></td></tr></table></figure>
+<h2 id="隐藏鼠标箭头"><a href="#隐藏鼠标箭头" class="headerlink" title="隐藏鼠标箭头"></a>隐藏鼠标箭头</h2><blockquote>
+<ol>
+<li>对于整个程序: QApplication::setOverrideCursor(Qt::BlankCursor);</li>
+<li>对单个控件：lable-&gt;setCursor(Qt::BlankCursor);//隐藏鼠标  label-&gt;setCursor(Qt::ArrowCursor);//显示正常鼠标</li>
+</ol>
+</blockquote>
+<h2 id="QStringList与迭代"><a href="#QStringList与迭代" class="headerlink" title="QStringList与迭代"></a>QStringList与迭代</h2><blockquote>
+<ol>
+<li>QStringList实际上就是一个QList<qstring>,此外，QStringList还具有一些特别针对字符串的方便函数，例如indexOf(),join()和replaceInStrings()。利用split()函数和join()函数，在列表与字符串之间进行转换相当简单</qstring></li>
+<li>QStringList对象可以调用方法takeFirst()来依次获得列表中的字符串对象<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">QString winter = <span class="string">"December,January,February"</span>;</span><br><span class="line">QString spring = <span class="string">"March,April,May"</span>;</span><br><span class="line">QString summer = <span class="string">"June,July,August"</span>;</span><br><span class="line">QString fall = <span class="string">"September,October,November"</span>;</span><br><span class="line"></span><br><span class="line">QStringList <span class="built_in">list</span>;</span><br><span class="line"><span class="built_in">list</span> &lt;&lt; winter;</span><br><span class="line"><span class="built_in">list</span> += spring;</span><br><span class="line"><span class="built_in">list</span>.append(summer);</span><br><span class="line"><span class="built_in">list</span> &lt;&lt; fall;</span><br><span class="line"></span><br><span class="line">QString allmonths = <span class="built_in">list</span>.join(",");	/*从列表到字符串，以逗号为分隔符*/</span><br><span class="line">QStringList list2 = allmonths.split(","); /*从字符串到列表，以逗号为分隔符*/</span><br><span class="line"></span><br><span class="line">foreach(<span class="keyword">const</span> QString &amp;str,<span class="built_in">list</span>)&#123; /*Qt foreach循环*/</span><br><span class="line">	//TODO</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(QStringList::iterator it = <span class="built_in">list</span>.begin(); it != <span class="built_in">list</span>.end(); ++it)&#123;</span><br><span class="line">	QString current = *it;</span><br><span class="line">	//TODO</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">QListIterator&lt;QString&gt; itr(list2);</span><br><span class="line"><span class="keyword">while</span>(itr.hasNext())&#123;</span><br><span class="line">	QString current = itr.next();</span><br><span class="line">	//TODO</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<h2 id="QDir，QFileInfo和QDirIterator"><a href="#QDir，QFileInfo和QDirIterator" class="headerlink" title="QDir，QFileInfo和QDirIterator"></a>QDir，QFileInfo和QDirIterator</h2><figure class="highlight c"><figcaption><span>利用QDir类和QFileInfo类获取目录的内容列表以及关于每一个项的信息</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">recurseAddDir</span><span class="params">(QDir d,<span class="keyword">bool</span> recursive=<span class="literal">true</span>,<span class="keyword">bool</span> symlinks=<span class="literal">false</span>)</span></span>&#123;</span><br><span class="line">	d.setSorting(QDir::Name);</span><br><span class="line">	QDir::Filters df = QDir::Files | QDir::NoDotAndDotDot;</span><br><span class="line">	<span class="keyword">if</span>(recursive) df |= QDir::Dirs;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">not</span> symlinks) df |= QDir::NoSymLinks;</span><br><span class="line">	QStringList qsl = d.entryList(df,QDir::Name|QDir::DirsFirst);</span><br><span class="line"></span><br><span class="line">	foreach(<span class="keyword">const</span> QString &amp;entry,qsl)&#123;</span><br><span class="line">		<span class="function">QFileInfo <span class="title">finfo</span><span class="params">(d,entry)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(finfo.isDir())&#123;</span><br><span class="line">			QDir sd(finfo.absoluteFilePath());</span><br><span class="line">			recurseAddDir(sd);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(finfo.completeSuffix()==<span class="string">"mp3"</span>)&#123;</span><br><span class="line">				addMp3File(finfo.absoluteFilePath());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><figcaption><span>使用QDirIterator实现相同功能</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">QDir dir = QDir::current();</span><br><span class="line">QDirIterator qdi(dir.absolutePath(), QStringList() &lt;&lt; "*.mp3", QDir::NoSymLinks | QDir::Files, QDirIterator::Subdirectories);</span><br><span class="line"><span class="keyword">while</span>(qdi.hasNext)&#123;</span><br><span class="line">	addMp3File(qdi.next());</span><br><span class="line">	<span class="comment">//TODO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="QDate"><a href="#QDate" class="headerlink" title="QDate"></a>QDate</h2><blockquote>
+<ol>
+<li>static QDate currentDate = QDate::currentDate();</li>
+</ol>
+</blockquote>
+<h2 id="Qt中字符串的数据流操作"><a href="#Qt中字符串的数据流操作" class="headerlink" title="Qt中字符串的数据流操作"></a>Qt中字符串的数据流操作</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">QString Student::toString() <span class="keyword">const</span>&#123;</span><br><span class="line">	QString retval;</span><br><span class="line">	<span class="function">QTextStream <span class="title">os</span><span class="params">(&amp;retval)</span></span>;</span><br><span class="line">	os &lt;&lt; <span class="string">"name:"</span> &lt;&lt; m_Name &lt;&lt; <span class="string">";ID:"</span> &lt;&lt; m_StudentID;</span><br><span class="line">	<span class="keyword">return</span> retval;</span><br><span class="line">&#125;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>qDeleteAll(container)只对包含指针的容器有意义，该函数将释放所有对象，但并不删除容器中的指针；删除容器中的指针需要调用容器的clear()函数</p>
+</blockquote>
+<h2 id="容器（Qt容器被定义成模板类）"><a href="#容器（Qt容器被定义成模板类）" class="headerlink" title="容器（Qt容器被定义成模板类）"></a>容器（Qt容器被定义成模板类）</h2><blockquote>
+<ol>
+<li>QList<t>是用数组实现的，数组的两端都有预分配的空间。它针对按索引的随机访问以及少于1000项的列表进行了优化。对于prepend()和append()这样的操作，它有很好的性能表现</t></li>
+<li>QStringList是派生自QList<qstring>的一个便利类</qstring></li>
+<li>QLinkedList<t>针对迭代器的顺序访问以及快速、常量时间的列表插入操作进行了优化，但排序和搜索比较缓慢。它提供多个便利函数来处理那些经常用到的操作<br>QVector<t>以连续的内存位置保存数据，并针对按索引的随机访问进行了优化。通常而言，QVector对象都是用其初始大小进行构造的，在其两端都不存在预先自动分配的内存空间，所以中间掺入、末端插入以及前端插入都是耗时的</t></t></li>
+<li>QStack<t>是派生自QVector<t>的public类，所以QVector类的public接口可以用于QStack对象。不过，push(),pop()以及top()函数采用的是后入先出(LIFO)的语法</t></t></li>
+<li>QMap&lt;Key,T&gt;是一个有序的关联容器，它保存的是键/值对，其作用是根据键来快速找到对应的值。它也被设计成支持适量的快速插入操作和删除操作。它将键有序排列，以便能够快速搜索和快速缩小搜索范围，采用的是一个跳跃列表字典，这个字典在概率上是平衡的并且高效的利用了内存。键的类型必须是operator&lt;()和operator==()</li>
+<li>QHash&lt;Key,T&gt;也是一个关联容器，它使用哈希表来进行键的查找。它提供快速的查找(键精确匹配)和插入操作，但其搜索速度较慢，且没有排序功能。键的类型必须是operator==()</li>
+<li>QMultiMap&lt;Key,T&gt;是QMap的一个子类，而QMultiHash&lt;Key,T&gt;是QHash的一个子类。这两个类是的一个键可以与多个值关联</li>
+<li>QCache&lt;Key,T&gt;是一个关联容器，它对最近使用过的项提供最快速的访问，并会根据几个开销函数的结果自动移除哪些不常用的项</li>
+<li>QSet<t>用QHash保存T类型的值，QHash中的键位于T中，而其中的哑值与每一个键相关联。这种安排可优化查找和插入操作。QSet中的几个函数用于常规的集合操作。它的默认构造函数会创建一个空集合</t></li>
+</ol>
+<p><strong>用于模板容器类的类型参数T，或者用于关联容器的键类型都必须为可赋值数据类型，即值类型。这意味着T必须具有public类型的默认构造函数、拷贝构造函数和赋值运算符。基本类例如int，double，char和指针都是可赋值的，有些Qt类型是可赋值的，例如QString，QDate，QTime。QObject以及派生自QObject的类型都是不可赋值的，如果需要使用某种不可赋值类型的对象，则可以定义一个指针容器，例如QList&lt;QFile*&gt;</strong></p>
+</blockquote>
+<h2 id="QFile"><a href="#QFile" class="headerlink" title="QFile"></a>QFile</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QFile <span class="title">outf</span><span class="params">((<span class="string">"filename"</span>)</span></span>;</span><br><span class="line">outf.open(QIODevice::WriteOnly);</span><br><span class="line"><span class="function">QTextStream <span class="title">outstr</span><span class="params">(&amp;outf)</span></span>;</span><br><span class="line">outstr &lt;&lt; <span class="string">"content"</span>;</span><br><span class="line">outf.close();</span><br></pre></td></tr></table></figure>
+<h2 id="序列化器模式：QTextStream和QDataStream"><a href="#序列化器模式：QTextStream和QDataStream" class="headerlink" title="序列化器模式：QTextStream和QDataStream"></a>序列化器模式：QTextStream和QDataStream</h2><blockquote>
+<ol>
+<li>序列化器是一种只负责读取或者写入对象的对象，Qt的QTextStream序列化器用于读写人可读的文件，而QDataStream序列化器用于读写结构化的二进制数据。这些类都是用序列化器模式实现的</li>
+<li>利用QDataStream就可以序列化和解序列化QVariant支持的全部类型，包括QList，QMap，QVector以及其他类型。</li>
+</ol>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QFile <span class="title">textFile</span><span class="params">(<span class="string">"playlist1.tsv"</span>)</span></span>;</span><br><span class="line"><span class="function">QFile <span class="title">binaryFile</span><span class="params">(<span class="string">"playlist1.bin"</span>)</span></span>;</span><br><span class="line">QTextStream textStream；</span><br><span class="line">QDataStream dataStream；</span><br><span class="line"><span class="keyword">if</span>(textFile.open(QIODevice::ReadOnly))&#123;</span><br><span class="line">	textStream.setDevice(&amp;textFile);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(binaryFile.open(QIODevice::WriteOnly))&#123;</span><br><span class="line">	dataStream.setDevice(&amp;binaryFile);</span><br><span class="line">&#125;</span><br><span class="line">QList&lt;MetaDataValue&gt; values;</span><br><span class="line"><span class="keyword">while</span>(!textStream.atEnd())&#123;</span><br><span class="line">	MetaDataValue mdv;</span><br><span class="line">	textStream &gt;&gt; mdv;</span><br><span class="line">	values &lt;&lt; mdv;</span><br><span class="line">	dataStream &lt;&lt; mdv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="QObject"><a href="#QObject" class="headerlink" title="QObject"></a>QObject</h2><blockquote>
+<ol>
+<li>QObject是Qt库中许多重要的类的基类，如QEvent，QApplication，QLayout和QWidget。</li>
+<li>QObject使基于事件的编程成为了可能，其中用到了QApplication和Qt的事件循环</li>
+<li>QObject没有公有的拷贝构造函数或复制赋值运算符。QObject类定义的结尾处有一个宏Q_DISABLE_COPY(QObject)，它显示地确保任何QObject都不能被复制。QObject不是设计用于复制的，QObject会用来代表具有唯一身份的对象。这种不带拷贝构造函数策略的一个直接后果就是永远无法通过值传递方式向函数传递OBject。</li>
+<li>QObject及其派生类的单参数构造函数应当予以显式声明explicit，以免意外的隐式转换的发生。</li>
+<li>每个QObject都可以有（至多）一个父QObject，且可以拥有任意数量的子QObject。</li>
+<li>每个QObject都将指向各个子对象的指针存放在一个QObjectList中，在调用QObject的析构函数时会自动销毁该对象的子对象</li>
+<li>通常而言，没有父对象的QObject应当在程序栈区(stack)中进行定义，而那些有父对象的QObject则应当在堆区(heap)动态创建出来，这样可有助于确保发生正确的析构操作。</li>
+<li>QObject有一个成员函数，可以返回一个指向主对象中全部子对象的指针列表：const QObjeectList&amp; QObject::children() const</li>
+<li>QObject还提供了两个名称为findChildren()的重载(递归)每个都会返回一个满足特定条件的子对象列表：QList<t> parentObj.findChildren<t>(const QString&amp; name=QString()) const 该函数返回一个类型为T的子对象列表，其对象名与name相等。如果name是空字符串，那么将会起到一个类过滤器的作用，返回结果是一个QList，其中包含指向全部子对象的指针，而这些子对象都可以通过类型转换变成类型T的对象</t></t></li>
+</ol>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">QList&lt;Customer*&gt; custlist = parent.findChildren&lt;Customer*&gt;();</span><br><span class="line">foreach (<span class="keyword">const</span> Customer* current,custlist)&#123;</span><br><span class="line">	qDebug() &lt;&lt; current-&gt;toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="QEvent"><a href="#QEvent" class="headerlink" title="QEvent"></a>QEvent</h2><blockquote>
+<ol>
+<li>QEvent类封装了底层事件的概念。QEvent类是若干特定事件类的基类，例如QActionEvent,QFileOpenEvent,QHoverEvent,QInputEvent,QMouseEvent等。QEvent对象可以由窗口系统创建以响应用户的动作(例如，QMouseEvent)或按照指定的时间间隔(QTimerEvent)完成创建，也可以由应用程序显式地创建。成员type()会返回一个美剧，其中含有近百个特定的值，以区分不同种类的各式事件(例如,关闭、DragEnter、DragMove、放下、输入、GrabMouse、HoverEnter、KeyPress、MouseButtonDblClick、MouseMove、Resize)</li>
+<li>一个典型的Qt程序会创建对象，连接各个对象，然后再告诉应用程序开始发送exec()，在运行时，应用程序就进入了事件循环，各个对象之间可以通过各种方式相互发送消息。</li>
+<li>只有在事件循环，特别是QApplication::exec()进入的事件循环中，信号才能发送到槽上。这是因为信号和槽在其外表之下是使用事件循环来传递消息的。</li>
+<li>QObject支持一些普通C++对象通常没有的特性：信号和槽，元对象、元属性、元方法，qobject_cast</li>
+<li>元对象编辑器，即moc，会针对每个使用Q_OBJECT宏的QObject派生类生成额外的函数，生成的代码可以在名称为moc_filename.cpp的文件中找到。</li>
+</ol>
+</blockquote>
+<h2 id="信号和槽"><a href="#信号和槽" class="headerlink" title="信号和槽"></a>信号和槽</h2><blockquote>
+<ol>
+<li>信号是在类定义中给出的类似于void函数声明的一种消息。它有参数列表却没有函数体。信号时一个类的接口的一部分，它看起来想函数，但不用同样的方式进行调用—它被此类的对象发射</li>
+<li>槽通常是一个void成员函数，它可以像普通的成员函数一样进行调用，或者可以由QMetaObject系统进行间接调用</li>
+<li>连接语句的语法：bool QObject::connect(senderQObjectPtr,SIGNAL(signalName(argumentList)),receiverQObjectPtr,SLOT(slotName(argumentList))optionalConnectionType);optionalConnectionType让你可以明确说明，你是否希望从发射点处同步(阻塞)或者非同步(排队)地调用目标槽</li>
+<li>如果有多个信号连接到同一个槽上且需要知道是那哟个QPbject发射的信号，则可以在该槽中调用sender(),它会返回一个指向那个对象的指针</li>
+</ol>
+</blockquote>
+<h2 id="堆还是栈"><a href="#堆还是栈" class="headerlink" title="堆还是栈"></a>堆还是栈</h2><blockquote>
+<p>一般情况下，没有父对象的QObject应当在栈上创建，或者定义成另一个类的子对象。有父对象的QObject不应该在栈上创建，因为那样的话，它有可能会被删除两次。<br>不推荐直接删除QObject，在带有事件循环的程序中，最好利用QObject::deleteLater()来删除QObject。这样做，可以在应用程序处理事件并在当前槽返回之后就安排该对象的销毁。希望能够在槽内删除信号的sender(),这么做实际上是必须的</p>
+</blockquote>
+<h2 id="QWidget和其余GUI开发中常用的类"><a href="#QWidget和其余GUI开发中常用的类" class="headerlink" title="QWidget和其余GUI开发中常用的类"></a>QWidget和其余GUI开发中常用的类</h2><blockquote>
+<ol>
+<li>QWidget是一个采用了多重继承的类，首先，QWidget是一个QObject，因此它可以有父对象、信号、槽以及可受管理的子对象。同时QWidget也是一个QPaintDevice，这个类是所有可在屏幕上进行绘制的对象的基类</li>
+<li>Qt数据类型——QPoint,QSize,QColor,QImage和QPixmap是在处理图形对象时常用到的类型</li>
+<li>布局——这些类能够动态地管理Widget的布局，其中有些事常用的特殊布局，包括QHBoxLayout，QVBoxLayout，QGridLayout，QFormLayout等</li>
+<li>模型——QAbstractItemModel及其各个派生类，如QAbstractListModel和QAbstractTableModel，外加一些已有的可继承实体类，如QSqlQueryModel和QFileSystemModel，都是Qt模型/视图框架中的一部分，该框架内置将一个模型和其他不同视图相连接的机制，以便对一个组件的修改可以自动变换到其他组件上</li>
+<li>控制类——QApplication和QAction两者都是管理GUI应用程序控制流的对象。QItemDelegate用作模型和视图之间的控制器</li>
+</ol>
+</blockquote>
+<h2 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h2><blockquote>
+<ol>
+<li>QDialog是Qt所有对话框的基类。对话框窗口可以是模态(modal)对话框也可以是非模态(nonmodal)对话框。</li>
+<li>当程序调用静态的便利函数”QMessageBox::”或者”QFileDialog::”时，弹出的对话框就是模态对话框。当模态对话框显示在屏幕上时，它会冻结同一应用程序中的其他所有可见窗口的输入功能。用户解除模态对话框后，与应用程序的常规交互才可以继续下去。QDialog::exec()是将模态对话框放到屏幕上的另一种方式。当用户完成了所需的响应后，对话框就可以返回数据，也可以返回对话框代码(QDialog::Accepted或者QDialog::Rejected);</li>
+<li>可以像QWidget一样通过show()显示一个QDialog，在此情况下，对话框是非模态的，用户也就可以与应用程序的其他窗口继续交互。</li>
+</ol>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QApplication <span class="title">app</span><span class="params">(argc,argv)</span></span>;</span><br><span class="line">QProgressDialog nonModal;</span><br><span class="line">nonModal.setWindowTitle(<span class="string">"Non Modal Parent Dialog"</span>);</span><br><span class="line">nonModal.show();</span><br><span class="line">nonModal.connect(&amp;nonModal,SIGNAL(finished()),&amp;app,SLOT(quit()));</span><br></pre></td></tr></table></figure>
+<h2 id="图标、图像与资源"><a href="#图标、图像与资源" class="headerlink" title="图标、图像与资源"></a>图标、图像与资源</h2><blockquote>
+<ol>
+<li>Qt提供了至少两种方式来获得标准的图标。一种方式来自于桌面样式的QStyle::standardIcon()，另一种则来自插件型图标主题:QIcon::fromTheme()</li>
+<li>把所需的二进制数据文件作为资源附加到工程中会让工程更为健壮。源代码无须为资源文件使用一些不可移植的路径名。要引用一个存储成资源的文件，可以使用在.rcc文件中指定的别名并在前面带一个前缀”:/“。于是，每个资源好像位于一个私有虚文件系统中，其根为”:/“。然而，得到这些好处是需要付出代价的，可执行文件会更大，程序也会需要更多的内存</li>
+<li>有3个Qt类可以简化处理图片：<ul>
+<li>QImage——用于离屏操作，输入输出操作，并可直接访问像素</li>
+<li>QPixmap——用于在屏幕上进行绘制并优化，仅用在主线程中</li>
+<li>QIcon——用于视频内存的缓冲且经常用到，但仅用在主线程中</li>
+<li>QPicture——存储绘制的操作而不是实际的位图图片</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h2 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h2><blockquote>
+<ol>
+<li>布局可以将它们的Widgets排列成如下几种形式：<ul>
+<li>垂直型(QVBoxLayout)</li>
+<li>水平型(QHBoxLayout)</li>
+<li>网格型(QGridLayout)</li>
+<li>窗体型(QFormLayout)</li>
+<li>栈型，任何时候都只有一个窗件可见(QStackedLayout)</li>
+</ul>
+</li>
+<li>可以使用addWidget()函数向QLayout添加窗件，当窗件添加到布局中时，它会称为拥有该布局的窗件的子对象。窗件永远不会称为布局的子对象</li>
+<li>为了能够顺利地管理其几何形状，每个QLayout对象都必须有一个父对象，这可以是一个QWidget，也可以是一个QLayout。可以在创建布局时通过向构造函数传递一个指向父窗件或者布局的指针来指定其父对象。当然，也可以先创建一个QLayout而不指定QLayout的父对象，这种情况下，可以稍后通过调用QWidget::addLayout()来指定其父对象</li>
+<li>布局可以拥有子布局，通过调用addLayout()函数，可以将一个布局添加为另外一个布局的子布局。如果布局的父对象是一个窗件，那么该窗件将再也无法称为另外一个布局的父对象</li>
+<li>不使用Qt设计师时，可以使用QLayout类的API来直接指定各个窗件之间的分割、伸展和支撑<ul>
+<li>addSpacing(int size)会向布局的末尾添加固定数量的像素</li>
+<li>addStretch(int stretch = 0)会添加数目不定的像素。此函数由一个最小的数目开始，然后逐渐扩展到使用所有的可用空间。如果在同一个布局中进行多次扩展，可以用此作为一个增长因子</li>
+<li>addStrut(int size)讲给处置方向施加一个最小的数值(也就是，QVBoxLayout的宽度或者QHBoxLayout的高度)</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h2 id="QTimer"><a href="#QTimer" class="headerlink" title="QTimer"></a>QTimer</h2><blockquote>
+<ol>
+<li>QTimer对象是一个倒数计时器，以毫秒级时间间隔启动，当其到达零时会发出一个timeout()信号.QTimer可用来以规则的间隔来发射信号，或者如果singleShot属性已设置成true，则在给定的时间间隔后仅发射一次信号。QTimer有一个静态函数singleShot()，可以在给定的时间间隔后调用一次槽。如果倒数间隔设置成0，QTimer会在事件队列中的全部事件处理完后就立刻发出timeout()信号</li>
+</ol>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QTimer::singleShot(m_expInterval,<span class="keyword">this</span>,SLOT(timerDisplayRandStr()));</span><br></pre></td></tr></table></figure>
+<h2 id="绘制事件和画图"><a href="#绘制事件和画图" class="headerlink" title="绘制事件和画图"></a>绘制事件和画图</h2><blockquote>
+<ol>
+<li>一个Widget应当在其paintEvent()方法中执行适当的绘制操作。这是QWidget中唯一可以创建QPainter painter(this)的地方。有下面几个原因使得QPaintEvent可以被发送到QWidget上。<ol>
+<li>窗件是隐藏的，然后又显露了出来</li>
+<li>窗件改变了大小或者进行了重新排布</li>
+<li>调用了update()或者repaint()。repaint()在paintEvent()得到调用后才会返回。update()在QPaintEvent被放进事件队列后会立即返回<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> LifeWidget::paintEvent(QPaintEvent* evt)&#123;</span><br><span class="line">	<span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">	<span class="keyword">if</span>(!m_image.isNull())&#123;</span><br><span class="line">		painter.drawImage(QPoint(<span class="number">0</span>,<span class="number">0</span>),m_image);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h2 id="QMainWindow"><a href="#QMainWindow" class="headerlink" title="QMainWindow"></a>QMainWindow</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyMainWindow</span>:</span><span class="keyword">public</span> QMainWindow&#123;</span><br><span class="line">	Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">explicit</span> <span class="title">MyMainWindow</span><span class="params">(QWidget* parent=<span class="number">0</span>)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">closeEvent</span><span class="params">(QCloseEvent* event)</span></span>;</span><br><span class="line"><span class="keyword">protected</span> slots:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">newFile</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">save</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="QAction"><a href="#QAction" class="headerlink" title="QAction"></a>QAction</h2><blockquote>
+<ol>
+<li>QAction从QObject派生而来，是用于用户选定动作的一个基类。它提供了丰富的接口，它还可以用于许多种动作中。QWidget接口使得每个窗件都可以维护一个QList&lt;QAction*&gt;。所有QWidget都可以拥有QAction，一些窗件借助上下文提供了QAction的清单，其他借助菜单栏。</li>
+<li>QMenu是一个能够给QAction集合提供特殊视图的QWidget。QMenuBar是菜单的一个集合，常见于QMainWindow中。</li>
+<li>每次调用QMenu::addAction(text,target,slot,shortcut)函数，都会窗件一个未命名的QAction，并且会将其添加到这个QMenu上。然后会调用它的积累函数，QWidget::addAction(QAction*),这样把新建的QAction添加到用于上下文菜单的QMenu的QAction清单中。</li>
+</ol>
+</blockquote>
+<h2 id="QSettings"><a href="#QSettings" class="headerlink" title="QSettings"></a>QSettings</h2><blockquote>
+<ol>
+<li>QSettings会管理键/值对的永久映射关系，它是一个QObject，并且会使用一些与QObject相似的属性接口——setValue()和value()——来设置和获取它的值。这个类可以用来存储任何需要在多次执行之间进行记忆的数据</li>
+<li>QSettings需要一个组织名和一个应用程序名，但当使用默认的构造函数时，QSettings会从QApplication中获得这些值。每个名称组合都会定义一个唯一的永久映射，这使得不会与其他命名的Qt应用程序产生冲突</li>
+<li>允许多个实例共享相同状态的类，可以看成是Monodtate模式的一种实现。拥有相同组织/应用程序名称的两个QSettings实例，可以访问同一个永久映射数据。这简化了应用程序从不同源文件访问公共设置值的过程。QSettings是Monostate模式的一种实现</li>
+</ol>
+</blockquote>
+<h2 id="剪切板"><a href="#剪切板" class="headerlink" title="剪切板"></a>剪切板</h2><blockquote>
+<ol>
+<li>每个Qt应用程序都可以使用qApp-&gt;clipboard()访问系统的剪贴板。剪贴板会保存带类型的数据(文本，图片，URL或者自定义数据)。要往剪贴板中放置数据，可以创建一个QMimeData，以一定的方式对数据进行编码，并且调用QClipBoard-&gt;setMimeData()。</li>
+</ol>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">connect(qApp-&gt;clipboard(),SIGNAL(changed(QClipboard::Mode)),<span class="keyword">this</span>,SLOT(clipboardChanged(QClipboard::Mode)));</span><br></pre></td></tr></table></figure>
+<h2 id="QImage"><a href="#QImage" class="headerlink" title="QImage"></a>QImage</h2><blockquote>
+<ol>
+<li>QImage在像素处理上得到了优化，QPixmap使用了视频存储器，它也是需要在屏幕上显示图片的多种窗件要用到的类。可以吧QImage转换成QPixmap并将其在QLabel进行显示<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int h(m_Image.height()),w(m_Image.width());</span><br><span class="line"><span class="keyword">int</span> r,g,b;</span><br><span class="line">QRgb oldpix,newpix;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> y=<span class="number">0</span>;y&lt;h;y++)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> x=<span class="number">0</span>;x&lt;w;x++)&#123;</span><br><span class="line">		oldpix=m_Image.pixel(x,y);</span><br><span class="line">		r=qRed(oldpix)*radj;</span><br><span class="line">		g=qGreen(oldpix)*gadj;</span><br><span class="line">		b=qBlue(oldpix)*badj;</span><br><span class="line">		newpix=qRgb(r,g,b);</span><br><span class="line">		m_Image.setPix(x,y,newpix);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</blockquote>
+<h2 id="模板类"><a href="#模板类" class="headerlink" title="模板类"></a>模板类</h2><blockquote>
+<p>因为每个Q_OBJECT都需要通过moc为其生成代码，而且moc并未智能到知道如何生成模板类的特化，孤儿不允许使一个已经标记为Q_OBJECT的类再次成为模板类</p>
+</blockquote>
+<p>##qSort</p>
+<blockquote>
+<ol>
+<li>qSort()函数是一个使用堆分类算法进行实现的范型方法。qSort()可以应用到任何Qt容器，只要容器内的对象拥有公共接口operator&lt;()和operator==()。基本数据类型的容器也可以使用此函数进行排序</li>
+</ol>
+</blockquote>
+<h2 id="反射与元对象"><a href="#反射与元对象" class="headerlink" title="反射与元对象"></a>反射与元对象</h2><blockquote>
+<ol>
+<li>所谓反射，就是指对象成员的自我检查，使用反射编程，就可以编写出通用的操作，可对具有各种不同结构的类进行操作。使用通用的值存储器QVariant，就可以按照一种统一的方式来对基本类型和其他普通类型进行操作</li>
+<li>所谓元对象就是描述另一个对象结构的对象。QMetaObject是元对象模式的一个Qt实现，它提供了一个QObject对象所拥有的属性和方法的信息。元对象模式有时也称为反射模式</li>
+<li>一个拥有元对象的类就可以支持反射。这是一个许多面向对象语言都具有的性质。虽然C++中不存在反射，但Qt的元对象编译器(moc)可以为QObject生成支持这种机制的代码</li>
+<li>只要满足一定条件(每个类都必须在头文件中定义，并且列举在工程文件的HEADERS中，同时此类的定义中还必须包括Q_OBJECT宏)，每个派生自QObject的类都会拥有一个有moc为其生成的QMetaObject。QObject拥有有个成员函数，它能够返回指向对象的QMetaObject的指针，这个函数原型是：QMetaObject* QObject：：metaObject() const[virtual]</li>
+<li>可以使用QMetaObject的下面这些方法来获取一个QObject的信息：<ul>
+<li>className(),它会将类的名称以const char*格式返回</li>
+<li>superClass(),如果存在基类的QMetaObject，则返回其指针，如果不存在返回0</li>
+<li>mathodCount(),返回类的成员函数的个数</li>
+</ul>
+</li>
+<li>信号和槽机制同样需要依赖与QMetaObject</li>
+<li>通过使用QMetaObject和QMetaProperty就可以编写足够通用的代码来处理所有具有自我描述能力的类</li>
+<li>除了C++的RTTI运算符dynamic_cast和typeid之外，Qt还提供了两种运行时的类型识别机制：<ul>
+<li>qobject_cast</li>
+<li>QObject::inherits()</li>
+</ul>
+</li>
+<li>qobject_cast是一个ANSI风格的类型转换运算符：DestType<em> qobject_cast&lt;DestType</em>&gt; (QObject* qoptr),如果转换失败返回NULL。qobject_cast实际是一个向下转换运算符，类似于dynamic_cast。拥有指向派生类的基类指针时，向下转换允许调用在基类接口中不存在的派生类方法。</li>
+<li>访问数据成员的方式：<ul>
+<li>直接访问，通过经典的gettet/settet，速度快，更为有效</li>
+<li>间接访问，通过QObject/QMetaObject接口，可让代码复用性更好</li>
+</ul>
+</li>
+<li>使用Q_PROPERTY宏来描述QObject的属性：Q_PROPERTY(type name READ getFunction [WRITE setFunction] [RESET resetFunction] [NOTIFY notifySignal] [DESIGNABLE bool] [SCRIPTABLE bool] [STORED bool]),例如：</li>
+</ol>
+</blockquote>
+<figure class="highlight c"><figcaption><span>customer-props.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Customer</span>:</span><span class="keyword">public</span> QObject&#123;</span><br><span class="line">	Q_OBJECT			<span class="comment">//moc预处理类需要的宏</span></span><br><span class="line">	Q_PROPERTY(QString id READ getId WRITE setId NOTIFY valueChanged);</span><br><span class="line">	Q_PROPERTY(QString name READ getName WRITE setName NOTIFY valueChanged);</span><br><span class="line">	Q_PROPERTY(QString address READ getAddress WRITE setAddress NOTIFY addressChanged);</span><br><span class="line">	Q_PROPERTY(QString phone READ getPhone WRITE setPhone NOTIFY phoneChanged);</span><br><span class="line">	Q_PROPERTY(QDate dateEstablished READ getDateEstablished);		<span class="comment">//只读属性</span></span><br><span class="line">	Q_PROPERTY(CustomerType type READ getType WRITE setType NOTIFY valueChanged);</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">enum</span> CustomerType&#123;</span><br><span class="line">				Corporate,Individual,Educational,Government</span><br><span class="line">					&#125;;												<span class="comment">//枚举类型定义必须与Q_ENUMS宏的定义出现在同一类定义中</span></span><br><span class="line">	Q_ENUMS(CustomerType);											<span class="comment">//特殊的宏可以实现生成字符串到枚举之间的转换功能；必须在同一个类中</span></span><br><span class="line">	explicit Customer(const QString name = QString(),QObject* parent = 0);//之所以声明为explicit，是因为不希望从QString转换到Customer时出现意外</span><br><span class="line">	QString getId <span class="keyword">const</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> m_id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setType</span><span class="params">(CustomerType newType)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">setType</span><span class="params">(QString newType)</span></span>;</span><br><span class="line">signals:</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">addressChanged</span><span class="params">(QString newAddress)</span></span>;</span><br><span class="line">	void valueChanged(QString propertyName,QVariant newValue,QVariant oldValue=QVariant());</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">phoneChanged</span><span class="params">(QString newPhone)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">typeChanged</span><span class="params">(CustomerType type)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	QString m_id,m_name,m_address,m_phone;</span><br><span class="line">	QDate m_date;</span><br><span class="line">	CustomerType m_type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><figcaption><span>customer-props.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Customer::Customer(<span class="keyword">const</span> QString name,QObject* parent):QObject(parent)&#123;</span><br><span class="line">	setObjectName(name);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> Customer::setId(<span class="keyword">const</span> QString&amp; newId)&#123;</span><br><span class="line">	<span class="keyword">if</span>(newId != m_id)&#123;</span><br><span class="line">		QString oldId = m_id;</span><br><span class="line">		m_id = newId;</span><br><span class="line">		<span class="function">emit <span class="title">valueChanged</span><span class="params">(<span class="string">"id"</span>,newId,oldId)</span></span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> Customer::setType(CustomerType theType)&#123;</span><br><span class="line">	<span class="keyword">if</span>(m_type != theType)&#123;</span><br><span class="line">		CustomerType oldType = m_type;</span><br><span class="line">		m_type = theType;</span><br><span class="line">		<span class="function">emit <span class="title">valueChanged</span><span class="params">(<span class="string">"type"</span>,theType,oldType)</span></span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">void</span> Customer::setType(QString newType)&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> QMetaObject* meta = metaObject();</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> propindex = meta-&gt;indexOfProperty(<span class="string">"type"</span>);</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">const</span> QMetaProperty mp = meta-&gt;property(propindex);</span><br><span class="line"></span><br><span class="line">	QMetaEnum menum = mp.enumerator();</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">char</span>* ntyp = newType.toAscii().data();</span><br><span class="line">	CustomerType theType = <span class="keyword">static_cast</span>&lt;CustomerType&gt;(menum.keyToValue(ntyp));</span><br><span class="line">	<span class="keyword">if</span>(theType != m_type)&#123;</span><br><span class="line">		CustomerType oldType = m_type;</span><br><span class="line">		m_type = theType;</span><br><span class="line">		<span class="function">emit <span class="title">valueChanged</span><span class="params">(<span class="string">"type"</span>,theType,oldType)</span></span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">QString Customer::getTypeString() <span class="keyword">const</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> property(<span class="string">"type"</span>).toString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以通多下面的函数来获得任意属性的值：QVariant QObject::property(QString propertyName);<br>QVariant是一个联合体的封装，其中包含了所有基本类型和所允许的全部Q_PROPERTY类型。QVariant有一个toString()函数能够为它支持的许多类型返回其QString表示。<br>QVariant对象可以通过QMetaProperty::read()或者QObject::property()获得<br>同一类的所有对象会共享同一个metaObject，因而会有相同元属性组<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QString <span class="title">objTOString</span><span class="params">(<span class="keyword">const</span> QObject* obj)</span></span>&#123;</span><br><span class="line">	QStringList result;</span><br><span class="line">	<span class="keyword">const</span> QMetaObject* meta = obj-&gt;metaObject();</span><br><span class="line">	result += QString(<span class="string">"class %1:public %2 &#123;"</span>).arg(meta-&gt;className()).arg(meta-&gt;superClass()-&gt;className());</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;meta-&gt;propertyCount();++i)&#123;</span><br><span class="line">		<span class="keyword">const</span> QMetaProperty qmp=meta-&gt;property(i);</span><br><span class="line">		QVariant value = obj-&gt;property(qmp.name());</span><br><span class="line">		<span class="keyword">if</span>(value.canConvert(QVariant::String))&#123;</span><br><span class="line">			result += QString(<span class="string">"%1 %2=%3;"</span>)</span><br><span class="line">			.arg(qmp.typeName())</span><br><span class="line">			.arg(qmp.name())</span><br><span class="line">			.arg(value.toString());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	result += <span class="string">"&#125;;"</span>;</span><br><span class="line">	<span class="keyword">return</span> result.join(<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="QMetaType"><a href="#QMetaType" class="headerlink" title="QMetaType"></a>QMetaType</h2><blockquote>
+<ol>
+<li>QMetaType是一个用于值类型的辅助类，对于60多种内置类型，QMetaType为每个类型ID关联了一个类型名，从而使构造和析构可以在运行时动态发生。有一个名称为QMetaType::Type的公共枚举，它有所有QVariant兼容类型的值。在QMetaType::Type中的枚举值与QVariant::Type中的枚举值一样<br>通过使用Q_ENUMS宏可以在QVariant系统中加入一些自定义的枚举类型。<br>使用Q_DECLARE_METATYPE(MyType)宏也有可能把自己的值类型加到QMetaType列表中。如果MyType有公共的默认复制构造函数和公共的复制构造函数以及一个公共的析构函数，Q_DECLARE_METATYPE宏使得它可用作QVariant中的自定义类型<br>要注册的元类型必须已经用Q_DECLARE_METATYPE声明过。模板函数qRegisterMetaType<t>()会注册类型T并返回由QMetaType使用的内部ID。这个函数有一个重载版本，qRegisterMetaType<t>(const char* name),它可以让你注册一个名称作为类型T的名称。对于这个函数的调用必须早早地出现在主程序中。</t></t></li>
+</ol>
+</blockquote>
+<figure class="highlight c"><figcaption><span>fraction.h</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fraction</span>:</span><span class="keyword">public</span> QPair&lt;qint32,qint32&gt;&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Fraction(qint32 n=<span class="number">0</span>,qint32 d=<span class="number">1</span>):QPair&lt;qint32,qint32&gt;(n.d)&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">Q_DECLARE_METATYPE(Fraction);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><figcaption><span>metatype.cpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">	<span class="function">QApplication <span class="title">app</span><span class="params">(argc,argv)</span></span>;</span><br><span class="line">	qRegissterMetaType&lt;Fraction&gt;(<span class="string">"Fraction"</span>);</span><br><span class="line">	<span class="function">Fraction <span class="title">twoThirds</span><span class="params">(<span class="number">2</span>,<span class="number">3</span>)</span></span>;</span><br><span class="line">	QVariant var;</span><br><span class="line">	var.setValue(twoThirds);</span><br><span class="line">	Q_ASSERT(var.value&lt;Fraction&gt;() == twoThirds);</span><br><span class="line">	</span><br><span class="line">	<span class="function">Fraction <span class="title">oneHalf</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>)</span></span>;</span><br><span class="line">	<span class="function">Fraction <span class="title">threeQuarters</span><span class="params">(<span class="number">3</span>,<span class="number">4</span>)</span></span>;</span><br><span class="line">	QList&lt;Fraction&gt; fractions;</span><br><span class="line">	fractions&lt;&lt;oneHalf&lt;&lt;twoThirds&lt;&lt;threeQuarters;</span><br><span class="line">	<span class="function">QFile <span class="title">binaryTestFile</span><span class="params">(<span class="string">"testMetaType.bin"</span>)</span></span>;</span><br><span class="line">	binaryTestFile.open(QIODevice::WriteOnly);</span><br><span class="line">	<span class="function">QDataStream <span class="title">dout</span><span class="params">(&amp;binaryTestFile)</span></span>;</span><br><span class="line">	dout&lt;&lt;fractions;</span><br><span class="line">	binaryTestFile.close();</span><br><span class="line">	binaryTestFile.open(QIODevice::ReadOnly);</span><br><span class="line">	<span class="function">QDataStream <span class="title">din</span><span class="params">(&amp;binaryTestFile)</span></span>;</span><br><span class="line">	QList&lt;Fraction&gt; frac2;</span><br><span class="line">	din &gt;&gt; frac2;</span><br><span class="line">	binaryTestFile.close();</span><br><span class="line">	Q_ASSERT(fractions == frac2);</span><br><span class="line">	creatTest();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">creatTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">int</span> fracType = QMetaType::type(<span class="string">"Fraction"</span>);</span><br><span class="line">	<span class="keyword">void</span>* vp = QMetaType::construct(fracType);</span><br><span class="line">	Fraction* fp = <span class="keyword">reinterpret_cast</span>&lt;Fraction*&gt;(vp);</span><br><span class="line">	fp-&gt;first  =<span class="number">1</span>;</span><br><span class="line">	fp-&gt;second = <span class="number">2</span>;</span><br><span class="line">	Q_ASSERT(*fp == Fraction(<span class="number">1</span>,<span class="number">2</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="invokeMethod"><a href="#invokeMethod" class="headerlink" title="invokeMethod()"></a>invokeMethod()</h2><blockquote>
+<ol>
+<li>Qt把信号连接到槽需要一种机制：通过名称以类型安全的方式来间接调用这些槽，当调用槽时，实际是由invokeMethod()完成的。</li>
+<li>与QObject::connect()类似，invokeMethod()接受一个可选参数Qt::ConnectionType,该参数可让你来决定是要用同步调用还是要用异步调用。默认情况下是Qt::AutoConnection，表示发射者和接收者处于同一线程中时会同步执行一个槽</li>
+<li>要通过invokeMethod()向函数传递类型参数，可以用Q_ARG宏创建一些值，这样会返回一个QGenericArgument，它封装了单个参数的类型和值信息</li>
+</ol>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> AutoSaver::saveIfNecessary()&#123;</span><br><span class="line">	<span class="keyword">if</span>(!QMetaObject::invokeMethod(parent(),<span class="string">"save"</span>))&#123;</span><br><span class="line">		qWarning()&lt;&lt;<span class="string">"AutoSaver:error invoking save() on parent"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">QByteArray buffer=...;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">bool</span> b = QMetaObject::invokeMethod(m_thread,<span class="string">"caculateSpectrum"</span>,Qt::AutoConnection,Q_ARG(QByteArray,buffer),Q_ARG(<span class="keyword">int</span>,format.frequency()),Q_ARG(<span class="keyword">int</span>,bytesPerSample));</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">## MVC设计模式</span><br><span class="line">&gt; <span class="number">1.</span> MVC由三类对象组成。模型是应用程序对象，视图是它的屏幕展示，控制器定义了用户界面对用户输入的反应行为。</span><br><span class="line">&gt; <span class="number">2.</span> 在Qt中，不同的控制器类的基类是QAbstractItemDelegate。那些连接信号与槽的connect语句也可以认为是控制器代码</span><br><span class="line">&gt; <span class="number">3.</span> Qt中包含有一个模型/视图框架，用于维护数据的组织管理和向用户的呈现方式之间的分离。三个最常用的视图类(列表、树和表格)都是默认提供的。另外，它还提供了抽象的和具体的数据模型，这些数据模型可被扩展和自定义以保存不同类型的数据。</span><br><span class="line">&gt; <span class="number">4.</span> 视图是获取、修改和呈现数据的对象。QAbstractItemModel定义了视图(还有委托)访问数据的一个标准接口。模型中存储供显示和操作的具体数据。通过信号和槽，他们将数据的变化通知给所有相关联的视图。每个视图对象都有一个指向模型对象的指针，视图对象会频繁访问模型的方法以获取或设置数据，或者做各种其他操作。</span><br><span class="line">&gt; <span class="number">5.</span> 模型中每个数据项都用一个模型索引来表示。模型索引为视图和委托提供了在不知道其底层数据结构的情况下间接访问模型中数据项的方法。QModeIndex对象由模型创建，可以被模型、视图或委托代码用于定位数据模型中特定项。QModeIndex对象具有很短的生命周期，可能在刚刚创建后就变成无效的状态，因此它们应该被立即使用而后丢弃</span><br><span class="line">&gt; <span class="number">6.</span> 如果使用一个在若干指令操作前已经存在的QModeIndex，那么应该先调用QModelIndex::isValid（）。QPersistentModelIndex对象具有更长的生命周期，但是在使用前任然应该先调用isValid()来进行检查</span><br><span class="line"></span><br><span class="line">## 智能指针</span><br><span class="line">&gt; <span class="number">1.</span> 一个重写了指针解引用操作<span class="keyword">operator</span>*()和<span class="keyword">operator</span>-&gt;()的类被称为智能指针。</span><br><span class="line">&gt; <span class="number">2.</span> QScopedPointer是一个在指针作用域结束后自动删除所引用对象的智能指针。它类似于<span class="built_in">std</span>::<span class="built_in">auto_ptr</span>。复制QScopedPointer是毫无意义的，因为它会导致所引用的对象重复删除</span><br><span class="line">&gt; <span class="number">3.</span> QSharedPointer是一个自动删除它所引用的对象的智能指针，但是它允许被复制，而且QSharedPointer会保持一个引用计数。共享的堆对象只有在最后一个指向它的只能指针销毁时才会被删除。</span><br><span class="line"></span><br><span class="line">## 输入掩码</span><br><span class="line">&gt; <span class="number">1.</span>所谓的输入掩码，是一种控制用户在输入窗件中可键入的内容的主动模式。它有助于防止输入某些类型的不正确的数据。每个QLineEdit都有一个QString属性用来存储掩码字符。输入掩码可以指定在键入QLineEdit的字符串中那个位置处的何种字符是允许的。该字符串由一些特殊的、预定义的掩码字符和一些占据输入字符串相应位置的普通字符构成</span><br><span class="line">&gt; 掩码字符：</span><br><span class="line">	* A:ASCII字母型字符——大写或者小写</span><br><span class="line">	* N:ASCII字母数字型字符——大写或者小写</span><br><span class="line">	* X:任意的ASCII字符</span><br><span class="line">	* D:ASCII非零数字</span><br><span class="line">	* <span class="number">9</span>:ASCII数字</span><br><span class="line">	* H:十六进制数字</span><br><span class="line">	* B:二进制数字</span><br><span class="line">	* &gt;:随后的字母字符是大写</span><br><span class="line">	* &lt;:随后的字母字符是小写</span><br><span class="line">	* ！:结束大小写转换</span><br><span class="line">	* \:转义字符</span><br><span class="line"></span><br><span class="line">```C</span><br><span class="line">QLineEdit* m_StringEntry;</span><br><span class="line">m_StringEntry-&gt;setInputMask(m_InputMask-&gt;text());</span><br></pre></td></tr></table></figure>
+<h2 id="QRegExp"><a href="#QRegExp" class="headerlink" title="QRegExp"></a>QRegExp</h2><blockquote>
+<ol>
+<li>正则表达式是验证输入、从输入中提取数据以及对输入进行搜索和替换的强大工具。Qt提供了QRegExp类，它实现了Perl风格的扩展正则表达式语言的大部分功能</li>
+<li>特殊字符：<ul>
+<li>‘.’可以与任意字符相匹配，称之为元字符</li>
+<li>‘\n’匹配换行符</li>
+<li>‘\f’匹配换页符</li>
+<li>‘\t’匹配制表符</li>
+<li>‘\xhhhh’匹配一个Unicode字符，其对应的码值是范围为0x0000到0xFFFF之间的一个十六进制数hhhh</li>
+</ul>
+</li>
+<li>量词——说明前面的字符(或字符组)在匹配的表达式中可出现次数的修饰符<ul>
+<li>‘+’ 出现1次或者更多次</li>
+<li>‘?’ 出现0次或者1次</li>
+<li>‘*’ 出现0次或者更多次</li>
+<li>{i,j} 出现至少i次但不超过j次</li>
+</ul>
+</li>
+<li>字符集——在匹配表达式指定位置允许出现的字符集合<ul>
+<li>‘\s’ 匹配任何空白符</li>
+<li>‘\S’ 匹配任何非空白符</li>
+<li>‘\d’ 匹配任何数字字符：从’0’到’9’</li>
+<li>‘\D’ 匹配任何非数字字符</li>
+<li>‘\w’ 匹配任何“单词”字符，也就是任意的字母、数字或者下划线</li>
+<li>‘\W’ 匹配任意的非单词字符</li>
+</ul>
+</li>
+<li>字符集也可以使用方括号指定:<ul>
+<li>[AEIOU]匹配这五个字符中的任意一个</li>
+<li>[a-g]短线使此集合可匹配从’a’到’g’的字符</li>
+<li>[^xyz]匹配任何除这三字符以外的字符</li>
+</ul>
+</li>
+<li>分组和捕获字符——(圆括号)是可以用来把字符划分成组的特殊字符。字符组可以是后向引用的。也就是说，如果存在一个匹配，那么分组了的值将可以通过各种方法来捕获和访问。为了简便起见，一般规定在一个正则表达式中最多可以引用9个分组，即使用\1到\9这样的修饰符。此外还有一个QRegExp成员函数cap(int nth),它返回第那个分组(基于QString的形式返回)</li>
+<li>锚点字符——去顶尝试进行匹配操作的边界<ul>
+<li>脱字符(^),如果它是正则表达式中的第一个字符，则说明匹配过程从字符串的开头处开始</li>
+<li>美元符($),如果它是正则表达式的最后一个字符，则表明匹配过程指导字符串的结尾才结束</li>
+<li>此外，还有单词边界(\b)断言或者非单词边界(\B),有助于我们关注正则表达式本身</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h2 id="Qt环境变量的获取与设置"><a href="#Qt环境变量的获取与设置" class="headerlink" title="Qt环境变量的获取与设置"></a>Qt环境变量的获取与设置</h2><blockquote>
+<p>QProcess::environment()函数和setEnvironment()函数</p>
+</blockquote>
+<h2 id="QProcess和进程控制"><a href="#QProcess和进程控制" class="headerlink" title="QProcess和进程控制"></a>QProcess和进程控制</h2><blockquote>
+<ol>
+<li>QProcess是一个能够非常方便而且跨平台的用于启动和控制其他进程的类。它从QPbject派生而来，可充分利用信号和槽来简化和其他Qt类的交互</li>
+<li>一个QProcess可以使用start()函数来启动另外一个进程，新进程将会成为一个子进程并且在父进程终止时而随之终止</li>
+<li>Qt的线程模型允许线程的优先次序和控制。QThread是一个低级类，适合用于显式的构建长期运行的线程</li>
+<li>QtConcurrent是一个命名空间，提供了用于编写并发软件的更高层次的类和算法。该命名空间有一个重要的类，QThreadPool，这是一个管理线程池的类。每个Qt应用程序都有一个QThreadPool::globalInstance()函数，它带有一个推荐的最大线程数，在大多数系统上，处理核的数量就是该值的默认值</li>
+<li>借助QtConcurrent中函数式的map/filter/reduce算法，通过将进程分布在由线程池管理的多个线程上，可编写一个能够自动利用系统多核的程序。另外，在命令模式和利用QtConcurrent::run()工作时可把QRunnable用作基类。在这些情况下，无须显示地创建线程或者直接管理他们，只需简单把工作片段描述为具有正确接口的对象即可</li>
+</ol>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-05T01:38:09.642Z" itemprop="dateUpdated">2018-07-05 09:38:09</time>
+</span><br>
+
+
+        
+        <a href="/2015/07/19/qt4/" target="_blank" rel="external">https://suda-morris.github.io/2015/07/19/qt4/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Qt4/">Qt4</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2015/07/19/qt4/&title=《QT4 Basic》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2015/07/19/qt4/&title=《QT4 Basic》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2015/07/19/qt4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《QT4 Basic》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2015/07/19/qt4/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2015/07/19/qt4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2015/07/20/review-in-cpp/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Review in C++ Language</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2015/07/06/poe-introduction/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">POE Introduction</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Sun Jul 19 2015 20:52:44 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2015/07/19/qt4/&title=《QT4 Basic》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2015/07/19/qt4/&title=《QT4 Basic》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2015/07/19/qt4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《QT4 Basic》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2015/07/19/qt4/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2015/07/19/qt4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACL0lEQVR42u3aW27DMAwF0ex/0+kCAqtzSaWoqPFX4NiOjgMQfOj1wsf741h/u77+866nM5sPGTJkHMsgP78+v17E+nryfPRqZMiQcQHjKYI9XUPYPIyS5/yyZhkyZMgokUjyxwO0DBkyZNQC7voJtZJVhgwZMjpFLEkKeXuOB/fNtbgMGTIOZPCu+99//sp8Q4YMGUcx3uHRoabttmBVMmTIGM3olKCdFj/5Nl6PDBkyhjJqLf60KCXjhPTeF3+0DBkyRjB4y56/Dp789Vt+MmTImM0ggY//ZJrk8dECen0yZMgYzeANMn5+b7uN42XIkDGVkQa19VYt0lbrjByKF8mQIeNYBgcUo3g4KiiuUIYMGaMZKWAdfHnKWBsSxA1BGTJkjGOQBdUKzrRJx8er6B+QIUPG4Yx0owPHpEvsJIgyZMiYzdhVjpJnpuljraiWIUPGPEY6XKwNLPdiZMiQcRsjTchqobY21IyDvgwZMi5gkOEib/SjEImviXNbGTJkDGXwthcvOPkWjc6wQYYMGbcxOmkcHwzwQMxJMmTIuIGRpm799hmnonGmDBkyhjJ2BdDOMIBs44j/BxkyZAxi8IMkcOkuD35X0HSTIUPGUEYaZDtvizfU4hcnQ4aMCxg88PUL2qDC3rtnRIYMGdcw+iPPdAiK2nMyZMiQ0Wjxr0NzbUvZ1wOuDBky/iWDFLHpIjrl8RfbbTJkyDiQkW5xSAMlb7Tx5xSHmjJkyDiP8QOrJWqYVMZOYQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

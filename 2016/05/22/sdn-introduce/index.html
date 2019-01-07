@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>SDN Introduction | suda-morris&#39;s Personal Blog | Geek makes life better.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="SDN">
+    <meta name="description" content="SDN简介                                                                                             SDN与传统网络的区别               软件定义网络（SDN）是一种网络网络虚拟化技术，利用OpenFlow协议把路由器的控制平面从数据平面中分离出来，以软件方式实现。这个架构可以让网络管理员">
+<meta name="keywords" content="SDN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SDN Introduction">
+<meta property="og:url" content="https://suda-morris.github.io/2016/05/22/sdn-introduce/index.html">
+<meta property="og:site_name" content="suda-morris&#39;s Personal Blog">
+<meta property="og:description" content="SDN简介                                                                                             SDN与传统网络的区别               软件定义网络（SDN）是一种网络网络虚拟化技术，利用OpenFlow协议把路由器的控制平面从数据平面中分离出来，以软件方式实现。这个架构可以让网络管理员">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://i.imgur.com/xgAZ7qZ.jpg">
+<meta property="og:image" content="http://i.imgur.com/QqFZ9Jo.jpg">
+<meta property="og:updated_time" content="2018-07-05T01:38:09.646Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SDN Introduction">
+<meta name="twitter:description" content="SDN简介                                                                                             SDN与传统网络的区别               软件定义网络（SDN）是一种网络网络虚拟化技术，利用OpenFlow协议把路由器的控制平面从数据平面中分离出来，以软件方式实现。这个架构可以让网络管理员">
+<meta name="twitter:image" content="http://i.imgur.com/xgAZ7qZ.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="suda-morris&#39;s Personal Blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">suda-morris</h5>
+          <a href="mailto:362953310@qq.com" title="362953310@qq.com" class="mail">362953310@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/suda-morris" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/wenris" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about" target="_blank" >
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">SDN Introduction</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">SDN Introduction</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-05-22T12:02:34.000Z" itemprop="datePublished" class="page-time">
+  2016-05-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Network/">Network</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SDN简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">SDN简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OpenFlow"><span class="post-toc-number">2.</span> <span class="post-toc-text">OpenFlow</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#SDN的优势"><span class="post-toc-number">3.</span> <span class="post-toc-text">SDN的优势</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-sdn-introduce"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">SDN Introduction</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-05-22 20:02:34" datetime="2016-05-22T12:02:34.000Z"  itemprop="datePublished">2016-05-22</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Network/">Network</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="SDN简介"><a href="#SDN简介" class="headerlink" title="SDN简介"></a>SDN简介</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/xgAZ7qZ.jpg" alt="SDN与传统网络的区别" title="">
+                </div>
+                <div class="image-caption">SDN与传统网络的区别</div>
+            </figure>
+<ol>
+<li><p>软件定义网络（SDN）是一种网络网络虚拟化技术，利用OpenFlow协议把路由器的控制平面从数据平面中分离出来，以软件方式实现。这个架构可以让网络管理员在不更动硬件设备的前提下，以中央控制方式，用程序重新规划网络，为控制网络流量提供了新的方法，也提供了核心网络及应用创新的良好平台。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://i.imgur.com/QqFZ9Jo.jpg" alt="SDN的典型架构" title="">
+                </div>
+                <div class="image-caption">SDN的典型架构</div>
+            </figure>
+</li>
+<li><p>SDN的典型架构共分三层</p>
+<ol>
+<li>应用层包括各种不同的业务和应用</li>
+<li>中间控制层主要负责处理数据平面资源的编排，维护网络拓扑、状态信息等</li>
+<li>基础设施层负责基于流表的数据处理、转发和状态收集。</li>
+</ol>
+</li>
+<li>SDN本质上具有“控制和转发分离”、“设备资源虚拟化”和“通用硬件及软件可编程”三大特性。可以带来的好处有<ol>
+<li>设备硬件归一化，硬件只关注转发和存储能力，与业务特性解耦，可以采用相对廉价的商用架构来实现</li>
+<li>网络的智能性全部由软件实现，网络设备的种类及功能由软件配置而定，对网络的操作控制和运行由服务器作为网络操作系统NOS来完成</li>
+<li>对业务响应相对更快，可以定制各种网络参数，如路由、完全、策略、QoS、流量工程等，并实时配置到网络中，开通具体业务时间将缩短</li>
+</ol>
+</li>
+</ol>
+<h2 id="OpenFlow"><a href="#OpenFlow" class="headerlink" title="OpenFlow"></a>OpenFlow</h2><ol>
+<li>OpenFlow是一种网络通讯协议，属于数据链路层，能够控制网络交换机或路由器的转送平面，借此改变网络数据包所走的网络路径</li>
+<li>OpenFlow允许从远程控制网络交换机的数据转送表，通过新增、修改与移除数据包控制规则与行动，来改变数据包转送的路径。比起用访问控制列表（ACL）和路由协议，允许更复杂的流量管理。同时，OpenFlow允许不同应用商用一个简单，开源的协议去远程管理交换机</li>
+</ol>
+<h2 id="SDN的优势"><a href="#SDN的优势" class="headerlink" title="SDN的优势"></a>SDN的优势</h2><ol>
+<li>喜欢同IT结构中的网络，根据业务需求部署上线以后，如果业务需求发生变动，重新修改响应网络设备上的配置是一件非常繁琐的事情。</li>
+<li>在互联网、移动互联网瞬息万变的业务环境下，网络的高稳定与高性能还不足以满足业务需求，灵活性和敏捷性反而更为关键</li>
+<li>SDN所做的事情是将网络设备上的控制权分离出来，由集中的控制器管理，无需依赖底层网络设备，屏蔽了来自底层网络设备的差异。而控制权是完全开放的，用户可以自定义任何想实现的网络路由和传输规则策略，从而更加灵活和智能</li>
+<li>进行SDN改造后，无需对网络中每个节点的路由器反复进行配置，网络中的设备本身就是自动化连通的。只需要在使用时定义好简单的网络规则即可。</li>
+<li>加入网络中有SIP、FTP、流媒体几种业务，网络的总带宽是一定的，那么如果某个时刻流媒体业务需要更多的带宽和流量，在传统网络中很难处理，在SDN改造后的网络中这很容易实现，SDN可以将流量整形、规整，临时让流媒体的管道更粗一些，让流媒体的带宽更大些，甚至关闭SIP和FTP的管道，待流媒体需求减少时在恢复原先的带宽占比</li>
+<li>正是因为这种业务逻辑的开放性，使得网络作为“管道”的发展空间变为无限可能。如果未来云计算的业务应用模型可以简化为“云-管-端”，那么SDN就是“管”这一环的重要技术支撑</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-05T01:38:09.646Z" itemprop="dateUpdated">2018-07-05 09:38:09</time>
+</span><br>
+
+
+        
+        <a href="/2016/05/22/sdn-introduce/" target="_blank" rel="external">https://suda-morris.github.io/2016/05/22/sdn-introduce/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://suda-morris.github.io">
+            <img src="/img/avatar.jpg" alt="suda-morris">
+            suda-morris
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SDN/">SDN</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2016/05/22/sdn-introduce/&title=《SDN Introduction》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2016/05/22/sdn-introduce/&title=《SDN Introduction》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2016/05/22/sdn-introduce/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SDN Introduction》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2016/05/22/sdn-introduce/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2016/05/22/sdn-introduce/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/05/26/write-english-essay/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Write English Essay</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/05/15/s3c6410-indroduce/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">S3C6410 Introduction</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Sun May 22 2016 20:02:34 GMT+0800',
+            owner: 'suda-morris',
+            repo: 'suda-morris.github.io',
+            oauth: {
+                client_id: 'c57bf626196975c975bd',
+                client_secret: '2d6206807459e263b680e92344b96bc324ac4157',
+            },
+        })
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>suda-morris &copy; 2015 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://suda-morris.github.io/2016/05/22/sdn-introduce/&title=《SDN Introduction》 — suda-morris's Personal Blog&pic=https://suda-morris.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://suda-morris.github.io/2016/05/22/sdn-introduce/&title=《SDN Introduction》 — suda-morris's Personal Blog&source=茅小泰的个人博客" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://suda-morris.github.io/2016/05/22/sdn-introduce/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《SDN Introduction》 — suda-morris's Personal Blog&url=https://suda-morris.github.io/2016/05/22/sdn-introduce/&via=https://suda-morris.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://suda-morris.github.io/2016/05/22/sdn-introduce/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACG0lEQVR42u3aQW4jMQwEwPz/097rXnbQTU4WsFRzMuKJpdKBICn+/MTP56/nX39/fpLffH7/hQcDA+NrGcny7TvPayV7yNfFwMC4h/G8ZLLd9v2cER0HBgYGxjopbFNGDAwMjN8IuO8WxhgYGBizInbT+9of2Wu1OAYGxhcy8m39/8+/cr+BgYHxVYxP+Wy2NWu6RbvCwMA4mpEHuE1bbdNuKwpgDAyMQxnJwMRswCJ/5/l/IxgGBsbRjFmbbD9IkTfUhutiYGAcxNiHxXyxhNq23jAwMG5gbFKx2ZDE7NoyOT4MDIwbGHmZmgOStlo7ilF3BDEwMI5gJIlgHnCTELkZF4vCOgYGxnGMTXhNNpFvdxXKMTAwjmbMUrpZWZsH3KJ8xcDAuJiRD2S0ZWc+ZlEXsRgYGMcxhpXuS8lcm/YNhy0wMDAOZewXawH5WAYGBsbNjLb13w6ktoeVNOYwMDBuYLRtslnjbD8jUV8JYGBgXMPIW/OzNz/l85yqYmBg3MZow3H+eXOFUFwPYGBgHMpoByDaInP2a/lVKwYGxqmMt5KztqGWz0tEv4CBgXE0Y9MIS5K2dpisTTdrGAYGxtcy2iA7a8nlw2ftAWFgYNzDKKresnHWDorloT+6GMDAwMCIg+9b9ebwFDEwMC5jPLf4Z029TQmNgYFxDyMpYpNv2+vM2TUnBgbGbYx2xGGWzM1CbcvGwMA4jvEHpd9LqSaNQu0AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
